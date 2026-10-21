@@ -1,5 +1,0 @@
-{
-  "notes": "Written by the Tracker's PUSH FIXTURES action (via Code.gs, action:'pushFixtures'). source-scores.js, source-news.js, and source-odds.js all read this file — do not rename its fields.",
-  "generatedAt": null,
-  "fixtures": []
-}
