@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04120b">
+<link rel="icon" href="assets/emblem-128.png">
+<link rel="apple-touch-icon" href="assets/emblem-128.png">
+<!-- Web app manifest, built here so no separate file is needed -->
+<script>
+(function(){try{
+  var u=function(f){return new URL(f,location.href).href},base=location.href.split('#')[0].split('?')[0];
+  var m={name:"3EYE Jackpot",short_name:"3EYE Jackpot",description:"Football fans contribute to a shared pool. One combined stake, one jackpot entry.",
+    start_url:base,scope:base.replace(/[^\/]*$/,''),display:"standalone",orientation:"portrait",background_color:"#04120b",theme_color:"#04120b",
+    icons:[{src:u("assets/emblem-128.png"),sizes:"128x128",type:"image/png",purpose:"any"},{src:u("assets/emblem-192.png"),sizes:"192x192",type:"image/png",purpose:"any maskable"},{src:u("assets/emblem-512.png"),sizes:"512x512",type:"image/png",purpose:"any maskable"}]};
+  var l=document.createElement("link");l.rel="manifest";l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:"application/manifest+json"}));document.head.appendChild(l);
+}catch(e){}})();
+</script>
+<meta name="application-name" content="3EYE Jackpot">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="3EYE Jackpot">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Link previews. If your site lives at a fixed address, change the og:image and og:url below to full https:// addresses; some apps ignore relative ones. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3EYE Jackpot">
+<meta property="og:title" content="3EYE Jackpot | Your Contributions. One Jackpot.">
+<meta property="og:description" content="Football fans contribute to a shared pool. One combined stake, one jackpot entry. 18+ only.">
+<meta property="og:image" content="assets/logo-full-480.png">
+<meta property="og:image:alt" content="3EYE Jackpot logo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3EYE Jackpot | Your Contributions. One Jackpot.">
+<meta name="twitter:description" content="Football fans contribute to a shared pool. One combined stake, one jackpot entry. 18+ only.">
+<meta name="twitter:image" content="assets/logo-full-480.png">
+<title>3EYE Jackpot | Your Contributions. One Jackpot.</title>
+<meta name="description" content="Football fans contribute to a shared pool. Contributions are combined into one stake and used to enter a single football jackpot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04120b; --bg2:#071c11; --panel:#0a2417; --line:rgba(232,185,49,.45);
+  --gold:#e8b931; --gold2:#f7dc7a; --gold3:#a97c14; --mint:#1fd39a; --red:#ff6b5e;
+  --text:#f4f1e6; --muted:#b9c4b8;
+  --serif:'Cinzel',Georgia,'Times New Roman',serif;
+  --sans:'Times New Roman',Times,'Liberation Serif','Noto Serif',Georgia,serif;
+  --tabbar:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:18.5px;min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;line-height:1.5;padding-bottom:calc(var(--tabbar) + env(safe-area-inset-bottom))}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea,button{font-family:inherit}
+h1,h2,h3,h4{font-family:var(--sans);font-weight:700}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:6px}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.gold-text{background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,var(--gold3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.only-wide{display:none}
+[hidden]{display:none!important}
+
+/* ---------- header ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(4,18,11,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:8px 16px;min-height:62px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.logo-mark{width:46px;height:46px;flex:none;display:block}
+.logo-mark img,.logo-mark svg{width:100%;height:100%;object-fit:contain;display:block}
+.logo-mark img{border-radius:50%;object-fit:contain}
+.logo-mark{overflow:hidden;border-radius:50%}
+.wordmark{font-family:var(--serif);font-weight:900;line-height:.95;letter-spacing:.02em}
+.wordmark b{display:block;font-size:24px;color:var(--gold2)}
+.wordmark span{display:block;font-size:19px;color:var(--gold)}
+.topnav{display:none;gap:34px;align-items:center}
+.topnav a{font-size:16.5px;font-weight:600;padding:8px 2px;border-bottom:2px solid transparent;color:var(--text)}
+.topnav a[aria-current="page"]{color:var(--gold2);border-color:var(--gold2)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;border-radius:999px;padding:12px 22px;font-size:17.5px;white-space:nowrap}
+.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,#c89a1e);color:#2a1d00;box-shadow:0 4px 18px rgba(232,185,49,.25)}
+.btn-line{border:1.5px solid var(--gold);color:var(--gold2);background:rgba(0,0,0,.25)}
+.btn-sm{padding:8px 16px;font-size:15.5px}
+.btn.only-wide{display:none}
+.menu-btn{font-size:32px;color:var(--gold);padding:6px}
+.top-acct{padding:7px 12px;font-size:14px;gap:0}
+.topbar-in{gap:8px}
+.brand{min-width:0}
+.menu-panel{display:none;border-top:1px solid var(--line);background:var(--bg2)}
+.menu-panel.open{display:block}
+.menu-panel a{display:block;padding:15px 20px;border-bottom:1px solid rgba(232,185,49,.15);font-weight:600}
+.menu-panel a[aria-current="page"]{color:var(--gold2)}
+
+/* ---------- layout ---------- */
+main{flex:1;width:100%;max-width:1200px;margin:0 auto}
+.view{display:none}
+.view.active{display:block}
+.wrap{padding:0 16px}
+section.band{border-bottom:1px solid var(--line)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;min-height:340px;padding:30px 16px 28px;border-bottom:1px solid var(--line);
+  background:
+   radial-gradient(circle at 12% 7%,#fff 0 2px,transparent 3px),radial-gradient(circle at 27% 4%,#fff 0 2px,transparent 3px),
+   radial-gradient(circle at 44% 8%,#fff 0 2px,transparent 3px),radial-gradient(circle at 63% 5%,#fff 0 2px,transparent 3px),
+   radial-gradient(circle at 82% 8%,#fff 0 2px,transparent 3px),
+   radial-gradient(55% 55% at 72% 8%,rgba(255,255,215,.38),transparent 65%),
+   radial-gradient(45% 45% at 18% 0%,rgba(120,255,185,.2),transparent 65%),
+   linear-gradient(180deg,#04170b 0%,#0a3a1e 52%,#0b4d24 72%,#052010 100%)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 34px,transparent 34px 68px);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000);mask-image:linear-gradient(180deg,transparent,#000)}
+.hero-copy{position:relative;z-index:2;max-width:100%;text-align:center}
+.hero-cta{display:flex;gap:10px;flex-wrap:nowrap;justify-content:center}
+.hero-cta .btn{padding:11px 16px;font-size:15.5px;gap:6px}
+.eyebrow{white-space:nowrap;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--mint);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:clamp(30px,8.7vw,46px);line-height:1.04;font-weight:700;letter-spacing:-.01em}
+h1 span{display:block}
+.hero p.lead{margin:14px auto 20px;font-size:16.5px;color:#f0eee3;max-width:34ch}
+.hero-art{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;max-width:460px;opacity:.22;filter:drop-shadow(0 0 22px rgba(232,185,49,.35))}
+.hero-art svg{width:100%;height:auto;display:block}
+.tag{position:absolute;z-index:3;right:18px;top:236px;font-family:var(--sans);font-style:italic;font-weight:700;font-size:clamp(16px,4.6vw,24px);line-height:1.05;
+  text-align:right;transform:rotate(-11deg);transform-origin:right top;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.tag em{font-style:normal;color:var(--gold)}
+.tag i{display:block;height:3px;background:var(--gold);border-radius:3px;margin-top:6px;transform:rotate(-8deg)}
+
+/* ---------- features ---------- */
+.features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:18px 4px}
+.feat{padding:2px 8px;border-left:1px solid var(--line);text-align:center}
+.feat:first-child{border-left:0}
+.feat .i{display:block;margin:0 auto 8px;font-size:34px;color:var(--gold)}
+.feat h3{font-size:16px;line-height:1.15;margin-bottom:5px}
+.feat p{font-size:13.5px;color:var(--muted);line-height:1.35}
+
+/* ---------- how it works ---------- */
+.how{padding:24px 12px 20px;scroll-margin-top:70px}
+.sec-title{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:6px}
+.sec-title::before,.sec-title::after{content:"";height:1.5px;flex:1;max-width:150px;background:var(--gold)}
+.sec-title h2{font-size:28px;font-weight:700;color:var(--gold2);white-space:nowrap}
+.how .sub{text-align:center;color:var(--muted);font-size:15.5px;margin-bottom:20px}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.steps li{position:relative;padding:0 6px;text-align:center}
+.num{display:grid;place-items:center;width:52px;height:52px;border:2px solid var(--gold);border-radius:50%;font-size:26px;font-weight:600;color:var(--gold2);margin:0 auto 12px}
+.steps h3{font-size:16px;line-height:1.15;margin-bottom:4px}
+.steps p{font-size:13.5px;color:var(--muted);line-height:1.35}
+.steps li:not(:last-child)::after{content:"›";position:absolute;right:-6px;top:10px;font-size:30px;color:var(--gold);line-height:1}
+.steps .win{position:absolute;right:2px;top:2px;font-size:34px;color:var(--mint)}
+
+/* ---------- latest card ---------- */
+.latest{margin:6px 12px 18px;border:1.5px solid var(--gold);border-radius:14px;padding:14px 14px 12px;scroll-margin-top:70px;
+  background:linear-gradient(135deg,rgba(10,58,30,.85),rgba(5,22,12,.95))}
+.latest-top{display:flex;gap:14px;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap}
+.latest-top .i{font-size:40px;color:var(--mint)}
+.latest-top .t{flex:1;min-width:150px}
+.latest h2{font-size:23px;color:var(--gold2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.latest-top p{font-size:15.5px;color:#cfe9dc}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px;text-align:left}
+.stat{display:flex;gap:9px;align-items:center;justify-content:center;padding:0 8px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat .i{font-size:34px;color:var(--mint)}
+.stat b{display:block;font-size:16px;line-height:1.15}
+.stat small{display:block;font-size:13px;color:var(--muted);line-height:1.25}
+.chip{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--gold);color:var(--gold2)}
+
+/* ---------- banners ---------- */
+.banner{position:relative;overflow:hidden;text-align:center;padding:30px 16px;border-top:1px solid var(--line);
+  background:radial-gradient(70% 100% at 50% 0%,rgba(31,211,154,.22),transparent 70%),#06200f}
+.banner svg.crowd{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.banner p{position:relative;font-weight:700;letter-spacing:.06em;color:var(--gold2);font-size:17px;line-height:1.25;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:14px}
+.banner p::before,.banner p::after{content:"";width:38px;height:1.5px;background:var(--gold)}
+.cta-wide{display:none;margin:10px 16px 18px;border:1.5px solid var(--gold);border-radius:12px;text-align:center;padding:22px 16px;
+  background:linear-gradient(90deg,#071c11,#0b3d21 50%,#071c11)}
+.cta-wide h2{font-size:30px;color:var(--gold);margin-bottom:4px}
+.cta-wide p{margin-bottom:14px}
+
+/* ---------- jackpot view ---------- */
+.page-head{padding:22px 16px 6px;text-align:center}
+.page-head h1{font-size:clamp(26px,7vw,38px)}
+.page-head p{color:var(--muted);font-size:16px;margin:6px auto 0;max-width:60ch}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:14px 16px 4px}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:rgba(0,0,0,.3)}
+.seg button{padding:9px 18px;border-radius:999px;font-weight:600;font-size:16px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d00}
+.jp-meta{display:flex;gap:10px;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap;padding:12px 16px 4px;font-size:15.5px;color:var(--muted)}
+.jp-meta strong{color:var(--text)}
+.sample{color:#2a1d00;background:var(--gold2);border-radius:6px;padding:3px 8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.sumrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:10px 16px}
+.sumcard{text-align:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel)}
+.sumcard small{display:block;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.sumcard b{font-size:18.5px;color:var(--gold2)}
+.matches{list-style:none;margin:6px 16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.match{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:11px 12px;border-top:1px solid rgba(232,185,49,.15)}
+.match:first-child{border-top:0}
+.mno{font-size:14.5px;font-weight:700;color:var(--gold);text-align:center}
+.mteams{font-weight:600;font-size:16.5px;line-height:1.25}
+.mteams small{display:block;font-weight:400;font-size:13.5px;color:var(--muted);margin-top:2px}
+.picks{display:flex;gap:8px;align-items:center}
+.tp{min-width:58px;text-align:center;padding:5px 8px;border-radius:8px;font-weight:700;font-size:13.5px;letter-spacing:.04em;border:1px solid rgba(255,255,255,.18);color:var(--muted)}
+.tp.dc{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d00;border-color:transparent}
+.lockbar{width:46px;height:30px;display:grid;place-items:center;border-radius:8px;border:1px dashed rgba(232,185,49,.5);color:var(--gold2);background:repeating-linear-gradient(135deg,rgba(232,185,49,.14) 0 6px,rgba(232,185,49,.04) 6px 12px)}
+.lockbar svg{width:16px;height:16px}
+.jp-meta .mm{display:block;width:100%;font-size:14.5px;color:var(--muted)}
+.seg button small{font-weight:400;opacity:.8;font-size:.85em}
+.empty{margin:18px 16px;padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+.contribute{margin:22px 16px 6px;border:1.5px solid var(--gold);border-radius:14px;padding:18px 16px;scroll-margin-top:76px;
+  background:linear-gradient(135deg,rgba(10,58,30,.9),rgba(5,22,12,.95))}
+.contribute h2{font-size:22px;color:var(--gold2);margin-bottom:4px;text-align:center}
+.contribute .sub{text-align:center}
+.contribute .sub{color:var(--muted);font-size:15.5px;margin-bottom:14px}
+.crow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid rgba(232,185,49,.18);font-size:16.5px}
+.crow span:first-child{color:var(--muted)}
+.crow b{font-size:18.5px}
+.crow.big b{font-size:21px;color:var(--gold2)}
+.field{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
+.field label{flex:1;color:var(--muted);font-size:16.5px}
+.field input{width:150px;background:#03110a;border:1.5px solid var(--gold);color:var(--text);border-radius:10px;padding:10px 12px;font-size:18.5px;font-weight:600;text-align:right}
+.note{display:flex;gap:10px;margin-top:14px;font-size:14.5px;color:#d6dfd3;background:rgba(232,185,49,.09);border:1px solid rgba(232,185,49,.3);border-radius:10px;padding:11px 12px}
+.note .i{font-size:18px;color:var(--gold);margin-top:1px}
+.disclaimer{margin:14px 0;padding:12px 14px;border:2px solid var(--red);border-radius:12px;background:rgba(255,107,94,.1);color:#fff;font-size:14.5px;line-height:1.5;font-weight:800;letter-spacing:.02em;text-transform:uppercase;text-align:center}
+.disclaimer .hl{display:inline-block;margin:0 2px 4px;padding:1px 8px;border-radius:999px;background:var(--gold);color:#2a1d00;font-weight:800}
+.disclaimer .hl.age-hl{background:var(--red);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.order-note{margin-top:10px;font-size:14.5px;color:#d6dfd3}
+.contribute .btn{margin-top:14px;width:100%;justify-content:center}
+
+/* ---------- about ---------- */
+.prose{padding:6px 16px 8px;max-width:70ch;margin-left:auto;margin-right:auto}
+.prose h2{font-size:20px;color:var(--gold2);margin:20px 0 6px;text-align:center}
+.prose p,.prose li{color:#d6dfd3;font-size:16.5px;margin-bottom:8px}
+.prose ul{padding-left:20px}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+footer.fine{padding:18px 16px 10px;text-align:center;font-size:13.5px;color:var(--muted)}
+
+/* ---------- bottom tab bar (mobile) ---------- */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(4,1fr);
+  background:rgba(4,18,11,.97);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);height:calc(var(--tabbar) + env(safe-area-inset-bottom))}
+.tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:14.5px;color:#5ee0bb;position:relative}
+.tabbar a .i{font-size:25px}
+.tabbar a[aria-current="page"]{color:var(--gold2)}
+.tabbar a[aria-current="page"]::after{content:"";position:absolute;left:22%;right:22%;bottom:0;height:3px;border-radius:3px;background:var(--gold)}
+
+.feat,.steps li,.stat,.sumcard{min-width:0}
+.feat h3,.feat p,.steps h3,.steps p,.stat b,.stat small{overflow-wrap:break-word}
+#acct{max-width:560px;margin:0 auto;padding:0 18px 30px}
+#acct label{display:block;font-weight:600;font-size:15.5px}
+.a-phone{display:flex;margin:5px 0 12px}.a-phone .a-cc{display:flex;align-items:center;padding:0 12px;border:1.5px solid rgba(232,185,49,.4);border-right:0;border-radius:8px 0 0 8px;background:#0b2a1a;color:var(--gold2);font-weight:700;font-size:17.5px}#acct .a-phone input{margin:0;border-radius:0 8px 8px 0;min-width:0}
+#acct input,#acct select{width:100%;padding:12px;margin:5px 0 12px;border-radius:8px;border:1.5px solid rgba(232,185,49,.4);background:#04150d;color:#fff;font-size:17.5px;font-family:inherit}
+.a-seg{display:flex;border:1.5px solid var(--gold);border-radius:999px;overflow:hidden;margin-bottom:16px}
+.a-seg button{flex:1;padding:10px;font-weight:600;font-size:16.5px;font-family:inherit;color:var(--gold2);background:none}
+.a-seg button[aria-pressed=true]{background:var(--gold);color:#2a1d00}
+.a-card{border:1.5px solid rgba(232,185,49,.4);border-radius:14px;background:rgba(7,30,20,.9);padding:16px;margin:0 0 16px}
+.a-card h3{margin:0 0 8px;font-size:19px;color:var(--gold2)}
+.a-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid rgba(232,185,49,.15)}.a-row b{text-align:right}
+.a-btn{padding:11px 20px;border-radius:999px;font-weight:700;font-size:16.5px;font-family:inherit;cursor:pointer;border:1.5px solid var(--gold)}
+.a-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d00;width:100%}.a-line{background:none;color:var(--gold2)}
+.a-top{display:flex;justify-content:center;gap:12px;align-items:center;margin-bottom:14px;text-align:center}
+.a-mute{color:#a5bbae;font-size:15.5px}.a-bad{color:var(--red)}.a-ok{color:var(--mint)}
+.a-chip{font-size:13.5px;padding:2px 9px;border-radius:99px;border:1px solid var(--gold);color:var(--gold2);margin-left:8px;vertical-align:middle}
+.hint{display:block;font-size:13.5px;color:var(--muted);margin:-4px 0 8px;text-align:right}
+details.more{margin-top:12px;border-top:1px solid rgba(232,185,49,.18);padding-top:10px}
+details.more summary{cursor:pointer;color:var(--gold2);font-weight:600;font-size:16px}
+details.more h3{font-size:15.5px;color:var(--gold2);margin:14px 0 6px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th,.tbl td{padding:7px 6px;text-align:left;border-bottom:1px solid rgba(232,185,49,.15)}
+.tbl th{color:var(--muted);font-weight:600;font-size:13.5px}
+.tbl tr.cur td{background:rgba(31,211,154,.12);font-weight:600}
+.about-logo{display:block;width:170px;height:auto;margin:6px 0 10px}
+.formula{border:1.5px solid var(--gold);border-radius:14px;padding:16px;margin:10px 0 16px;background:linear-gradient(135deg,rgba(10,58,30,.85),rgba(5,22,12,.95))}
+.formula h2{margin:0 0 10px!important;font-size:19px!important}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-weight:700;font-size:clamp(15px,4vw,20px);margin:0 0 12px}
+.eq span{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:7px 11px}
+.eq i{font-style:normal;color:var(--gold)}
+.eg{padding:11px 13px;background:rgba(31,211,154,.09);border:1px solid rgba(31,211,154,.35);border-radius:10px;font-size:16px}
+.eg b{color:var(--gold2)}
+details.term{background:var(--panel);border:1.5px solid var(--line);border-radius:12px;margin:0 0 10px;overflow:hidden}
+details.term summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:18px;color:var(--gold2);list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.term summary::-webkit-details-marker{display:none}
+details.term summary::after{content:"+";color:var(--gold);font-size:22px;line-height:1}
+details.term[open] summary::after{content:"\2212"}
+details.term .tb{padding:0 16px 12px}
+.fine a{color:var(--gold2);text-decoration:underline}
+#acct .a-check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:15.5px;margin:4px 0 12px}
+#acct .a-check input{width:20px;height:20px;margin:2px 0 0;flex:none}
+#acct a{color:var(--gold2);text-decoration:underline}
+#acct .a-link{background:none;border:0;color:var(--gold2);text-decoration:underline;font:inherit;font-size:15.5px;cursor:pointer;padding:6px 0}
+.a-note{padding:10px 0;border-top:1px solid rgba(232,185,49,.15);font-size:15.5px}.a-note b{display:block;color:var(--gold2)}.a-note.new{border-left:3px solid var(--mint);padding-left:10px}
+.a-dot{display:inline-block;min-width:20px;padding:0 6px;border-radius:99px;background:var(--red);color:#fff;font-size:13.5px;text-align:center;margin-left:6px}
+
+@media (max-width:359px){
+  .features{grid-template-columns:repeat(2,1fr);row-gap:16px}
+  .feat:nth-child(3){border-left:0}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:18px}
+  .steps li:nth-child(2)::after{display:none}
+  .stats{grid-template-columns:1fr;row-gap:12px}.stat{border-left:0;padding:0}
+}
+
+@media (max-width:420px){
+  .topbar-in{padding:8px 10px;gap:6px}
+  .logo-mark{width:42px;height:42px}
+  .brand{gap:7px}
+  .wordmark b{font-size:20px}.wordmark span{font-size:15.5px}
+  .top-acct{padding:6px 10px;font-size:13px}
+  .menu-btn{font-size:28px;padding:4px}
+  .hero-cta .btn{padding:10px 12px;font-size:15px}
+}
+
+/* ---------- wide screens: top menu, no tab bar ---------- */
+@media (min-width:860px){
+  body{padding-bottom:0}
+  .tabbar,.menu-btn,.menu-panel{display:none!important}
+  .topnav{display:flex}
+  .top-acct{display:none}
+  .only-wide{display:inline}
+  .only-narrow{display:none}
+  .topbar-in{padding:10px 28px;min-height:76px}
+  .logo-mark{width:62px;height:62px}
+  .wordmark b{font-size:34px}.wordmark span{font-size:27px}
+  .brand{margin-right:0}
+  .topnav{margin:0 auto}
+  .hero{min-height:440px;padding:56px 56px 44px}
+  .hero-copy{max-width:820px;margin:0 auto}
+  .eyebrow{font-size:14px;letter-spacing:.1em}
+  h1{font-size:clamp(44px,4.6vw,64px)}
+  .hero p.lead{font-size:18px;max-width:52ch;margin:18px auto 24px}
+  .hero-art{width:44%;max-width:560px;opacity:.2}
+  .hero-cta .btn{padding:13px 24px;font-size:17px}
+  .tag{right:3%;top:auto;bottom:38px;font-size:22px;transform:rotate(-6deg)}
+  .tag i{display:none}
+  .features{padding:24px 28px}
+  .feat{padding:2px 28px}
+  .feat h3{font-size:18px}.feat p{font-size:15.5px}
+  .feat .i{font-size:38px}
+  .how{padding:30px 28px 24px}
+  .steps{gap:18px}
+  .steps li{padding:0 8px}
+  .steps h3{font-size:18.5px}.steps p{font-size:15.5px}
+  .steps li:not(:last-child)::after{right:-12px;top:12px}
+  .steps .win{display:none}
+  .latest{margin:6px 28px 22px;padding:18px 22px}
+  .stat b{font-size:17.5px}
+  .banner{display:none}
+  .cta-wide{display:block;margin:6px 28px 24px}
+  .page-head,.controls,.jp-meta,.sumrow{padding-left:28px;padding-right:28px}
+  .matches,.contribute,.empty{margin-left:28px;margin-right:28px}
+  .prose{padding:6px 28px}
+  .matches{display:grid;grid-template-columns:1fr 1fr}
+  .match{border-right:1px solid rgba(232,185,49,.15)}
+  .match:nth-child(-n+2){border-top:0}
+  .contribute{max-width:640px}
+}
+
+/* ---------- progress, countdown, help, footer ---------- */
+.prog{margin-top:14px;padding-top:12px;border-top:1px solid rgba(232,185,49,.18)}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:15.5px}
+.prog-top b{color:var(--gold2)}
+.prog-top .cd{font-size:14.5px;color:var(--muted)}
+.prog-top .cd b{color:var(--mint);font-variant-numeric:tabular-nums}
+.bar{height:12px;margin-top:8px;border-radius:999px;background:rgba(0,0,0,.4);border:1px solid var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--gold2));transition:width .8s ease}
+.prog small{display:block;margin-top:6px;font-size:13.5px;color:var(--muted)}
+.cd.urgent b{color:var(--red)}
+.cdbox{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 12px;padding:10px 12px;border-radius:10px;background:rgba(31,211,154,.09);border:1px solid rgba(31,211,154,.35);font-size:15.5px}
+.cdbox b{font-size:18.5px;color:var(--mint);font-variant-numeric:tabular-nums}
+.cdbox.urgent b{color:var(--red)}
+.cdbox.closed{background:rgba(255,107,94,.1);border-color:rgba(255,107,94,.4)}
+.cdbox.closed b{color:var(--red)}
+.wa-fab{position:fixed;right:14px;bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom));z-index:55;display:flex;align-items:center;gap:8px;
+  padding:11px 16px;border-radius:999px;background:#25d366;color:#04200f;font-weight:700;font-size:15.5px;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.wa-fab svg{width:22px;height:22px;fill:currentColor}
+.warn-fab{position:fixed;left:14px;bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom));z-index:55;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:22px;line-height:1;background:var(--gold);border:2px solid #2a1d00;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.warn-modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.7)}
+.warn-modal[hidden]{display:none}
+.warn-card{position:relative;width:100%;max-width:460px;max-height:88vh;overflow:auto;padding:22px 20px 20px;border:2px solid var(--red);border-radius:14px;background:#06200f;text-align:center}
+.warn-card h2{font-size:22px;color:var(--gold2);margin-bottom:10px}
+.warn-card h3{font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);margin:14px 0 4px}
+.warn-card p{font-size:15.5px;color:#d6dfd3;margin-bottom:6px}
+.warn-card .warn-caps{font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.02em;margin:10px 0 4px}
+.warn-card .btn{margin-top:14px}
+.warn-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.warn-badges .hl{padding:3px 10px;border-radius:999px;background:var(--gold);color:#2a1d00;font-weight:800;font-size:13.5px}
+.warn-badges .age-hl{background:var(--red);color:#fff}
+.warn-x{position:absolute;right:10px;top:6px;font-size:30px;line-height:1;color:var(--gold2);padding:4px 10px}
+.help-hint{margin:10px 0 0;padding:10px 12px;border-radius:10px;font-size:15px;background:rgba(232,185,49,.09);border:1px solid rgba(232,185,49,.3);color:#d6dfd3}
+.help-hint a{color:var(--gold2);text-decoration:underline}
+.sitefoot{border-top:1px solid var(--line);background:var(--bg2);padding:22px 16px 18px;font-size:14.5px;color:var(--muted)}
+.sitefoot-in{max-width:1200px;margin:0 auto;display:grid;gap:16px;text-align:center}
+.sitefoot h4{font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
+.sitefoot p{margin-bottom:6px;line-height:1.5}
+.sitefoot a{color:var(--gold2);text-decoration:underline}
+.age{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px solid var(--red);color:var(--red);font-weight:800;font-size:14.5px;margin-right:8px;vertical-align:middle}
+.sitefoot .legal{padding-top:12px;border-top:1px solid rgba(232,185,49,.15);text-align:center;font-size:13.5px}
+@media (min-width:860px){
+  .wa-fab{bottom:24px;right:24px}
+  .warn-fab{bottom:24px;left:24px}
+  .sitefoot{padding:28px}
+  .sitefoot-in{grid-template-columns:1.2fr 1fr 1fr;gap:34px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar>i{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".5" stop-color="#e8b931"/><stop offset="1" stop-color="#a97c14"/></linearGradient>
+  </defs>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="7" r="3.2"/><circle cx="5.5" cy="9.5" r="2.4"/><circle cx="18.5" cy="9.5" r="2.4"/><path d="M6.5 19c0-3.3 2.4-5.5 5.5-5.5s5.5 2.2 5.5 5.5z"/><path d="M1.5 17.5c0-2.4 1.6-4 4-4 .8 0 1.5.2 2.1.5-1.3 1-2 2.1-2.2 3.5z"/><path d="M22.5 17.5c0-2.4-1.6-4-4-4-.8 0-1.5.2-2.1.5 1.3 1 2 2.1 2.2 3.5z"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v4.2c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V5.5"/><path d="M4.5 9.7v4.2c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V9.7"/><path d="M4.5 13.9v4.2c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-4.2"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3.5h10v5.5a5 5 0 0 1-10 0z"/><path d="M7 5H3.5c0 3 1.3 4.6 3.7 5"/><path d="M17 5h3.5c0 3-1.3 4.6-3.7 5"/><path d="M12 14v4"/><path d="M8 20.5h8"/><path d="M9.5 18h5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8.5L19 7.5V21H6z"/><path d="M14 3v5h5"/><path d="M9 12h7M9 15.5h7M9 19h4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 13.5h1.5M11.3 13.5h1.5M14.5 13.5h1.5M8 17h1.5M11.3 17h1.5M14.5 17h1.5"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8.2l3.4 2.5-1.3 4h-4.2l-1.3-4z"/><path d="M12 8.2V3.2M15.4 10.7l4.7-1.5M14.1 14.7l2.9 4M9.9 14.7l-2.9 4M8.6 10.7L3.9 9.2"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11L12 3.5 20.5 11"/><path d="M5.5 9.5V20.5h13V9.5"/><path d="M10 20.5v-6h4v6"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1"/><circle cx="12" cy="12" r="6.6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.7" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5L20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></symbol>
+
+  <!-- Emblem drawn in code. Set LOGO_SRC in the config block to use the real artwork instead. -->
+  <symbol id="logo-emblem" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="96" fill="#0a3d22" stroke="url(#gold)" stroke-width="6"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#1fd39a" stroke-width="1" opacity=".7"/>
+    <path d="M52 40a74 74 0 0 1 42-14" fill="none" stroke="#1fd39a" stroke-width="5" stroke-linecap="round"/>
+    <path d="M108 26a74 74 0 0 1 48 34" fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M54 160a74 74 0 0 0 40 14M110 174a74 74 0 0 0 40-16" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M30 98C58 54 142 54 170 98 142 142 58 142 30 98Z" fill="none" stroke="url(#gold)" stroke-width="5"/>
+    <path d="M42 98C64 68 136 68 158 98" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".6"/>
+    <circle cx="100" cy="98" r="29" fill="#0a2a1a" stroke="url(#gold)" stroke-width="4"/>
+    <circle cx="100" cy="98" r="23" fill="#f6f3e7"/>
+    <path d="M100 86l11 8-4 13H93l-4-13z" fill="#0a3d22"/>
+    <path d="M100 86V77M111 94l9-3M107 107l6 8M93 107l-6 8M89 94l-9-3" stroke="#0a3d22" stroke-width="2" fill="none"/>
+    <g stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <path d="M44 74h18l8 8"/><path d="M36 90h26"/><path d="M40 106h20l10-8" stroke="#1fd39a"/><path d="M48 122h22l8 6"/>
+      <circle cx="41" cy="74" r="3.4"/><circle cx="33" cy="90" r="3.4"/><circle cx="37" cy="106" r="3.4" stroke="#1fd39a"/><circle cx="45" cy="122" r="3.4"/>
+    </g>
+    <g fill="url(#gold)"><path d="M100 10l5 11h-10z"/><path d="M100 190l5-11h-10z"/><path d="M10 100l11-5v10z"/><path d="M190 100l-11-5v10z"/></g>
+  </symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#home" aria-label="3EYE Jackpot home">
+      <span class="logo-mark" id="logo-slot"><svg viewBox="0 0 200 200" role="img" aria-label="3EYE Jackpot logo"><use href="#logo-emblem"/></svg></span>
+      <span class="wordmark"><b>3EYE</b><span>JACKPOT</span></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#jackpot" data-nav="jackpot">Latest Jackpot</a>
+      <a href="#how" data-nav="how">How It Works</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#account" data-nav="account" class="js-acct">Sign up / Log in</a>
+    </nav>
+    <a class="btn btn-gold btn-sm top-acct js-acct" href="#account">Sign up / Log in</a>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel"><svg class="i"><use href="#i-menu"/></svg></button>
+  </div>
+  <div class="menu-panel" id="menu-panel">
+    <a href="#home" data-nav="home">Home</a>
+    <a href="#jackpot" data-nav="jackpot">Latest Jackpot</a>
+    <a href="#how" data-nav="how">How It Works</a>
+    <a href="#about" data-nav="about">About</a>
+    <a href="#account" data-nav="account" class="js-acct">Sign up / Log in</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HOME ================= -->
+  <div class="view" id="view-home">
+    <section class="hero">
+      <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <div class="eyebrow">Football Jackpot &bull; Community Pool</div>
+        <h1><span>Your Contributions.</span><span class="gold-text">One Jackpot.</span></h1>
+        <p class="lead">Members contribute to a shared pool. The contributions are combined into one stake and used to enter a single football jackpot.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold js-cta" href="#account">Join the Pool <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="#how">How It Works</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band features" aria-label="Why 3EYE Jackpot">
+      <div class="feat"><svg class="i"><use href="#i-doc"/></svg><h3>Open Records</h3><p>Every pool total and payout is recorded, win or lose.</p></div>
+      <div class="feat"><svg class="i"><use href="#i-coins"/></svg><h3>Fair Shares</h3><p>Your payout follows your share of the pool, to the shilling.</p></div>
+      <div class="feat"><svg class="i"><use href="#i-users"/></svg><h3>Earliest First</h3><p>Early contributors fill the first pool. Overflow opens a second one.</p></div>
+      <div class="feat"><svg class="i"><use href="#i-info"/></svg><h3>Checked Payments</h3><p>Each M-Pesa payment is verified before it counts.</p></div>
+    </section>
+
+    <section class="band how" id="how" aria-labelledby="how-h">
+      <div class="sec-title"><h2 id="how-h">How It Works</h2></div>
+      <p class="sub">From sign-up to payout in four steps.</p>
+      <ol class="steps">
+        <li><span class="num">1</span><div><h3>Join</h3><p>Create an account with your phone number.</p></div></li>
+        <li><span class="num">2</span><div><h3>Contribute</h3><p>Pay by M-Pesa and enter your confirmation code.</p></div></li>
+        <li><span class="num">3</span><div><h3>Confirmation</h3><p>We verify the payment and record your share.</p></div></li>
+        <li><span class="num">4</span><div><h3>Outcome</h3><p>The pool enters one jackpot and winnings are shared by stake.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="latest" id="latest-card" aria-label="Latest jackpot">
+      <div class="latest-top">
+        <svg class="i"><use href="#i-cal"/></svg>
+        <div class="t">
+          <h2>Latest Jackpot</h2>
+          <p>Check the latest fixture list and pool details.</p>
+        </div>
+        <a class="btn btn-line btn-sm" href="#jackpot">View Latest Jackpot <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="prog" id="hc-prog" hidden>
+        <div class="prog-top"><span id="hc-prog-txt"></span><span class="cd" id="hc-cd"></span></div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="hc-bar"><i></i></div>
+        <small id="hc-prog-sub"></small>
+      </div>
+      <div class="stats">
+        <div class="stat"><svg class="i"><use href="#i-ball"/></svg><div><b id="hc-matches">&mdash; Matches</b><small>Selected from top leagues</small></div></div>
+        <div class="stat"><svg class="i"><use href="#i-trophy"/></svg><div><b id="hc-prize">Big Prize</b><small id="hc-prize-sub">For all winners</small></div></div>
+      </div>
+    </section>
+
+    <div class="banner"><svg class="crowd" id="crowd" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><p>Real fans. One shared pool.</p></div>
+
+    <section class="cta-wide">
+      <h2>Ready to Take Part?</h2>
+      <p>Create your account, then join the open pool.</p>
+      <a class="btn btn-gold btn-sm js-cta" href="#account">Join the Pool <svg class="i"><use href="#i-arrow"/></svg></a>
+    </section>
+  </div>
+
+  <!-- ================= LATEST JACKPOT ================= -->
+  <div class="view" id="view-jackpot">
+    <div class="page-head">
+      <h1><span class="gold-text">Latest Jackpot</span></h1>
+      <p>The matches in each jackpot, the pool total and what a share would pay.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Bookmaker" id="seg-platform"></div>
+      <div class="seg" role="group" aria-label="Jackpot" id="seg-jackpot"></div>
+    </div>
+    <div class="jp-meta" id="jp-meta"></div>
+    <div class="wrap"><div class="prog" id="jp-prog" hidden style="border-top:0;margin-top:6px">
+      <div class="prog-top"><span id="jp-prog-txt"></span><span class="cd" id="jp-cd"></span></div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="jp-bar"><i></i></div>
+      <small id="jp-prog-sub"></small>
+    </div></div>
+    <div class="sumrow" id="jp-sum"></div>
+    <ol class="matches" id="jp-matches"></ol>
+
+    <section class="contribute" id="contribute" aria-labelledby="c-h">
+      <h2 id="c-h">Pool contribution</h2>
+      <p class="sub">Enter what you would put in to see your share.</p>
+      <div class="cdbox" id="c-cd" hidden><span id="c-cd-label">Pool closes in</span><b id="c-cd-val">&mdash;</b></div>
+      <div class="crow"><span>Full stake for the pool</span><b id="c-total">&mdash;</b></div>
+      <div class="field"><label for="c-amount">Your contribution (KES)</label><input id="c-amount" type="number" inputmode="numeric" min="0" step="10"></div>
+      <span class="hint" id="c-min"></span>
+      <div class="crow big"><span>Your winning % if the pool fills (at least)</span><b id="c-share">&mdash;</b></div>
+      <div class="crow"><span>Your share right now (of what is collected, with your stake)</span><b id="c-now">&mdash;</b></div>
+      <div class="crow"><span>Prize at stake</span><b id="c-prize">&mdash;</b></div>
+      <div class="crow"><span id="c-pay-label">Your share would pay</span><b id="c-pay">&mdash;</b></div>
+      <details class="more" id="c-more-wrap" hidden><summary>More detail</summary><div id="c-more"></div></details>
+      <div class="note"><svg class="i"><use href="#i-warn"/></svg><span>Bookmaker prizes are shared among all winners in a category, so actual payouts can vary. The figure above is an estimate if the prize were won by the pool alone.</span></div>
+      <div class="note"><svg class="i"><use href="#i-warn"/></svg><span>We aim to play the full combination at the highest stake. If the pool falls short, we play a smaller cover that the money supports, and your share becomes <b>your contribution &divide; the total actually collected</b>. If a pool overfills, the excess moves to a second pool on the same jackpot.</span></div>
+      <p class="order-note"><b>Pool order:</b> the earliest contributors are placed in the earliest pools. Which pool you land in depends on how fast your stake is confirmed compared with how fast other stakes come in.</p>
+      <button type="button" class="btn btn-gold" id="c-cta"><span id="c-cta-t">Continue</span> <svg class="i"><use href="#i-arrow"/></svg></button>
+      <p class="order-note" id="c-cta-note">You will be asked to sign up or log in, then taken to the payment page with this stake filled in. Nothing is reserved until your M-Pesa payment is confirmed.</p>
+    </section>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <div class="view" id="view-about">
+    <div class="page-head"><h1><span class="gold-text">About 3EYE Jackpot</span></h1></div>
+    <div class="prose">
+      <img class="about-logo" src="assets/logo-full-480.png" alt="3EYE Jackpot logo">
+      <p>3EYE Jackpot is a football pool community. Members add an agreed share, the contributions are combined into one stake, and that stake enters a single football jackpot.</p>
+      <h2>Clear records</h2>
+      <p>Contributions and pool details are communicated clearly, and results are shared whether they go our way or not.</p>
+      <h2>Good to know</h2>
+      <ul>
+        <li>Nothing here is a guarantee of a win.</li>
+        <li>Bookmaker prizes are shared among all winners in a category, so payouts can vary.</li>
+        <li>Read the full <a href="#terms" style="color:var(--gold2);text-decoration:underline">Pool Terms</a> before you contribute.</li>
+      </ul>
+      <div class="links" id="about-links"></div>
+    </div>
+  </div>
+  <div class="view" id="view-terms">
+    <div class="page-head"><h1><span class="gold-text">Pool Terms</span></h1><p>Plain rules for how the pool works and how winnings are shared. Please read before you contribute.</p></div>
+    <div class="prose" id="terms-body"></div>
+  </div>
+  <div class="view" id="view-account">
+    <div class="page-head"><h1><span class="gold-text" id="acct-title">Sign up / Log in</span></h1></div>
+    <div id="acct"></div>
+  </div>
+</main>
+
+<footer class="sitefoot" id="site-foot">
+  <div class="sitefoot-in">
+    <div>
+      <h4>Contact</h4>
+      <p id="foot-contact">Questions or complaints? Message us and we will reply as soon as we can.</p>
+      <p><a href="#terms">Pool Terms</a> &bull; <a href="#about">About</a> &bull; <a href="#account" class="js-acct">Sign up / Log in</a></p>
+    </div>
+  </div>
+  <p class="legal" style="max-width:1200px;margin:16px auto 0">&copy; <span id="yr"></span> 3EYE Jackpot &bull; Football Pool Community &bull; 18+ only</p>
+</footer>
+
+<button class="warn-fab" id="warn-fab" type="button" aria-haspopup="dialog" aria-controls="warn-modal" aria-label="Important information: 18+, risk and responsible play">&#9888;&#65039;</button>
+<div class="warn-modal" id="warn-modal" role="dialog" aria-modal="true" aria-labelledby="warn-h" hidden>
+  <div class="warn-card">
+    <button class="warn-x" id="warn-x" type="button" aria-label="Close">&times;</button>
+    <h2 id="warn-h">Important information</h2>
+    <div class="warn-badges"><span class="hl age-hl">18+ ONLY</span><span class="hl">NOT AFFILIATED WITH ANY BOOKMAKER</span></div>
+    <p class="warn-caps">DISCLAIMER! STAKE ONLY WHAT YOU CAN AFFORD TO LOSE. BET RESPONSIBLY. GAMBLING CAN BE ADDICTIVE.</p>
+    <h3>Play responsibly</h3>
+    <p>Jackpots are very hard to win and you can lose your whole contribution. If betting stops being fun, stop and talk to someone you trust. Nothing here is a guarantee of a win.</p>
+    <h3>Payments</h3>
+    <p>Pay only to the M-Pesa details shown inside My Account after you log in. We never ask for your PIN.</p>
+    <h3>Prizes</h3>
+    <p>Bookmaker prizes are shared among all winners, so payouts can vary.</p>
+    <button class="btn btn-gold btn-sm" id="warn-ok" type="button">I understand</button>
+  </div>
+</div>
+<a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener" hidden aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.18-3.1.82.83-3.03-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.7c-.2 0-.5.07-.75.35-.26.28-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.4 2.4.95 2.9.76 3.4.7.53-.05 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.57-.35s-1.7-.84-1.97-.93c-.26-.1-.46-.15-.65.14-.2.3-.75.93-.92 1.12-.17.2-.34.22-.63.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.65-1.6-.9-2.18-.23-.56-.47-.48-.65-.49h-.55z"/></svg>
+  <span>Help</span>
+</a>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#home" data-nav="home"><svg class="i"><use href="#i-home"/></svg>Home</a>
+  <a href="#jackpot" data-nav="jackpot"><svg class="i"><use href="#i-trophy"/></svg>Latest Jackpot</a>
+  <a href="#how" data-nav="how"><svg class="i"><use href="#i-gear"/></svg>How It Works</a>
+  <a href="#about" data-nav="about"><svg class="i"><use href="#i-info"/></svg>About</a>
+</nav>
+
+<!-- =====================================================================
+     CONFIG + JACKPOT DATA  (edit this block each week)
+     Fill it by hand from the weekly screenshot. When the feeds are found,
+     replace getJackpotData() below to fetch them in the same shape and
+     nothing else on the page needs to change.
+     Jackpots are posted from the admin page (Pools > Post a jackpot). Each match carries only a type: DC (double chance) or S (single). No odds or picks are stored.
+     A jackpot disappears from this page when its first match kicks off.
+     Pools now come from your Sheet (Pools tab) through the API, with data/jackpots.json as a backup.
+     ===================================================================== -->
+<script id="jackpot-data">
+const SITE = {
+  currency: "KES",
+  telegram: "https://t.me/Official_3eyejackpot",
+  // >>> CONTACT (payment details are NOT stored on this page: members see them only inside My Account, from the backend) <<<
+  whatsapp: "https://wa.me/254787383923",   // admin WhatsApp: 0787 383 923 (Help button, footer, About page, PIN reset, unlock requests)
+  // >>> ------------------------- <<<
+  pricePerLine: 99,        // KES per combination (SportPesa Mega Jackpot Pro); a pool in data/jackpots.json can override it
+  feePercent: 0,           // % you keep for running the pool, taken from winnings
+  minContribution: 100,        // keep equal to MIN_CONTRIB in Code.gs
+  defaultContribution: 1000,
+  cutoffMinutes: 30,           // keep equal to CLOSE_MIN in Code.gs (pool closes this long before the first kickoff)
+  payoutDays: 2,               // days after the bookmaker pays us that members are paid
+  disputeDays: 7,              // days members have to flag a wrong record
+  logoSrc: "assets/emblem-128.png",     // emblem image next to this file; set to "" to fall back to the drawn emblem
+  poolsRefreshSeconds: 60      // how often the page re-reads pool totals from the Sheet while it is open
+};
+
+/* Shown only if neither the Sheet nor data/jackpots.json can be reached. It is empty on purpose, so members never see made-up fixtures. */
+const JACKPOT_DATA = { isSample: false, defaultPlatform: "sportpesa", platforms: { sportpesa: { name: "SportPesa", items: [] }, betika: { name: "Betika", items: [] } } };
+
+/* Returns the jackpot data. Order: 1) your Sheet via the API (action "pools"), 2) data/jackpots.json, 3) an empty page. */
+function fetchPools() {
+  const fromApi = () => {
+    if (!window.API_URL) return Promise.reject(new Error('no API'));
+    return fetch(window.API_URL, { method: 'POST', body: JSON.stringify({ action: 'pools' }) })
+      .then(r => r.json()).then(j => { if (!j || !j.ok || !Array.isArray(j.pools)) throw new Error((j && j.msg) || 'bad reply'); return j; });
+  };
+  const fromFile = () => fetch('data/jackpots.json', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  return fromApi().catch(err => { console.warn('Sheet feed unavailable, trying data/jackpots.json:', err.message); return fromFile(); });
+}
+function getJackpotData() {
+  return fetchPools().then(j => {
+    const platforms = { sportpesa: { name: 'SportPesa', items: [] }, betika: { name: 'Betika', items: [] } }, now = Date.now();
+    (j.pools || []).forEach(p => {
+      if (p.kickoff && new Date(p.kickoff).getTime() <= now) return;   // a jackpot is wiped from the site the moment its first match kicks off
+      const k = String(p.bookmaker || 'other').toLowerCase();
+      const pl = platforms[k] || (platforms[k] = { name: p.bookmaker || 'Other', items: [] });
+      pl.items.push({ key: p.jackpot || p.poolId, short: p.jackpotName || p.name, poolId: p.poolId, title: p.name, prize: p.prize, closes: p.closes, kickoff: p.kickoff, status: p.status, min: p.min, pricePerLine: p.pricePerLine,
+        totalStake: p.totalStake != null ? p.totalStake : p.target, collected: p.collected != null ? p.collected : p.total,
+        members: p.members, prizes: p.prizes, matches: p.matches || [] });
+    });
+    let def = null, best = Infinity;
+    Object.keys(platforms).forEach(k => { const it = platforms[k].items; it.sort((x, y) => new Date(x.closes) - new Date(y.closes)); if (it.length && new Date(it[0].closes) < best) { best = new Date(it[0].closes); def = k; } });
+    return { isSample: false, updated: j.updated, defaultPlatform: def || 'sportpesa', platforms };
+  }).catch(err => { console.warn('No jackpot data available:', err); return JACKPOT_DATA; });
+}
+</script>
+
+<script id="app">
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const state = { data: null, platform: null, jpKey: null, mode: 'upcoming', amount: null };
+
+  /* ---------- formatting & maths ---------- */
+  const num = n => (n == null || isNaN(n)) ? null : Number(n);
+  const money = n => num(n) == null ? '\u2014' : SITE.currency + ' ' + Math.round(n).toLocaleString('en-US');
+  const trim1 = x => String(Math.round(x * 10) / 10);
+  function moneyShort(n) {
+    n = num(n); if (n == null) return null;
+    if (n >= 1e9) return SITE.currency + ' ' + trim1(n / 1e9) + 'B';
+    if (n >= 1e6) return SITE.currency + ' ' + trim1(n / 1e6) + 'M';
+    return money(n);
+  }
+  function calcShare(amount, totalStake, prize) {
+    amount = num(amount); totalStake = num(totalStake); prize = num(prize);
+    if (amount == null || amount < 0 || !totalStake || totalStake <= 0) return { share: null, payout: null };
+    const share = Math.min(amount / totalStake, 1);
+    return { share, payout: prize == null ? null : prize * share };
+  }
+  function pct(share) {
+    if (share == null) return '\u2014';
+    const p = share * 100;
+    return (p >= 10 ? p.toFixed(1) : p >= 1 ? p.toFixed(2) : p.toFixed(3)).replace(/\.?0+$/, '') + '%';
+  }
+  const when = iso => {
+    if (typeof iso === 'string' && !/^\d{4}-\d{2}-\d{2}/.test(iso)) return iso;
+    const d = new Date(iso); if (isNaN(d)) return String(iso == null ? '' : iso);
+    return d.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Nairobi' });
+  };
+  const itemsOf = p => { const pl = state.data && state.data.platforms[p]; return (pl && pl.items) || []; };
+  const getJackpot = p => { const it = itemsOf(p); return it.find(j => j.key === state.jpKey) || it[0] || null; };
+  const soonest = p => itemsOf(p)[0] || null;
+  /* A jackpot leaves the page as soon as its first match kicks off, even if the page was left open. */
+  function pruneExpired() {
+    if (!state.data) return false; const now = Date.now(); let gone = false;
+    Object.keys(state.data.platforms).forEach(k => { const pl = state.data.platforms[k], keep = (pl.items || []).filter(j => !(j.kickoff && new Date(j.kickoff).getTime() <= now)); if (keep.length !== (pl.items || []).length) { pl.items = keep; gone = true; } });
+    return gone;
+  }
+  const matchCount = jp => jp ? ((jp.matches && jp.matches.length) || jp.matchCount || 0) : 0;
+  const dcOf = jp => (jp.matches || []).filter(m => m.type === 'DC').length;
+  const linesOf = jp => Math.pow(2, dcOf(jp));
+  const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  const stakeOf = jp => num(jp.totalStake) != null ? num(jp.totalStake) : linesOf(jp) * (num(jp.pricePerLine) || SITE.pricePerLine);
+
+  /* ---------- drawn artwork ---------- */
+  function ballSVG() {
+    const pent = (cx, cy, r, rot) => Array.from({ length: 5 }, (_, k) => {
+      const a = (rot + 72 * k) * Math.PI / 180; return (cx + r * Math.cos(a)).toFixed(1) + ',' + (cy + r * Math.sin(a)).toFixed(1);
+    }).join(' ');
+    let patches = '', seams = '';
+    for (let k = 0; k < 5; k++) {
+      const a = (-90 + 72 * k) * Math.PI / 180, cx = 100 + 84 * Math.cos(a), cy = 100 + 84 * Math.sin(a);
+      patches += '<polygon points="' + pent(cx, cy, 26, -90 + 72 * k + 180) + '" fill="#0b2a1a"/>';
+      seams += '<line x1="' + (100 + 29 * Math.cos(a)).toFixed(1) + '" y1="' + (100 + 29 * Math.sin(a)).toFixed(1) + '" x2="' + (100 + 62 * Math.cos(a)).toFixed(1) + '" y2="' + (100 + 62 * Math.sin(a)).toFixed(1) + '"/>';
+    }
+    return '<svg viewBox="0 0 300 260"><defs>' +
+      '<radialGradient id="bl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#d8d5c6"/><stop offset="1" stop-color="#7d7b6e"/></radialGradient>' +
+      '<clipPath id="bc"><circle cx="100" cy="100" r="96"/></clipPath>' +
+      '<linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".5" stop-color="#e8b931"/><stop offset="1" stop-color="#a97c14"/></linearGradient></defs>' +
+      '<g fill="none" stroke="url(#g2)" stroke-width="4" stroke-linecap="round">' +
+      '<path d="M8 130C60 40 240 40 292 130 240 220 60 220 8 130Z"/><path d="M30 130C80 66 220 66 270 130" stroke-width="2" opacity=".6"/>' +
+      '<path d="M150 14v26M150 246v-26" stroke-width="3"/></g>' +
+      '<g transform="translate(70 50) scale(.8)"><g clip-path="url(#bc)"><circle cx="100" cy="100" r="96" fill="url(#bl)"/>' + patches +
+      '<polygon points="' + pent(100, 100, 29, -90) + '" fill="#0b2a1a"/>' +
+      '<g stroke="#8c8a7c" stroke-width="2" opacity=".8">' + seams + '</g>' +
+      '<circle cx="100" cy="100" r="96" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="8"/></g></g></svg>';
+  }
+  function crowdSVG() {
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const W = 600, H = 120; let s = '';
+    for (let x = 6; x < W; x += 13) {
+      const y = 62 + rnd() * 34, r = 6 + rnd() * 3;
+      s += '<circle cx="' + x.toFixed(0) + '" cy="' + y.toFixed(0) + '" r="' + r.toFixed(1) + '"/>';
+      s += '<rect x="' + (x - 8).toFixed(0) + '" y="' + (y + r).toFixed(0) + '" width="16" height="' + H + '" rx="7"/>';
+      if (rnd() > .62) s += '<path d="M' + (x - 5) + ' ' + (y + r + 4) + ' L' + (x - 12) + ' ' + (y - 14) + ' M' + (x + 5) + ' ' + (y + r + 4) + ' L' + (x + 12) + ' ' + (y - 16) + '" stroke="#020a05" stroke-width="4" stroke-linecap="round" fill="none"/>';
+    }
+    return { vb: '0 0 ' + W + ' ' + H, html: '<g fill="#020a05">' + s + '</g>' };
+  }
+
+  /* ---------- progress bar + countdown ---------- */
+  const poolOf = jp => (jp && state.mode === 'upcoming') ? jp : null;
+  function paintProgress(jp, ids) {
+    const box = $(ids.box); if (!box) return;
+    const target = jp && (num(jp.totalStake) || ((jp.matches || []).length ? stakeOf(jp) : null)), got = jp && num(jp.collected);
+    if (!jp || state.mode !== 'upcoming' || !target || target <= 0 || got == null) { box.hidden = true; return; }
+    const pc = Math.max(0, Math.min(100, got / target * 100)), left = Math.max(0, target - got);
+    box.hidden = false;
+    $(ids.txt).innerHTML = '<b>' + money(got) + '</b> of ' + money(target) + ' collected';
+    $(ids.bar).setAttribute('aria-valuenow', String(Math.round(pc))); $(ids.bar).firstElementChild.style.width = pc.toFixed(1) + '%';
+    $(ids.sub).textContent = pc >= 100 ? 'This pool is full. New contributions go into the next pool on the same jackpot.' : money(left) + ' still needed' + (jp.members ? ' \u00b7 ' + jp.members + ' members in' : '') + '. Earlier contributors fill earlier pools.';
+  }
+  function untilClose(jp) {
+    if (!jp || !jp.closes) return null;
+    const t = new Date(jp.closes).getTime(); return isNaN(t) ? null : t - Date.now();
+  }
+  function fmtLeft(ms) {
+    const s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, z = n => String(n).padStart(2, '0');
+    return d > 0 ? d + 'd ' + z(h) + 'h ' + z(m) + 'm' : z(h) + ':' + z(m) + ':' + z(x);
+  }
+  let tickTimer = null;
+  function tick() {
+    if (pruneExpired()) { renderHomeCard(); renderJackpot(); return; }
+    const dp = state.data && (state.data.defaultPlatform || Object.keys(state.data.platforms)[0]);
+    const home = state.data && soonest(dp), cur = state.data && getJackpot(state.platform);
+    const paint = (el, jp, label) => {
+      if (!el) return; const ms = state.mode === 'upcoming' || el.id === 'hc-cd' ? untilClose(jp) : null;
+      if (ms == null) { el.hidden = true; el.textContent = ''; return; }
+      el.hidden = false; el.classList.toggle('urgent', ms > 0 && ms < 3600000);
+      el.innerHTML = ms <= 0 ? 'Pool closed' : label + ' <b>' + fmtLeft(ms) + '</b>';
+    };
+    paint($('#hc-cd'), home, 'Closes in');
+    paint($('#jp-cd'), state.mode === 'upcoming' ? cur : null, 'Closes in');
+    const box = $('#c-cd');
+    if (box) {
+      const ms = state.mode === 'upcoming' ? untilClose(cur) : null;
+      if (ms == null) box.hidden = true;
+      else { box.hidden = false; box.classList.toggle('urgent', ms > 0 && ms < 3600000); box.classList.toggle('closed', ms <= 0);
+        if (ms <= 0) setCta(false, 'Pool closed');
+        $('#c-cd-label').textContent = ms <= 0 ? 'This pool has closed. Contributions are no longer accepted.' : 'Pool closes in'; $('#c-cd-val').textContent = ms <= 0 ? '' : fmtLeft(ms); }
+    }
+  }
+  function startTick() { tick(); if (!tickTimer) tickTimer = setInterval(tick, 1000); }
+
+  /* ---------- views ---------- */
+  function renderHomeCard() {
+    const dp = state.data.defaultPlatform || Object.keys(state.data.platforms)[0];
+    const jp = soonest(dp);
+    const n = matchCount(jp), prize = jp && moneyShort(jp.prize);
+    $('#hc-matches').textContent = (n || '\u2014') + ' Matches';
+    $('#hc-prize').textContent = prize || 'Prize to be set';
+    $('#hc-prize-sub').textContent = prize ? 'Jackpot prize' : 'Shared among all winners';
+    const prevMode = state.mode; state.mode = 'upcoming';
+    paintProgress(jp, { box: '#hc-prog', txt: '#hc-prog-txt', bar: '#hc-bar', sub: '#hc-prog-sub' });
+    state.mode = prevMode; tick();
+  }
+
+  function renderControls() {
+    const seg = $('#seg-platform');
+    seg.innerHTML = Object.keys(state.data.platforms).map(k =>
+      '<button type="button" data-platform="' + esc(k) + '" aria-pressed="' + (k === state.platform) + '">' + esc(state.data.platforms[k].name) + '</button>').join('');
+    const its = itemsOf(state.platform), cur = getJackpot(state.platform), js = $('#seg-jackpot');
+    js.style.display = its.length < 2 ? 'none' : '';
+    js.innerHTML = its.map(j => '<button type="button" data-jp="' + esc(j.key) + '" aria-pressed="' + (!!cur && j.key === cur.key) + '">' + esc(j.short) + ' <small>(' + matchCount(j) + ')</small></button>').join('');
+  }
+
+  function renderJackpot() {
+    renderControls();
+    const jp = getJackpot(state.platform);
+    const meta = $('#jp-meta'), sum = $('#jp-sum'), list = $('#jp-matches');
+    const pName = state.data.platforms[state.platform].name;
+    if (!jp || !matchCount(jp)) {
+      meta.innerHTML = ''; sum.innerHTML = ''; list.innerHTML = ''; list.hidden = true; $('#jp-prog').hidden = true;
+      let e = $('#jp-empty'); if (!e) { e = document.createElement('div'); e.id = 'jp-empty'; e.className = 'empty'; list.after(e); }
+      e.hidden = false; e.textContent = 'No ' + pName + ' jackpot is open right now. Check back soon.';
+      updateContribution(null); return;
+    }
+    const e = $('#jp-empty'); if (e) e.hidden = true;
+    list.hidden = false;
+    paintProgress(jp, { box: '#jp-prog', txt: '#jp-prog-txt', bar: '#jp-bar', sub: '#jp-prog-sub' });
+    const ms = jp.matches || [], dc = dcOf(jp);
+    meta.innerHTML = '<strong>' + esc(jp.title || pName) + '</strong><span class="mm">' + dc + ' doubles (DC) \u00b7 ' + (ms.length - dc) + ' singles \u00b7 ' + linesOf(jp).toLocaleString('en-US') + ' lines</span>';
+    const first = jp.closes || ms.map(m => m.kickoff).filter(Boolean).sort()[0];
+    const third = '<div class="sumcard"><small>' + (jp.closes ? 'Closes' : 'First kickoff') + '</small><b style="font-size:15px">' + esc(first ? when(first) : '\u2014') + '</b></div>';
+    sum.innerHTML = '<div class="sumcard"><small>Matches</small><b>' + matchCount(jp) + '</b></div>' +
+      '<div class="sumcard"><small>Big prize</small><b>' + esc(moneyShort(jp.prize) || '\u2014') + '</b></div>' + third;
+    list.innerHTML = ms.map((m, i) => {
+      const isDC = m.type === 'DC', sub = [m.league, m.kickoff ? when(m.kickoff) : ''].filter(Boolean).map(esc).join(' \u00b7 ');
+      return '<li class="match"><span class="mno">' + (i + 1) + '</span><div class="mteams">' + esc(m.home) + ' vs ' + esc(m.away) + '<small>' + sub + '</small></div>' +
+        '<div class="picks"><span class="tp' + (isDC ? ' dc' : '') + '">' + (isDC ? 'DC' : 'Single') + '</span><span class="lockbar" role="img" aria-label="Selection locked">' + LOCK + '</span></div></li>';
+    }).join('');
+    updateContribution(jp); tick();
+  }
+
+  function setCta(ok, label) { const b = $('#c-cta'); if (!b) return; b.disabled = !ok; $('#c-cta-t').textContent = label; }
+  /* Remember the chosen jackpot and stake so the payment page can fill them in after sign-up or log-in. */
+  function saveIntent() {
+    const jp = getJackpot(state.platform), a = Number($('#c-amount').value);
+    if (!jp || !(a > 0)) return;
+    try { sessionStorage.setItem('tj_intent', JSON.stringify({ poolId: jp.poolId, jackpot: jp.key, name: jp.title || jp.short, amount: Math.round(a) })); } catch (e) {}
+    location.hash = '#account';
+  }
+  function updateContribution(jp) {
+    const input = $('#c-amount'), more = $('#c-more'), wrap = $('#c-more-wrap');
+    const minAmt = jp ? (num(jp.min) || SITE.minContribution || 0) : (SITE.minContribution || 0);
+    $('#c-min').textContent = minAmt ? 'Minimum contribution for this pool ' + money(minAmt) : '';
+    if (!jp) { ['#c-total', '#c-share', '#c-now', '#c-prize', '#c-pay'].forEach(s => $(s).textContent = '\u2014'); wrap.hidden = true; setCta(false, 'Continue'); return; }
+    if (state.amount == null && document.activeElement !== input) input.value = jp.defaultContribution != null ? jp.defaultContribution : Math.max(SITE.defaultContribution, minAmt);
+    const amt = input.value === '' ? null : Number(input.value);
+    input.min = minAmt || 0; $('#c-min').style.color = (amt != null && minAmt && amt < minAmt) ? 'var(--red)' : '';
+    const total = stakeOf(jp), keep = 1 - (SITE.feePercent || 0) / 100;
+    const r = calcShare(amt, total, jp.prize);
+    $('#c-total').textContent = money(total);
+    $('#c-prize').textContent = money(jp.prize);
+    $('#c-share').textContent = pct(r.share);
+    $('#c-pay').textContent = money(r.payout == null ? null : r.payout * keep);
+    $('#c-pay-label').textContent = 'Your share would pay';
+    const got = num(jp.collected) || 0, nowSh = (amt != null && amt > 0) ? Math.min(amt / (got + amt), 1) : null;
+    $('#c-now').textContent = pct(nowSh);
+    const ms = untilClose(jp), closed = ms != null && ms <= 0, valid = amt != null && amt > 0 && (!minAmt || amt >= minAmt) && !closed;
+    setCta(valid, closed ? 'Pool closed' : valid ? 'Continue with ' + money(amt) : (amt != null && minAmt && amt < minAmt ? 'Minimum is ' + money(minAmt) : 'Enter your contribution'));
+    const price = num(jp.pricePerLine) || SITE.pricePerLine, dmax = dcOf(jp);
+    let h = '';
+    if (jp.prizes && jp.prizes.length) {
+      h += '<h3>If the slip pays</h3><table class="tbl"><tr><th>Result</th><th>Prize</th><th>Your payout</th></tr>' +
+        jp.prizes.map(z => '<tr><td>' + esc(z.label) + '</td><td>' + money(z.amount) + '</td><td>' + money(r.share == null ? null : z.amount * r.share * keep) + '</td></tr>').join('') + '</table>';
+    }
+    if (dmax > 0) {
+      h += '<h3>Cover levels (how many doubles we play)</h3><table class="tbl"><tr><th>Doubles</th><th>Lines</th><th>Total stake</th><th>Your share</th></tr>';
+      for (let d = 0; d <= dmax; d++) {
+        const n = Math.pow(2, d), t = n * price, sh = amt == null ? null : Math.min(amt / t, 1);
+        h += '<tr' + (d === dmax ? ' class="cur"' : '') + '><td>' + d + '</td><td>' + n.toLocaleString('en-US') + '</td><td>' + money(t) + '</td><td>' + pct(sh) + '</td></tr>';
+      }
+      h += '</table>';
+    }
+    more.innerHTML = h; wrap.hidden = !h;
+  }
+
+  /* ---------- routing ---------- */
+  function route() {
+    let h = (location.hash || '#home').slice(1), view = h, target = null, navKey = h;
+    if (h === 'how') { view = 'home'; target = 'how'; }
+    else if (h === 'contribute') { view = 'jackpot'; target = 'contribute'; navKey = 'jackpot'; }
+    if (h === 'pay') { view = 'account'; navKey = 'account'; }
+    if (!['home', 'jackpot', 'about', 'terms', 'account'].includes(view)) { view = 'home'; navKey = 'home'; }
+    $$('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + view));
+    $$('[data-nav]').forEach(a => a.dataset.nav === navKey ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    closeMenu();
+    const el = target && document.getElementById(target);
+    if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' })); else window.scrollTo(0, 0);
+  }
+  function closeMenu() { $('#menu-panel').classList.remove('open'); $('#menu-btn').setAttribute('aria-expanded', 'false'); }
+
+  function renderTerms() {
+    const ex = { mine: 500, total: 5000, won: 100000 }, pc = ex.mine / ex.total, K = n => SITE.currency + ' ' + Math.round(n).toLocaleString('en-US');
+    const fee = SITE.feePercent ? 'A pool fee of ' + SITE.feePercent + '% is taken from the amount won before it is shared, and the fee is shown on this page.' : 'There is currently no pool fee. If we ever add one, it will be shown on this page before you contribute.';
+    const T = [
+      ['1. The pool', ['3EYE Jackpot runs community pools for bookmaker football jackpots. Members contribute to one shared pool, and the pool places one combined stake on one jackpot slip.', 'Joining is voluntary. You must be 18 or over, and you must be allowed to take part under the law where you live.', 'We are not affiliated with any bookmaker.']],
+      ['2. Joining and contributing', ['ul', 'The minimum contribution is set for each pool and is shown on the pool page and in My Account.', 'Payment details are shown only inside My Account, after you log in. Pay only to those details, and never to a number sent by anyone else.', 'A contribution counts only when we have confirmed it and recorded it against your name and number. After you pay, enter the M-Pesa code in My Account so we can check it. Each M-Pesa code can be used once.', 'A pool closes ' + SITE.cutoffMinutes + ' minutes before its first kickoff. A payment that arrives late is refunded in full.', 'You can ask to withdraw your contribution any time before the pool closes.']],
+      ['3. The stake we place', ['ul', 'Our target is always the full combination at the highest stake: the number of lines multiplied by the price per line (currently ' + K(SITE.pricePerLine) + ' a line).', 'If the pool does not reach that stake by closing time, we play a smaller cover that the money supports, for example fewer doubles. The matches do not change.', 'Your share is always your contribution \u00f7 the total actually collected in the pool. If the pool falls short, shares are worked out on the smaller total, so nobody is left out and nothing is held back.', 'If we cannot place the slip before the jackpot closes, for example because the bookmaker site is down, every contribution is refunded in full.', 'We show which matches are double chance (DC) and which are singles, but the selections themselves are kept private. After placing the slip we record the total pool and the slip reference.']],
+      ['4. When a pool fills: second pools and order', ['ul', 'Each pool takes contributions only up to the full stake. If contributions go past it, the excess moves to a second pool on the same jackpot, with the same matches and the same slip. A third pool follows if needed, and so on. Each pool runs like a fresh pool.', 'Pool placement depends on speed: the earliest confirmed contributors are placed in the earlier pools. Where you land depends on how fast your stake is confirmed compared with how fast other stakes come in.', 'If your payment is bigger than the room left in a pool, it is split: the part that fits goes into that pool and the rest goes into the next one. We tell you how it was split in My Account.', 'Winnings are worked out separately for each pool, using your share of that pool.']],
+      ['5. Winnings and payouts', ['ul', 'Your payout = (your contribution \u00f7 total pool) \u00d7 amount won. This is the same share of the winnings as your share of the stake.', 'Amount won is what the bookmaker actually pays on our slip, after any tax or charges the bookmaker or the law takes. It may be the full jackpot or a bonus prize.', 'Bookmakers share each prize equally among all winners in that category, so the amount can be much smaller than the headline prize. We cannot promise any amount.', fee, 'Payouts are rounded down to the nearest shilling and sent by M-Pesa to the number you registered with, within ' + SITE.payoutDays + ' days of the bookmaker paying us. Each payout is recorded in My Account.']],
+      ['6. If we do not win, or a jackpot is cancelled', ['ul', 'If the slip does not win, contributions are not refunded, because the stake has already been placed.', 'If the bookmaker cancels the jackpot or returns the stake, we return the money to members using the same share formula.', 'Postponed or abandoned matches follow the bookmaker\u2019s own rules, and we follow the bookmaker\u2019s results.']],
+      ['7. Your account and records', ['ul', 'You log in with your phone number and a 4-character PIN. Keep your PIN private. We will never ask you for it.', 'After 5 wrong PIN attempts your account is locked for 1 hour. You can send an unlock request from the log-in page, and we will confirm it with you on WhatsApp.', 'For every pool we record the total pool, the slip reference and the result, whether we win or lose. A jackpot is removed from the public pool page when its first match starts. Your own contributions and payouts show in My Account.', 'If you think a record is wrong, tell us within ' + SITE.disputeDays + ' days of the result and we will check it against the M-Pesa and bookmaker records.']],
+      ['8. Risk and responsible play', ['Nothing here is a guarantee of a win. Jackpots are very hard to win and you can lose your whole contribution. Contribute only what you can afford to lose, and if betting stops being fun, stop and talk to someone you trust.']],
+      ['9. Changes and contact', ['We may update these terms. The terms shown here when you contribute apply to that pool. Contact us on WhatsApp or Telegram with any question or complaint, and we will try to settle it with you directly. These terms are governed by the laws of Kenya.']]
+    ];
+    const eg = '<b>Example.</b> You put in ' + K(ex.mine) + ' and the total pool is ' + K(ex.total) + '. Your share is ' + ex.mine.toLocaleString('en-US') + ' \u00f7 ' + ex.total.toLocaleString('en-US') + ' = ' + (pc * 100) + '%. If the slip wins ' + K(ex.won) + ', you receive ' + (pc * 100) + '% \u00d7 ' + K(ex.won) + ' = <b>' + K(ex.won * pc) + '</b>.';
+    $('#terms-body').innerHTML = '<div class="formula"><h2>How winnings are shared</h2><div class="eq"><span>Your payout</span><i>=</i><span>(Your contribution \u00f7 Total pool)</span><i>\u00d7</i><span>Amount won</span></div><p class="eg">' + eg + '</p></div>' +
+      T.map((t, i) => { const b = t[1], body = b[0] === 'ul' ? '<ul>' + b.slice(1).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : b.map(x => '<p>' + esc(x) + '</p>').join('');
+        return '<details class="term"' + (i === 0 ? ' open' : '') + '><summary>' + esc(t[0]) + '</summary><div class="tb">' + body + '</div></details>'; }).join('') +
+      '<p style="font-size:14.5px;color:var(--muted);text-align:center;margin:12px 0">Keep a screenshot of your M-Pesa confirmation.</p>';
+  }
+
+  /* ---------- start ---------- */
+  function init() {
+    if (SITE.logoSrc) $('#logo-slot').innerHTML = '<img src="' + esc(SITE.logoSrc) + '" alt="3EYE Jackpot logo">';
+    $('#hero-art').innerHTML = ballSVG();
+    const c = crowdSVG(), cv = $('#crowd'); cv.setAttribute('viewBox', c.vb); cv.innerHTML = c.html;
+    const links = [];
+    if (SITE.whatsapp) links.push('<a class="btn btn-gold btn-sm" href="' + esc(SITE.whatsapp) + '" target="_blank" rel="noopener">WhatsApp</a>');
+    if (SITE.telegram) links.push('<a class="btn btn-line btn-sm" href="' + esc(SITE.telegram) + '" target="_blank" rel="noopener">Telegram</a>');
+    $('#about-links').innerHTML = links.join('');
+    renderTerms();
+    (function () {
+      const m = $('#warn-modal'), open = () => { m.hidden = false; $('#warn-ok').focus(); }, close = () => { m.hidden = true; $('#warn-fab').focus(); };
+      $('#warn-fab').onclick = open; $('#warn-x').onclick = close; $('#warn-ok').onclick = close;
+      m.addEventListener('click', e => { if (e.target === m) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !m.hidden) close(); });
+    })();
+    $('#yr').textContent = new Date().getFullYear();
+    const wa = $('#wa-fab');
+    if (SITE.whatsapp) { wa.href = SITE.whatsapp + (SITE.whatsapp.indexOf('?') < 0 ? '?text=' + encodeURIComponent('Hi 3EYE Jackpot, I need help with ') : ''); wa.hidden = false; }
+    else if (SITE.telegram) { wa.href = SITE.telegram; wa.querySelector('span').textContent = 'Help'; wa.hidden = false; wa.style.background = '#2aabee'; }
+    const fc = [];
+    if (SITE.whatsapp) fc.push('<a href="' + esc(SITE.whatsapp) + '" target="_blank" rel="noopener">WhatsApp</a>');
+    if (SITE.telegram) fc.push('<a href="' + esc(SITE.telegram) + '" target="_blank" rel="noopener">Telegram</a>');
+    if (fc.length) $('#foot-contact').innerHTML = 'Questions or complaints? Message us on ' + fc.join(' or ') + ' and we will reply as soon as we can.';
+
+    $('#menu-btn').addEventListener('click', () => {
+      const open = $('#menu-panel').classList.toggle('open'); $('#menu-btn').setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    $('#seg-platform').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { state.platform = b.dataset.platform; state.jpKey = null; state.amount = null; renderJackpot(); } });
+    $('#seg-jackpot').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { state.jpKey = b.dataset.jp; state.amount = null; renderJackpot(); } });
+    $('#c-amount').addEventListener('input', e => { state.amount = e.target.value === '' ? '' : e.target.value; updateContribution(getJackpot(state.platform)); });
+    $('#c-cta').addEventListener('click', saveIntent);
+    window.addEventListener('hashchange', route);
+
+    route();
+    getJackpotData().then(d => {
+      state.data = d; state.platform = d.defaultPlatform || Object.keys(d.platforms)[0];
+      renderHomeCard(); renderJackpot(); route(); startTick();
+    }).catch(err => { console.error('Jackpot data failed to load', err); });
+    /* keep the totals and countdown fresh while the page stays open */
+    if (SITE.poolsRefreshSeconds > 0) setInterval(() => {
+      if (document.hidden) return;
+      getJackpotData().then(d => { if (!state.data) return; state.data = d; if (!d.platforms[state.platform]) state.platform = d.defaultPlatform; renderHomeCard(); renderJackpot(); }).catch(() => {});
+    }, SITE.poolsRefreshSeconds * 1000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+<script id="config">
+/* Paste your deployed Apps Script web app URL here (it ends in /exec). It is safe for this to be public. */
+window.API_URL = "https://script.google.com/macros/s/AKfycbzefvjwwFY___KN6aZS4J-eKcFdSvZhLq3a2JaOv9gBP6vRFR9UWsFfBxOTS8NjqPx2/exec";
+</script>
+<script id="account">
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const kes = n => 'KES ' + Math.round(+n || 0).toLocaleString('en-US');
+  const pct = sh => { const p = (sh || 0) * 100; return (p >= 10 ? p.toFixed(1) : p >= 1 ? p.toFixed(2) : p.toFixed(3)).replace(/\.?0+$/, '') + '%'; };
+  const when = v => { const d = new Date(v); return isNaN(d) ? '' : d.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Nairobi' }); };
+  let T = sessionStorage.getItem('tj_t'), mode = 'login', last = null, flash = null;
+  const getIntent = () => { try { return JSON.parse(sessionStorage.getItem('tj_intent') || 'null'); } catch (e) { return null; } };
+  const clearIntent = () => { try { sessionStorage.removeItem('tj_intent'); } catch (e) {} };
+  const sharePct = (amt, pool) => {
+    amt = +amt; if (!(amt > 0) || !pool) return { fill: '\u2014', now: '\u2014' };
+    const fill = pool.target > 0 ? Math.min(amt / pool.target, 1) : null, now = Math.min(amt / ((+pool.total || 0) + amt), 1);
+    return { fill: fill == null ? '\u2014' : pct(fill), now: pct(now) };
+  };
+
+  async function api(action, d) {
+    if (!window.API_URL) throw new Error('Accounts are not switched on yet.');
+    let r;
+    for (let k = 0; k < 2 && !r; k++) {          // one quiet retry: Apps Script sometimes drops the first call after a cold start
+      try { r = await fetch(window.API_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action: action, token: T }, d || {})) }); }
+      catch (e) { if (k) throw new Error('Could not reach the server. Check your connection and try again.'); await new Promise(z => setTimeout(z, 1200)); }
+    }
+    let j; try { j = await r.json(); } catch (e) { throw new Error('The server sent an unexpected reply. Try again.'); }
+    if (!j.ok) { if (/log in again/i.test(j.msg)) { T = null; sessionStorage.removeItem('tj_t'); navLabel(); } throw new Error(j.msg); }
+    return j;
+  }
+  const say = (m, bad) => { const e = $('#a-msg'); if (e) { e.textContent = m; e.className = bad ? 'a-bad' : 'a-ok'; } };
+  const draw = h => { $('#acct').innerHTML = h; };
+  /* Nav label: "Sign up / Log in" while signed out, "My Account" once logged in */
+  function navLabel() {
+    const t = T ? 'My Account' : 'Sign up / Log in';
+    document.querySelectorAll('.js-acct').forEach(a => { a.textContent = t; });
+    document.querySelectorAll('.js-cta').forEach(a => { a.hidden = !!T; });
+    const h = $('#acct-title'); if (h) h.textContent = t;
+  }
+  navLabel();
+
+  /* ---------- signed out ---------- */
+  function authHtml(note) {
+    const su = mode === 'signup', rs = mode === 'reset';
+    const tabs = rs ? '' : '<div class="a-seg"><button type="button" data-m="login" aria-pressed="' + !su + '">Log in</button><button type="button" data-m="signup" aria-pressed="' + su + '">Sign up</button></div>';
+    const it = getIntent();
+    const itHtml = it ? '<div class="a-card"><b>Your stake: ' + kes(it.amount) + '</b><br><span class="a-mute">' + esc(it.name || 'Selected jackpot') + '. Sign up or log in and you will go straight to the payment page with this amount filled in.</span></div>' : '';
+    return itHtml + tabs + '<form id="a-form" class="a-card" autocomplete="on">' +
+      (rs ? '<h3>Forgot your PIN?</h3><p class="a-mute">Choose a new PIN. The admin confirms it with you on WhatsApp, then it starts working.</p>' : '') +
+      (su ? '<label>Full name<input name="name" autocomplete="name" required></label>' : '') +
+      '<label>Phone number (M-Pesa)<div class="a-phone"><span class="a-cc">+254</span><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="712345678" pattern="[17][0-9]{8}" title="9 digits, starting with 7 or 1" required></div></label>' +
+      '<label>' + (su ? 'Choose a 4-character PIN (letters or numbers)' : rs ? 'New 4-character PIN (letters or numbers)' : 'PIN (4 letters or numbers)') + '<input name="pin" type="password" inputmode="text" maxlength="4" pattern="[A-Za-z0-9]{4}" title="Exactly 4 letters or numbers" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="' + (mode === 'login' ? 'current-password' : 'new-password') + '" required></label>' +
+      (su ? '<label class="a-check"><input type="checkbox" name="agree" required><span>I am 18 or over, and I accept the <a href="./#terms" target="_blank" rel="noopener">Pool Terms</a> and the risks of betting.</span></label>' : '') +
+      '<button class="a-btn a-gold" type="submit">' + (su ? 'Create account' : rs ? 'Send reset request' : 'Log in') + '</button>' +
+      '<p id="a-msg" class="' + (note ? 'a-bad' : '') + '">' + esc(note || '') + '</p>' +
+      (mode === 'login' ? '<button type="button" class="a-link" data-m="reset">Forgot your PIN?</button><p class="help-hint">Reset requests are confirmed by the admin on WhatsApp. After 5 wrong PINs the account locks for 1 hour, and you can then request an unlock.</p>' : rs ? '<button type="button" class="a-link" data-m="login">Back to log in</button>' : '') + '</form>';
+  }
+  function bindAuth() {
+    const ph = $('#a-form') && $('#a-form').elements.phone;
+    if (ph) ph.addEventListener('input', () => {   // digits only, drop +254 / leading 0, must start with 1 or 7, max 9 digits
+      let d = ph.value.replace(/\D/g, ''); if (d.indexOf('254') === 0 && d.length > 9) d = d.slice(3);
+      d = d.replace(/^0+/, ''); while (d && !/^[17]/.test(d)) d = d.slice(1);
+      ph.value = d.slice(0, 9);
+    });
+    document.querySelectorAll('#acct [data-m]').forEach(b => b.onclick = () => { mode = b.dataset.m; draw(authHtml()); bindAuth(); });
+    $('#a-form').onsubmit = async ev => {
+      ev.preventDefault(); const f = ev.target, btn = f.querySelector('button[type=submit]'), v = n => f.elements[n] ? f.elements[n].value : '';
+      btn.disabled = true;
+      try {
+        if (mode === 'signup') { const j = await api('signup', { name: v('name'), phone: '254' + v('phone'), pin: v('pin'), agree: f.elements.agree.checked }); if (j.token) { T = j.token; sessionStorage.setItem('tj_t', T); render(); } else { f.reset(); say(j.msg, false); } }
+        else if (mode === 'reset') { const j = await api('requestReset', { phone: '254' + v('phone'), pin: v('pin') }); f.reset(); say(j.msg, false); }
+        else { const j = await api('login', { phone: '254' + v('phone'), pin: v('pin') }); T = j.token; sessionStorage.setItem('tj_t', T); render(); }
+      } catch (e) {
+        say(e.message, true);
+        if (mode === 'login' && /locked/i.test(e.message) && !$('#a-unlock')) {
+          const u = document.createElement('button'); u.type = 'button'; u.id = 'a-unlock'; u.className = 'a-btn a-line'; u.style.marginTop = '8px'; u.textContent = 'Request unlock';
+          u.onclick = async () => { u.disabled = true; try { const j = await api('requestUnlock', { phone: '254' + v('phone') }); say(j.msg, false); } catch (x) { say(x.message, true); u.disabled = false; } };
+          $('#a-msg').after(u);
+        }
+      } finally { btn.disabled = false; }
+    };
+  }
+
+  /* ---------- signed in ---------- */
+  function poolCard(p) {
+    const row = (k, v) => '<div class="a-row"><span>' + k + '</span><b>' + v + '</b></div>';
+    return '<div class="a-card"><h3>' + esc(p.name) + '<span class="a-chip">' + esc(p.status) + '</span></h3>' +
+      row('Your contribution', kes(p.mine)) + row('Pool total', kes(p.total)) + row(p.status === 'Open' ? 'Your share now (moves until the pool closes)' : 'Your share', pct(p.share)) +
+      (p.prize ? row(p.won ? 'Your share of the winnings' : 'Your share would pay if the jackpot wins', kes(p.wouldPay)) : '') +
+      (p.paidOut > 0 ? row('Paid out to you', kes(p.paidOut)) : '') +
+      (p.fee > 0 ? '<p class="a-mute">Includes a ' + esc(p.fee) + '% pool fee.</p>' : '') + '</div>';
+  }
+  function dashHtml(j) {
+    let h = '<div class="a-top"><b>Hello, ' + esc(j.name) + '</b><button class="a-btn a-line" id="a-out" type="button">Log out</button></div>';
+    if (flash) { h += '<div class="a-card"><b class="a-ok">' + esc(flash) + '</b></div>'; flash = null; }
+    const it = getIntent(), itPool = it && j.open.find(p => p.poolId === it.poolId);
+    if (it && !itPool) { clearIntent(); h += '<div class="a-card a-mute">The jackpot you chose is no longer open for contributions, so your stake was not carried over. Pick another below.</div>'; }
+    if (j.notes.length) {
+      h += '<div class="a-card"><h3>Messages' + (j.unread ? '<span class="a-dot">' + j.unread + '</span>' : '') + '</h3>' +
+        j.notes.slice(0, 8).map(n => '<div class="a-note' + (n.unread ? ' new' : '') + '"><b>' + esc(n.title) + '</b>' + esc(n.body) + '<br><small class="a-mute">' + esc(when(n.date)) + '</small></div>').join('') + '</div>';
+    }
+    h += j.pools.length ? j.pools.map(poolCard).join('') : '<p class="a-mute" style="margin-bottom:16px">You have no confirmed contributions yet.</p>';
+    if (j.open.length) {
+      h += '<div class="a-card"><h3>Ready to contribute?</h3><p class="a-mute">Tap the button to see where to send your M-Pesa payment. Then pay and enter the M-Pesa code below.</p>' +
+        '<button class="a-btn a-gold" id="a-getpay" type="button">Show payment details</button><div id="a-paybox" style="margin-top:10px;white-space:pre-line;font-weight:700"></div></div>';
+      h += '<form id="a-pay" class="a-card"><h3>Payment</h3><p class="a-mute">Step 1: pay by M-Pesa using the details above. Step 2: enter the amount and the M-Pesa code here. Your stake counts only once the admin confirms the code. Nothing is reserved before that.</p>' +
+        '<label>Pool<select name="poolId">' + j.open.map(p => '<option value="' + esc(p.poolId) + '"' + (itPool && p.poolId === itPool.poolId ? ' selected' : '') + ' data-target="' + (+p.target || 0) + '" data-total="' + (+p.total || 0) + '" data-min="' + (+p.min || +j.min || 0) + '">' + esc(p.name) + (p.full ? ' (full: your payment goes to the next pool)' : '') + (p.closes ? ' (closes ' + esc(when(p.closes)) + ')' : '') + '</option>').join('') + '</select></label>' +
+        '<label>Amount (KES, minimum <span id="a-minv">' + (+(j.open[0] && j.open[0].min) || +j.min || 0) + '</span>)<input name="amount" type="number" inputmode="numeric" min="' + (+(j.open[0] && j.open[0].min) || +j.min || 1) + '"' + (it && itPool ? ' value="' + (+it.amount || '') + '"' : '') + ' required></label>' +
+        '<div class="a-card" style="margin:0 0 12px"><div class="a-row"><span>Your winning % if the pool fills (at least)</span><b id="a-fill">\u2014</b></div><div class="a-row"><span>Your share right now (with your stake)</span><b id="a-now">\u2014</b></div></div>' +
+        '<label>M-Pesa confirmation code<input name="ref" maxlength="12" autocapitalize="characters" placeholder="e.g. SKL2A3B4C5" required></label>' +
+        '<p class="a-mute">Pools fill in order. The earliest confirmed payments go into the earliest pool, and anything over a pool&rsquo;s limit rolls into the next pool on the same jackpot.</p>' +
+        '<button class="a-btn a-gold" type="submit">Send to admin</button><p id="a-msg"></p>' +
+        (j.pending.length ? '<p class="a-mute">Waiting for the admin to confirm: ' + j.pending.map(x => kes(x.amount) + ' (' + esc(x.ref) + ')').join(', ') + '</p>' : '') + '</form>';
+    } else h += '<p class="a-mute" style="margin-bottom:16px">No pool is open for contributions right now.</p>';
+    h += '<details class="more"><summary>Change my PIN</summary><form id="a-pin" style="margin-top:10px">' +
+      '<label>Current PIN<input name="current" type="password" inputmode="text" maxlength="4" autocapitalize="off" autocomplete="current-password" required></label>' +
+      '<label>New PIN (4 letters or numbers)<input name="pin" type="password" inputmode="text" maxlength="4" pattern="[A-Za-z0-9]{4}" title="Exactly 4 letters or numbers" autocapitalize="off" autocomplete="new-password" required></label>' +
+      '<button class="a-btn a-line" type="submit">Change PIN</button><p id="a-msg2"></p></form></details>';
+    return h;
+  }
+  async function render() {
+    if (!$('#acct')) return;
+    navLabel();
+    if (!T) { draw(authHtml()); bindAuth(); return; }
+    draw('<p class="a-mute">Loading\u2026</p>');
+    try { last = await api('dashboard'); draw(dashHtml(last)); bindDash(); if (last.unread) api('markSeen').catch(() => {}); }
+    catch (e) { if (!T) { draw(authHtml(e.message)); bindAuth(); } else draw('<p class="a-bad">' + esc(e.message) + '</p><button class="a-btn a-line" id="a-retry" type="button">Try again</button>'), $('#a-retry').onclick = render; }
+  }
+  function bindDash() {
+    $('#a-out').onclick = async () => { try { await api('logout'); } catch (e) {} T = null; sessionStorage.removeItem('tj_t'); render(); };
+    const gp = $('#a-getpay');
+    if (gp) gp.onclick = async () => { gp.disabled = true; const box = $('#a-paybox'); try { const j = await api('payDetails'); box.textContent = j.details || j.msg; box.className = ''; } catch (e) { box.textContent = e.message; box.className = 'a-bad'; } finally { gp.disabled = false; } };
+    const f = $('#a-pay');
+    if (f) {
+      const sync = () => {
+        const o = f.elements.poolId.selectedOptions[0], m = o ? +o.dataset.min || 0 : 0;
+        $('#a-minv').textContent = m; f.elements.amount.min = m || 1;
+        const r = sharePct(f.elements.amount.value, o ? { target: +o.dataset.target, total: +o.dataset.total } : null);
+        $('#a-fill').textContent = r.fill; $('#a-now').textContent = r.now;
+      };
+      f.elements.poolId.onchange = sync; f.elements.amount.addEventListener('input', sync); sync();
+      if (getIntent()) setTimeout(() => f.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    }
+    if (f) f.onsubmit = async ev => {
+      ev.preventDefault(); const btn = f.querySelector('button[type=submit]'); btn.disabled = true;
+      try { const j = await api('declare', { poolId: f.elements.poolId.value, amount: f.elements.amount.value, ref: f.elements.ref.value }); clearIntent(); flash = j.msg; await render(); }
+      catch (e) { say(e.message, true); btn.disabled = false; }
+    };
+    const g = $('#a-pin');
+    g.onsubmit = async ev => {
+      ev.preventDefault(); const m = $('#a-msg2'), btn = g.querySelector('button'); btn.disabled = true;
+      try { const j = await api('changePin', { current: g.elements.current.value, pin: g.elements.pin.value }); g.reset(); m.textContent = j.msg; m.className = 'a-ok'; }
+      catch (e) { m.textContent = e.message; m.className = 'a-bad'; } finally { btn.disabled = false; }
+    };
+  }
+  window.addEventListener('hashchange', () => { if (/^#(account|pay)$/.test(location.hash)) render(); });
+  if (/^#(account|pay)$/.test(location.hash)) render();
+})();
+</script>
+</body>
+</html>
