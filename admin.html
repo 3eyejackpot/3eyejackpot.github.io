@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>3EYE Admin</title>
+<style>
+body{margin:0;background:#04120b;color:#f2f5ef;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:820px;margin:0 auto;padding:16px}h1{color:#f7dc7a;font-size:22px;margin:0}h3{margin:14px 0 6px;color:#f7dc7a;font-size:15px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+button{font-family:inherit;font-weight:700;font-size:14px;padding:8px 13px;border-radius:999px;border:1.5px solid #e8b931;background:#e8b931;color:#2a1d00;cursor:pointer}
+button:disabled{opacity:.5}button.g{background:none;color:#f7dc7a}button.no{background:none;color:#ff6b5e;border-color:#ff6b5e}button.on{background:#f7dc7a}
+.card,.row{background:#071e14;border:1px solid rgba(232,185,49,.35);border-radius:12px;padding:12px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.row.s{padding:8px 12px;margin-bottom:6px}
+input,select,textarea{padding:9px;margin:4px 4px 8px 0;border-radius:8px;border:1.5px solid rgba(232,185,49,.4);background:#04150d;color:#fff;font-size:15px;font-family:inherit;max-width:100%}
+textarea{width:100%;box-sizing:border-box}
+.m{color:#a5bbae;font-size:13.5px}.ok{color:#1fd39a}.bad{color:#ff6b5e}a{color:#f7dc7a}label{font-size:13px;display:inline-block}
+</style>
+</head>
+<body><div class="w" id="app"></div>
+<script id="config">
+/* Paste your deployed Apps Script web app URL here (it ends in /exec). It is safe for this to be public. */
+window.API_URL = "https://script.google.com/macros/s/AKfycbzefvjwwFY___KN6aZS4J-eKcFdSvZhLq3a2JaOv9gBP6vRFR9UWsFfBxOTS8NjqPx2/exec";
+window.PAY_INFO = "Send your contribution by M-Pesa as the admin instructs, then enter the M-Pesa confirmation code below.";
+</script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const kes=n=>'KES '+Math.round(+n||0).toLocaleString('en-US'),val=id=>($('#'+id)||{}).value;
+const day=v=>{const d=new Date(v);return isNaN(d)?'':d.toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Africa/Nairobi'})};
+const toLocal=v=>{const d=new Date(v);return isNaN(d)?'':new Date(d.getTime()+3*36e5).toISOString().slice(0,16)}; // Nairobi wall clock for datetime-local
+const fromLocal=v=>v?v+':00+03:00':'';
+let T=sessionStorage.getItem('tj_a'),tab='waiting',pools=[],curMember=null;
+async function api(action,d){
+  if(!window.API_URL)throw new Error('Set API_URL in assets/config.js first.');
+  let r;try{r=await fetch(window.API_URL,{method:'POST',body:JSON.stringify(Object.assign({action,token:T},d||{}))});}catch(e){throw new Error('Could not reach the server.');}
+  let j;try{j=await r.json();}catch(e){throw new Error('Unexpected reply from the server.');}
+  if(!j.ok){if(/log in again/i.test(j.msg)){T=null;sessionStorage.removeItem('tj_a');}throw new Error(j.msg);}return j;}
+const note=(m,bad)=>{const n=$('#note');if(n){n.textContent=m;n.className=bad?'bad':'ok';}};
+async function run(f){try{await f();}catch(e){if(!T)draw(e.message);else note(e.message,true);}}
+const opts=sel=>pools.map(p=>`<option value="${esc(p.poolId)}"${p.poolId===sel?' selected':''}>${esc(p.name)} (${esc(p.shown)})</option>`).join('');
+const loadPools=async()=>{pools=(await api('pools')).list;};
+
+function draw(err){
+  if(!T){$('#app').innerHTML=`<div class="top"><h1>3EYE Admin</h1></div><form id="lf" class="card"><label>Email<br><input name="email" type="email" autocomplete="username" required></label><br><label>Password<br><input name="password" type="password" autocomplete="current-password" required></label><br><button type="submit">Log in</button><p class="bad" id="note">${esc(err||'')}</p></form>`;
+    $('#lf').onsubmit=e=>{e.preventDefault();const f=e.target;run(async()=>{const j=await api('adminLogin',{email:f.email.value,password:f.password.value});T=j.token;sessionStorage.setItem('tj_a',T);draw();});};return;}
+  const names={waiting:'Waiting list',queue:'Payments',resets:'PIN resets',members:'Members',pools:'Pools',msgs:'Messages',log:'Log'};
+  $('#app').innerHTML=`<div class="top"><h1>3EYE Admin</h1><button class="g" data-act="out">Log out</button></div><div class="tabs">${Object.keys(names).map(k=>`<button class="${k===tab?'on':'g'}" data-act="tab" data-t="${k}">${names[k]}</button>`).join('')}</div><p id="note" class="m"></p><div id="pane"></div>`;
+  run(panes[tab]);}
+
+const memberView=d=>{const m=d.member,row=(r,k)=>`<div class="row s"><div>${esc(r.pool)} · <b>${kes(r.amount)}</b> <span class="m">${esc(day(r.date))}${r.note?' · '+esc(r.note):''}</span></div><div><button class="g" data-act="edit${k}" data-id="${esc(r.id)}" data-a="${r.amount}">Edit</button> <button class="no" data-act="del${k}" data-id="${esc(r.id)}">Delete</button></div></div>`;
+  return `<div class="card"><b>${esc(m.name)}</b> <span class="m">${esc(m.phone)} · ${esc(m.status)} · joined ${esc(day(m.created))} · terms ${esc(m.terms||'n/a')}</span><br>
+  <label>Name <input id="mn" value="${esc(m.name)}"></label><label>Phone <input id="mp" value="${esc(m.phone)}"></label>
+  <label>Status <select id="ms">${['Pending','Approved','Rejected','Suspended'].map(s=>`<option${s===m.status?' selected':''}>${s}</option>`).join('')}</select></label>
+  <button data-act="savemember" data-p="${esc(m.phone)}">Save</button> <button class="g" data-act="reset" data-p="${esc(m.phone)}">Set new PIN</button> <button class="no" data-act="delmember" data-p="${esc(m.phone)}">Delete</button>
+  <h3>Contributions</h3>${d.contributions.map(r=>row(r,'contrib')).join('')||'<p class="m">None.</p>'}
+  <h3>Payouts</h3>${d.payouts.map(r=>row(r,'payrec')).join('')||'<p class="m">None.</p>'}</div>`;};
+
+const panes={
+  async waiting(){const j=await api('waiting');$('#pane').innerHTML=j.list.length?j.list.map(m=>`<div class="row"><div><b>${esc(m.name)}</b><br>${esc(m.phone)} · <a target="_blank" rel="noopener" href="https://wa.me/${esc(m.phone)}">Confirm on WhatsApp</a></div><div><button data-act="decide" data-p="${esc(m.phone)}" data-s="Approved">Approve</button> <button class="no" data-act="decide" data-p="${esc(m.phone)}" data-s="Rejected">Reject</button></div></div>`).join(''):'<p class="m">No one is waiting.</p>';},
+  async queue(){const j=await api('queue');$('#pane').innerHTML=j.list.length?j.list.map(x=>`<div class="row"><div><b>${esc(x.name)}</b> · ${esc(x.phone)}<br><span class="m">Pool ${esc(x.poolId)} · M-Pesa code</span> <b>${esc(x.ref)}</b></div><div><input id="amt-${esc(x.queueId)}" type="number" value="${x.amount}" style="width:110px"> <button data-act="verify" data-q="${esc(x.queueId)}">Verify</button> <button class="no" data-act="verify" data-q="${esc(x.queueId)}" data-r="1">Reject</button></div></div>`).join(''):'<p class="m">No payments waiting. Check each code against your M-Pesa messages before you verify.</p>';},
+  async resets(){const j=await api('resets');$('#pane').innerHTML=j.list.length?j.list.map(x=>`<div class="row"><div><b>${esc(x.name)}</b> · ${esc(x.phone)}<br><span class="m">Asked ${esc(day(x.time))}. Confirm with them on WhatsApp first.</span> <a target="_blank" rel="noopener" href="https://wa.me/${esc(x.phone)}">WhatsApp</a></div><div><button data-act="decidereset" data-id="${esc(x.id)}" data-y="1">Approve</button> <button class="no" data-act="decidereset" data-id="${esc(x.id)}">Reject</button></div></div>`).join(''):'<p class="m">No PIN reset requests.</p>';},
+  async members(){await loadPools();$('#pane').innerHTML=`<div class="card"><input id="q" placeholder="Search name or phone"><button data-act="search">Search</button><div id="res"></div></div><div id="detail"></div><div class="card"><b>Record a contribution</b><br><input id="cp" placeholder="Member phone"><select id="cpool">${opts()}</select><input id="ca" type="number" placeholder="Amount (KES)"><button data-act="contrib">Record</button></div>`;if(curMember)await showMember(curMember);},
+  async pools(){await loadPools();$('#pane').innerHTML=`<div class="card"><b>Create a pool</b><br><input id="np-name" placeholder="Name, e.g. SportPesa Mega Pro 17"><input id="np-target" type="number" placeholder="Target stake"><input id="np-fee" type="number" placeholder="Fee %" style="width:90px"><input id="np-prize" type="number" placeholder="Jackpot prize"><br><label>First kickoff (Nairobi time) <input id="np-kick" type="datetime-local"></label> <span class="m">The pool closes 30 minutes before.</span><br><button data-act="createpool">Create</button></div>`+pools.map(p=>`<div class="card"><b>${esc(p.name)}</b> <span class="m">${esc(p.poolId)} · showing as ${esc(p.shown)}</span><br><span class="m">Collected ${kes(p.total)} from ${p.members} members · target ${kes(p.target)} · fee ${p.fee}% · closes ${esc(day(p.closes))}</span><br>
+  <label>Name <input id="nm-${esc(p.poolId)}" value="${esc(p.name)}"></label> <label>Kickoff <input id="ko-${esc(p.poolId)}" type="datetime-local" value="${esc(toLocal(p.kickoff))}"></label><br>
+  <label>Status <select id="st-${esc(p.poolId)}">${['Open','Closed','Settled'].map(s=>`<option${s===p.status?' selected':''}>${s}</option>`).join('')}</select></label> <label>Prize <input id="pz-${esc(p.poolId)}" type="number" value="${p.prize}" style="width:120px"></label> <label>Amount won <input id="wn-${esc(p.poolId)}" type="number" value="${p.won}" style="width:120px"></label> <label>Fee % <input id="fe-${esc(p.poolId)}" type="number" value="${p.fee}" style="width:70px"></label><br>
+  <button data-act="savepool" data-id="${esc(p.poolId)}">Save</button> <button class="g" data-act="settle" data-id="${esc(p.poolId)}">Payouts</button> <button class="no" data-act="delpool" data-id="${esc(p.poolId)}">Delete</button></div>`).join('')+'<div id="settle"></div>';},
+  async msgs(){const j=await api('notes');$('#pane').innerHTML=`<div class="card"><b>Send a message</b><br><label>To <input id="mt" placeholder="ALL or member phone" value="ALL"></label><br><input id="mti" maxlength="80" placeholder="Title" style="width:100%;box-sizing:border-box"><textarea id="mb" rows="3" maxlength="600" placeholder="Message (shows on the member's dashboard)"></textarea><button data-act="sendmsg">Send</button></div><h3>Recent</h3>`+(j.list.map(n=>`<div class="m" style="margin-bottom:8px"><b>${esc(n.title)}</b> to ${esc(n.to)} · ${esc(day(n.date))}<br>${esc(n.body)}</div>`).join('')||'<p class="m">Nothing yet.</p>');},
+  async log(){const j=await api('audit');$('#pane').innerHTML=j.list.map(r=>`<div class="m">${esc(String(r.time).slice(0,16).replace('T',' '))} · ${esc(r.action)} · ${esc(r.detail)}</div>`).join('')||'<p class="m">Nothing yet.</p>';}
+};
+async function showMember(ph){curMember=ph;const d=await api('memberDetail',{phone:ph});$('#detail').innerHTML=memberView(d);}
+async function showSettle(id){const j=await api('settle',{poolId:id});$('#settle').innerHTML=`<div class="card"><b>Payouts</b> <span class="m">won ${kes(j.won)} · pool ${kes(j.total)}</span>`+(j.list.map(m=>`<div class="row"><div>${esc(m.name)} <span class="m">${(m.share*100).toFixed(2)}% · suggested ${kes(m.suggested)} · paid ${kes(m.paid)}</span></div><button data-act="payout" data-id="${esc(id)}" data-p="${esc(m.phone)}" data-a="${Math.max(0,m.suggested-m.paid)}">Record payout</button></div>`).join('')||'<p class="m">No contributions in this pool.</p>')+'</div>';}
+const ask=(t,d)=>prompt(t,d);
+const acts={
+  tab(b){tab=b.dataset.t;draw();},
+  async out(){try{await api('logout');}catch(e){}T=null;sessionStorage.removeItem('tj_a');draw();},
+  async decide(b){const j=await api('decide',{phone:b.dataset.p,status:b.dataset.s});await panes.waiting();note(j.msg);},
+  async verify(b){const j=await api('verify',{queueId:b.dataset.q,amount:val('amt-'+b.dataset.q),reject:!!b.dataset.r});await panes.queue();note(j.msg);},
+  async decidereset(b){const j=await api('decideReset',{id:b.dataset.id,approve:!!b.dataset.y});await panes.resets();note(j.msg);},
+  async search(){const j=await api('search',{q:val('q')});$('#res').innerHTML=j.list.map(m=>`<div class="row s"><div>${esc(m.name)} <span class="m">${esc(m.phone)} · ${esc(m.status)}</span></div><button class="g" data-act="open" data-p="${esc(m.phone)}">Open</button></div>`).join('')||'<p class="m">No match.</p>';},
+  async open(b){await showMember(b.dataset.p);},
+  async savemember(b){const j=await api('editMember',{phone:b.dataset.p,fields:{name:val('mn'),phone:val('mp'),status:val('ms')}});curMember=val('mp');await showMember(await api('search',{q:curMember}).then(r=>r.list[0]?r.list[0].phone:b.dataset.p));note(j.msg);},
+  async delmember(b){if(!confirm('Delete this member? This cannot be undone.'))return;const j=await api('deleteMember',{phone:b.dataset.p});curMember=null;await panes.members();note(j.msg);},
+  async reset(b){const pin=ask('New 6-digit PIN for this member (tell them on WhatsApp):');if(!pin)return;const j=await api('requestReset',{phone:b.dataset.p,pin});note(j.msg+' Approve it under PIN resets.');},
+  async contrib(){note((await api('contribute',{phone:val('cp'),poolId:val('cpool'),amount:val('ca')})).msg);},
+  async editcontrib(b){const a=ask('Correct amount (KES):',b.dataset.a);if(!a)return;note((await api('editContribution',{id:b.dataset.id,fields:{amount:a}})).msg);await showMember(curMember);},
+  async delcontrib(b){if(!confirm('Delete this contribution? The member is notified.'))return;note((await api('deleteContribution',{id:b.dataset.id})).msg);await showMember(curMember);},
+  async editpayrec(b){const a=ask('Correct payout amount (KES):',b.dataset.a);if(!a)return;note((await api('editPayout',{id:b.dataset.id,fields:{amount:a}})).msg);await showMember(curMember);},
+  async delpayrec(b){if(!confirm('Delete this payout record? The member is notified.'))return;note((await api('deletePayout',{id:b.dataset.id})).msg);await showMember(curMember);},
+  async createpool(){const j=await api('createPool',{name:val('np-name'),target:val('np-target'),fee:val('np-fee'),prize:val('np-prize'),kickoff:fromLocal(val('np-kick'))});await panes.pools();note(j.msg);},
+  async savepool(b){const id=b.dataset.id,f={name:val('nm-'+id),status:val('st-'+id),prize:val('pz-'+id),won:val('wn-'+id),fee:val('fe-'+id)},k=val('ko-'+id);if(k)f.kickoff=fromLocal(k);const j=await api('updatePool',{poolId:id,fields:f});await panes.pools();note(j.msg);},
+  async delpool(b){if(!confirm('Delete this pool?'))return;const j=await api('deletePool',{poolId:b.dataset.id});await panes.pools();note(j.msg);},
+  async settle(b){await showSettle(b.dataset.id);},
+  async payout(b){const a=ask('Amount paid out (KES):',b.dataset.a);if(!a)return;const j=await api('payout',{poolId:b.dataset.id,phone:b.dataset.p,amount:a,note:'M-Pesa'});await showSettle(b.dataset.id);note(j.msg);},
+  async sendmsg(){const j=await api('message',{to:val('mt').trim().toUpperCase()==='ALL'?'ALL':val('mt'),title:val('mti'),body:val('mb')});await panes.msgs();note(j.msg);}
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b)run(()=>acts[b.dataset.act](b));});
+draw();
+</script></body></html>
