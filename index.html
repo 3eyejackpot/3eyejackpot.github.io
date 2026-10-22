@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04120b">
+<link rel="icon" href="assets/emblem-128.png">
+<link rel="apple-touch-icon" href="assets/emblem-128.png">
+<!-- Web app manifest, built here so no separate file is needed -->
+<script>
+(function(){try{if(!location.hash){var v=sessionStorage.getItem('tj_view');if(v&&v!=='home')history.replaceState(null,'','#'+v);}}catch(e){}})();
+</script>
+<script>
+(function(){try{
+  var u=function(f){return new URL(f,location.href).href},base=location.href.split('#')[0].split('?')[0];
+  var m={name:"3EYE Jackpot",short_name:"3EYE Jackpot",description:"Football fans contribute to a shared pool. One combined stake, one jackpot entry.",
+    start_url:base,scope:base.replace(/[^\/]*$/,''),display:"standalone",orientation:"portrait",background_color:"#04120b",theme_color:"#04120b",
+    icons:[{src:u("assets/emblem-128.png"),sizes:"128x128",type:"image/png",purpose:"any"},{src:u("assets/emblem-192.png"),sizes:"192x192",type:"image/png",purpose:"any maskable"},{src:u("assets/emblem-512.png"),sizes:"512x512",type:"image/png",purpose:"any maskable"}]};
+  var l=document.createElement("link");l.rel="manifest";l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:"application/manifest+json"}));document.head.appendChild(l);
+}catch(e){}})();
+</script>
+<meta name="application-name" content="3EYE Jackpot">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="3EYE Jackpot">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Link previews. If your site lives at a fixed address, change the og:image and og:url below to full https:// addresses; some apps ignore relative ones. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3EYE Jackpot">
+<meta property="og:title" content="3EYE Jackpot | Your Contributions. One Jackpot.">
+<meta property="og:description" content="Football fans contribute to a shared pool. One combined stake, one jackpot entry. 18+ only.">
+<meta property="og:image" content="assets/logo-full-480.png">
+<meta property="og:image:alt" content="3EYE Jackpot logo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3EYE Jackpot | Your Contributions. One Jackpot.">
+<meta name="twitter:description" content="Football fans contribute to a shared pool. One combined stake, one jackpot entry. 18+ only.">
+<meta name="twitter:image" content="assets/logo-full-480.png">
+<title>3EYE Jackpot | Your Contributions. One Jackpot.</title>
+<meta name="description" content="Football fans contribute to a shared pool. Contributions are combined into one stake and used to enter a single football jackpot.">
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04120b; --bg2:#071c11; --panel:#0a2417; --line:rgba(232,185,49,.45);
+  --gold:#e8b931; --gold2:#f7dc7a; --gold3:#a97c14; --mint:#1fd39a; --red:#ff6b5e;
+  --text:#f4f1e6; --muted:#b9c4b8;
+  --serif:'Cinzel',Georgia,'Times New Roman',serif;
+  --sans:'Times New Roman',Times,'Liberation Serif','Noto Serif',Georgia,serif;
+  --tabbar:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15.9px;min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;line-height:1.5;padding-bottom:calc(var(--tabbar) + env(safe-area-inset-bottom))}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea,button{font-family:inherit}
+h1,h2,h3,h4{font-family:var(--sans);font-weight:700}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:6px}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.gold-text{background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,var(--gold3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.only-wide{display:none}
+[hidden]{display:none!important}
+
+/* ---------- header ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(4,18,11,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:8px 16px;min-height:62px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.logo-mark{width:46px;height:46px;flex:none;display:block}
+.logo-mark img,.logo-mark svg{width:100%;height:100%;object-fit:contain;display:block}
+.logo-mark img{border-radius:50%;object-fit:contain}
+.logo-mark{overflow:hidden;border-radius:50%}
+.wordmark{font-family:var(--serif);font-weight:900;line-height:.95;letter-spacing:.02em}
+.wordmark b{display:block;font-size:20.6px;color:var(--gold2)}
+.wordmark span{display:block;font-size:16.3px;color:var(--gold)}
+.topnav{display:none;gap:20px;align-items:center}
+.topnav a{font-size:14.2px;font-weight:600;padding:8px 2px;border-bottom:2px solid transparent;color:var(--text)}
+.topnav a[aria-current="page"]{color:var(--gold2);border-color:var(--gold2)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;border-radius:999px;padding:12px 22px;font-size:15px;white-space:nowrap}
+.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,#c89a1e);color:#2a1d00;box-shadow:0 4px 18px rgba(232,185,49,.25)}
+.btn-line{border:1.5px solid var(--gold);color:var(--gold2);background:rgba(0,0,0,.25)}
+.btn-sm{padding:8px 16px;font-size:13.3px}
+.btn.only-wide{display:none}
+.menu-btn{font-size:27.5px;color:var(--gold);padding:6px}
+.top-acct{padding:7px 12px;font-size:12px;gap:0}
+.topbar-in{gap:8px}
+.brand{min-width:0}
+.menu-panel{display:none;border-top:1px solid var(--line);background:var(--bg2)}
+.menu-panel.open{display:block}
+.menu-panel a{display:block;padding:15px 20px;border-bottom:1px solid rgba(232,185,49,.15);font-weight:600}
+.menu-panel a[aria-current="page"]{color:var(--gold2)}
+
+/* ---------- layout ---------- */
+main{flex:1;width:100%;max-width:1200px;margin:0 auto}
+.view{display:none}
+.view.active{display:block}
+.wrap{padding:0 16px}
+section.band{border-bottom:1px solid var(--line)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;min-height:340px;padding:30px 16px 28px;border-bottom:1px solid var(--line);
+  background:
+   radial-gradient(circle at 12% 7%,#fff 0 2px,transparent 3px),radial-gradient(circle at 27% 4%,#fff 0 2px,transparent 3px),
+   radial-gradient(circle at 44% 8%,#fff 0 2px,transparent 3px),radial-gradient(circle at 63% 5%,#fff 0 2px,transparent 3px),
+   radial-gradient(circle at 82% 8%,#fff 0 2px,transparent 3px),
+   radial-gradient(55% 55% at 72% 8%,rgba(255,255,215,.38),transparent 65%),
+   radial-gradient(45% 45% at 18% 0%,rgba(120,255,185,.2),transparent 65%),
+   linear-gradient(180deg,#04170b 0%,#0a3a1e 52%,#0b4d24 72%,#052010 100%)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 34px,transparent 34px 68px);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000);mask-image:linear-gradient(180deg,transparent,#000)}
+.hero-copy{position:relative;z-index:2;max-width:100%;text-align:center}
+.hero-cta{display:flex;gap:10px;flex-wrap:nowrap;justify-content:center}
+.hero-cta .btn{padding:11px 16px;font-size:13.3px;gap:6px}
+.eyebrow{white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--mint);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:clamp(25.8px,7.5vw,39.6px);line-height:1.04;font-weight:700;letter-spacing:-.01em}
+h1 span{display:block}
+.hero p.lead{margin:14px auto 20px;font-size:14.2px;color:#f0eee3;max-width:34ch}
+.hero-art{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;max-width:460px;opacity:.22;filter:drop-shadow(0 0 22px rgba(232,185,49,.35))}
+.hero-art svg{width:100%;height:auto;display:block}
+.tag{position:absolute;z-index:3;right:18px;top:236px;font-family:var(--sans);font-style:italic;font-weight:700;font-size:clamp(13.8px,4vw,20.6px);line-height:1.05;
+  text-align:right;transform:rotate(-11deg);transform-origin:right top;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.tag em{font-style:normal;color:var(--gold)}
+.tag i{display:block;height:3px;background:var(--gold);border-radius:3px;margin-top:6px;transform:rotate(-8deg)}
+
+/* ---------- features ---------- */
+.features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:18px 4px}
+.feat{padding:2px 8px;border-left:1px solid var(--line);text-align:center}
+.feat:first-child{border-left:0}
+.feat .i{display:block;margin:0 auto 8px;font-size:29.2px;color:var(--gold)}
+.feat h3{font-size:13.8px;line-height:1.15;margin-bottom:5px}
+.feat p{font-size:11.6px;color:var(--muted);line-height:1.35}
+
+/* ---------- how it works ---------- */
+.how{padding:24px 12px 20px;scroll-margin-top:70px}
+.sec-title{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:6px}
+.sec-title::before,.sec-title::after{content:"";height:1.5px;flex:1;max-width:150px;background:var(--gold)}
+.sec-title h2{font-size:24.1px;font-weight:700;color:var(--gold2);white-space:nowrap}
+.how .sub{text-align:center;color:var(--muted);font-size:13.3px;margin-bottom:20px}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.steps li{position:relative;padding:0 6px;text-align:center}
+.num{display:grid;place-items:center;width:52px;height:52px;border:2px solid var(--gold);border-radius:50%;font-size:22.4px;font-weight:600;color:var(--gold2);margin:0 auto 12px}
+.steps h3{font-size:13.8px;line-height:1.15;margin-bottom:4px}
+.steps p{font-size:11.6px;color:var(--muted);line-height:1.35}
+.steps li:not(:last-child)::after{content:"›";position:absolute;right:-6px;top:10px;font-size:25.8px;color:var(--gold);line-height:1}
+.steps .win{position:absolute;right:2px;top:2px;font-size:29.2px;color:var(--mint)}
+
+/* ---------- latest card ---------- */
+.latest{margin:6px 12px 18px;border:1.5px solid var(--gold);border-radius:14px;padding:14px 14px 12px;scroll-margin-top:70px;
+  background:linear-gradient(135deg,rgba(10,58,30,.85),rgba(5,22,12,.95))}
+.latest-top{display:flex;gap:14px;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap}
+.latest-top .i{font-size:34.4px;color:var(--mint)}
+.latest-top .t{flex:1;min-width:150px}
+.latest h2{font-size:19.8px;color:var(--gold2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.latest-top p{font-size:13.3px;color:#cfe9dc}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px;text-align:left}
+.stat{display:flex;gap:9px;align-items:center;justify-content:center;padding:0 8px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat .i{font-size:29.2px;color:var(--mint)}
+.stat b{display:block;font-size:13.8px;line-height:1.15}
+.stat small{display:block;font-size:11.2px;color:var(--muted);line-height:1.25}
+.chip{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--gold);color:var(--gold2)}
+
+/* ---------- banners ---------- */
+.banner{position:relative;overflow:hidden;text-align:center;padding:30px 16px;border-top:1px solid var(--line);
+  background:radial-gradient(70% 100% at 50% 0%,rgba(31,211,154,.22),transparent 70%),#06200f}
+.banner svg.crowd{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.banner p{position:relative;font-weight:700;letter-spacing:.06em;color:var(--gold2);font-size:14.6px;line-height:1.25;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:14px}
+.banner p::before,.banner p::after{content:"";width:38px;height:1.5px;background:var(--gold)}
+.cta-wide{display:none;margin:10px 16px 18px;border:1.5px solid var(--gold);border-radius:12px;text-align:center;padding:22px 16px;
+  background:linear-gradient(90deg,#071c11,#0b3d21 50%,#071c11)}
+.cta-wide h2{font-size:25.8px;color:var(--gold);margin-bottom:4px}
+.cta-wide p{margin-bottom:14px}
+
+/* ---------- jackpot view ---------- */
+.page-head{padding:22px 16px 6px;text-align:center}
+.page-head h1{font-size:clamp(22.4px,6vw,32.7px)}
+.page-head p{color:var(--muted);font-size:13.8px;margin:6px auto 0;max-width:60ch}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:14px 16px 4px}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:rgba(0,0,0,.3)}
+.seg button{padding:9px 18px;border-radius:999px;font-weight:600;font-size:13.8px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d00}
+.jp-meta{display:flex;gap:10px;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap;padding:12px 16px 4px;font-size:13.3px;color:var(--muted)}
+.jp-meta strong{color:var(--text)}
+.sample{color:#2a1d00;background:var(--gold2);border-radius:6px;padding:3px 8px;font-size:11.2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.sumrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:10px 16px}
+.sumcard{text-align:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel)}
+.sumcard small{display:block;font-size:11.2px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.sumcard b{font-size:15.9px;color:var(--gold2)}
+.matches{list-style:none;margin:6px 16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.match{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:11px 12px;border-top:1px solid rgba(232,185,49,.15)}
+.match:first-child{border-top:0}
+.mno{font-size:12.5px;font-weight:700;color:var(--gold);text-align:center}
+.mteams{font-weight:600;font-size:14.2px;line-height:1.25}
+.mteams small{display:block;font-weight:400;font-size:11.6px;color:var(--muted);margin-top:2px}
+.picks{display:flex;gap:8px;align-items:center}
+.tp{min-width:58px;text-align:center;padding:5px 8px;border-radius:8px;font-weight:700;font-size:11.6px;letter-spacing:.04em;border:1px solid rgba(255,255,255,.18);color:var(--muted)}
+.tp.dc{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d00;border-color:transparent}
+.lockbar{width:46px;height:30px;display:grid;place-items:center;border-radius:8px;border:1px dashed rgba(232,185,49,.5);color:var(--gold2);background:repeating-linear-gradient(135deg,rgba(232,185,49,.14) 0 6px,rgba(232,185,49,.04) 6px 12px)}
+.lockbar svg{width:16px;height:16px}
+.jp-meta .mm{display:block;width:100%;font-size:12.5px;color:var(--muted)}
+.seg button small{font-weight:400;opacity:.8;font-size:.85em}
+.empty{margin:18px 16px;padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+.contribute{margin:22px 16px 6px;border:1.5px solid var(--gold);border-radius:14px;padding:18px 16px;scroll-margin-top:76px;
+  background:linear-gradient(135deg,rgba(10,58,30,.9),rgba(5,22,12,.95))}
+.contribute h2{font-size:18.9px;color:var(--gold2);margin-bottom:4px;text-align:center}
+.contribute .sub{text-align:center}
+.contribute .sub{color:var(--muted);font-size:13.3px;margin-bottom:14px}
+.crow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid rgba(232,185,49,.18);font-size:14.2px}
+.crow span:first-child{color:var(--muted)}
+.crow b{font-size:15.9px}
+.crow.big b{font-size:18.1px;color:var(--gold2)}
+.field{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
+.field label{flex:1;color:var(--muted);font-size:14.2px}
+.field input{width:150px;background:#03110a;border:1.5px solid var(--gold);color:var(--text);border-radius:10px;padding:10px 12px;font-size:15.9px;font-weight:600;text-align:right}
+.note{display:flex;gap:10px;margin-top:14px;font-size:12.5px;color:#d6dfd3;background:rgba(232,185,49,.09);border:1px solid rgba(232,185,49,.3);border-radius:10px;padding:11px 12px}
+.note .i{font-size:15.5px;color:var(--gold);margin-top:1px}
+.disclaimer{margin:14px 0;padding:12px 14px;border:2px solid var(--red);border-radius:12px;background:rgba(255,107,94,.1);color:#fff;font-size:12.5px;line-height:1.5;font-weight:800;letter-spacing:.02em;text-transform:uppercase;text-align:center}
+.disclaimer .hl{display:inline-block;margin:0 2px 4px;padding:1px 8px;border-radius:999px;background:var(--gold);color:#2a1d00;font-weight:800}
+.disclaimer .hl.age-hl{background:var(--red);color:#fff}
+.order-note{margin-top:10px;font-size:12.5px;color:#d6dfd3}
+.contribute .btn{margin-top:14px;width:100%;justify-content:center}
+
+/* ---------- about ---------- */
+.prose{padding:6px 16px 8px;max-width:70ch;margin-left:auto;margin-right:auto}
+.prose h2{font-size:17.2px;color:var(--gold2);margin:20px 0 6px;text-align:center}
+.prose p,.prose li{color:#d6dfd3;font-size:14.2px;margin-bottom:8px}
+.prose ul{padding-left:20px}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+footer.fine{padding:18px 16px 10px;text-align:center;font-size:11.6px;color:var(--muted)}
+
+/* ---------- bottom tab bar (mobile) ---------- */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(4,1fr);
+  background:rgba(4,18,11,.97);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);height:calc(var(--tabbar) + env(safe-area-inset-bottom))}
+.tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12.5px;color:#5ee0bb;position:relative}
+.tabbar a .i{font-size:21.5px}
+.tabbar a[aria-current="page"]{color:var(--gold2)}
+.tabbar a[aria-current="page"]::after{content:"";position:absolute;left:22%;right:22%;bottom:0;height:3px;border-radius:3px;background:var(--gold)}
+
+.feat,.steps li,.stat,.sumcard{min-width:0}
+.feat h3,.feat p,.steps h3,.steps p,.stat b,.stat small{overflow-wrap:break-word}
+#acct{max-width:560px;margin:0 auto;padding:0 18px 30px}
+#acct label{display:block;font-weight:600;font-size:13.3px}
+.a-phone{display:flex;margin:5px 0 12px}.a-phone .a-cc{display:flex;align-items:center;padding:0 12px;border:1.5px solid rgba(232,185,49,.4);border-right:0;border-radius:8px 0 0 8px;background:#0b2a1a;color:var(--gold2);font-weight:700;font-size:15px}#acct .a-phone input{margin:0;border-radius:0 8px 8px 0;min-width:0}
+#acct input,#acct select{width:100%;padding:12px;margin:5px 0 12px;border-radius:8px;border:1.5px solid rgba(232,185,49,.4);background:#04150d;color:#fff;font-size:15px;font-family:inherit}
+.a-seg{display:flex;border:1.5px solid var(--gold);border-radius:999px;overflow:hidden;margin-bottom:16px}
+.a-seg button{flex:1;padding:10px;font-weight:600;font-size:14.2px;font-family:inherit;color:var(--gold2);background:none}
+.a-seg button[aria-pressed=true]{background:var(--gold);color:#2a1d00}
+.a-card{border:1.5px solid rgba(232,185,49,.4);border-radius:14px;background:rgba(7,30,20,.9);padding:16px;margin:0 0 16px}
+.a-card h3{margin:0 0 8px;font-size:16.3px;color:var(--gold2)}
+.a-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid rgba(232,185,49,.15)}.a-row b{text-align:right}
+.a-btn{padding:11px 20px;border-radius:999px;font-weight:700;font-size:14.2px;font-family:inherit;cursor:pointer;border:1.5px solid var(--gold)}
+.a-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d00;width:100%}.a-line{background:none;color:var(--gold2)}
+.a-top{display:flex;justify-content:center;gap:12px;align-items:center;margin-bottom:14px;text-align:center}
+.a-mute{color:#a5bbae;font-size:13.3px}.a-bad{color:var(--red)}.a-ok{color:var(--mint)}
+.a-chip{font-size:11.6px;padding:2px 9px;border-radius:99px;border:1px solid var(--gold);color:var(--gold2);margin-left:8px;vertical-align:middle}
+.hint{display:block;font-size:11.6px;color:var(--muted);margin:-4px 0 8px;text-align:right}
+div.more-open{margin-top:14px;border-top:1px solid rgba(232,185,49,.18);padding-top:4px}
+div.more-open h3{font-size:13.3px;color:var(--gold2);margin:12px 0 6px}
+details.more{margin-top:12px;border-top:1px solid rgba(232,185,49,.18);padding-top:10px}
+details.more summary{cursor:pointer;color:var(--gold2);font-weight:600;font-size:13.8px}
+details.more h3{font-size:13.3px;color:var(--gold2);margin:14px 0 6px}
+.tbl{width:100%;border-collapse:collapse;font-size:12.9px}
+.tbl th,.tbl td{padding:7px 6px;text-align:left;border-bottom:1px solid rgba(232,185,49,.15)}
+.tbl th{color:var(--muted);font-weight:600;font-size:11.6px}
+.tbl tr.cur td{background:rgba(31,211,154,.12);font-weight:600}
+.about-logo{display:block;width:170px;height:auto;margin:6px 0 10px}
+.formula{border:1.5px solid var(--gold);border-radius:14px;padding:16px;margin:10px 0 16px;background:linear-gradient(135deg,rgba(10,58,30,.85),rgba(5,22,12,.95))}
+.formula h2{margin:0 0 10px!important;font-size:16.3px!important}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-weight:700;font-size:clamp(12.9px,3.4vw,17.2px);margin:0 0 12px}
+.eq span{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:7px 11px}
+.eq i{font-style:normal;color:var(--gold)}
+.eg{padding:11px 13px;background:rgba(31,211,154,.09);border:1px solid rgba(31,211,154,.35);border-radius:10px;font-size:13.8px}
+.eg b{color:var(--gold2)}
+details.term{background:var(--panel);border:1.5px solid var(--line);border-radius:12px;margin:0 0 10px;overflow:hidden}
+details.term summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:15.5px;color:var(--gold2);list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.term summary::-webkit-details-marker{display:none}
+details.term summary::after{content:"+";color:var(--gold);font-size:18.9px;line-height:1}
+details.term[open] summary::after{content:"\2212"}
+details.term .tb{padding:0 16px 12px}
+.fine a{color:var(--gold2);text-decoration:underline}
+#acct .a-check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:13.3px;margin:4px 0 12px}
+#acct .a-check input{width:20px;height:20px;margin:2px 0 0;flex:none}
+#acct a{color:var(--gold2);text-decoration:underline}
+#acct .a-link{background:none;border:0;color:var(--gold2);text-decoration:underline;font:inherit;font-size:13.3px;cursor:pointer;padding:6px 0}
+.a-note{padding:10px 0;border-top:1px solid rgba(232,185,49,.15);font-size:13.3px}.a-note b{display:block;color:var(--gold2)}.a-note.new{border-left:3px solid var(--mint);padding-left:10px}
+.a-dot{display:inline-block;min-width:20px;padding:0 6px;border-radius:99px;background:var(--red);color:#fff;font-size:11.6px;text-align:center;margin-left:6px}
+
+
+/* ---------- my stakes ---------- */
+.a-h2{font-size:18.1px;color:var(--gold2);margin:6px 0 10px;text-align:center}
+.stake{position:relative;padding-top:14px}
+.stake h3{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0 0 2px}
+.stake .a-chip{margin-left:0}
+.stake .sub{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.stake .a-row b{font-variant-numeric:tabular-nums}
+.stake .a-row.hl b{color:var(--gold2);font-size:15.5px}
+.stake .est{font-weight:400;font-size:11.6px;color:var(--muted)}
+.stake .slices{margin:4px 0 2px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.28);font-size:12.5px}
+.stake .slices div{display:flex;justify-content:space-between;gap:10px;padding:2px 0}
+.stake .why{margin-top:8px;padding:9px 11px;border-radius:10px;font-size:12.9px;background:rgba(255,107,94,.1);border:1px solid rgba(255,107,94,.4)}
+.stake.s-Pending{border-color:rgba(232,185,49,.4)}
+.stake.s-Approved,.stake.s-Running{border-color:rgba(31,211,154,.55)}
+.stake.s-Won{border-color:var(--mint);box-shadow:0 0 0 1px rgba(31,211,154,.35) inset}
+.stake.s-Rejected,.stake.s-Lost,.stake.s-Removed{border-color:rgba(255,107,94,.45)}
+.a-chip.st-Pending{color:var(--gold2);border-color:var(--gold)}
+.a-chip.st-Approved,.a-chip.st-Running{color:var(--mint);border-color:var(--mint)}
+.a-chip.st-Won{background:var(--mint);color:#032015;border-color:var(--mint);font-weight:700}
+.a-chip.st-Rejected,.a-chip.st-Lost,.a-chip.st-Removed{color:var(--red);border-color:var(--red)}
+.a-more{display:block;margin:0 auto 18px;width:auto;padding:10px 22px}
+.tot{border-style:dashed}
+.ghost{opacity:.6;border-style:dashed}
+.ghost .a-chip{color:var(--muted);border-color:var(--muted)}
+/* ---------- member dashboard: tabs, tiles, timeline, history, messages, settings ---------- */
+.a-tabs{display:flex;gap:6px;overflow-x:auto;margin:0 -4px 16px;padding:2px 4px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.a-tabs::-webkit-scrollbar{display:none}
+.a-tabs button{flex:1 0 auto;padding:9px 14px;border-radius:999px;border:1.5px solid rgba(232,185,49,.45);background:none;color:var(--gold2);font-family:inherit;font-weight:600;font-size:13.3px;cursor:pointer;white-space:nowrap}
+.a-tabs button[aria-selected=true]{background:var(--gold);color:#2a1d00;border-color:var(--gold)}
+.a-tabs .a-dot{margin-left:5px}
+.a-seg.a-sub{margin-bottom:12px}
+.a-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 16px}
+.a-tile{border:1.5px solid rgba(232,185,49,.35);border-radius:14px;background:rgba(7,30,20,.9);padding:12px 8px;text-align:center}
+.a-tile span{display:block;font-size:12px;color:var(--muted)}
+.a-tile b{display:block;font-size:17px;color:var(--gold2);font-variant-numeric:tabular-nums;margin-top:2px}
+.a-tile small{display:block;font-size:11.6px;color:#a5bbae;margin-top:2px;min-height:1em}
+.a-alert{border:1.5px solid var(--gold);border-radius:14px;background:rgba(232,185,49,.1);padding:12px 14px;margin:0 0 14px;font-size:13.8px;text-align:center}
+.a-alert.bad{border-color:var(--red);background:rgba(255,107,94,.1)}
+#acct .a-alert .a-link{display:inline;margin:0 0 0 6px;padding:0}
+.a-bar{height:10px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:8px 0 6px}
+.a-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.a-bar.warn i{background:var(--red)}
+.a-pool{padding:10px 0;border-top:1px solid rgba(232,185,49,.15)}
+.a-pool:first-of-type{border-top:0}
+.a-tl{list-style:none;display:flex;margin:10px 0 4px;padding:0}
+.a-tl li{flex:1;position:relative;text-align:center;font-size:10.4px;color:var(--muted);padding-top:21px;line-height:1.2}
+.a-tl li i{position:absolute;top:0;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;border:2px solid rgba(232,185,49,.35);background:#04150d;z-index:1}
+.a-tl li::before{content:"";position:absolute;top:6px;left:-50%;width:100%;height:2px;background:rgba(232,185,49,.25)}
+.a-tl li:first-child::before{display:none}
+.a-tl li.done{color:var(--mint)}
+.a-tl li.done i{background:var(--mint);border-color:var(--mint)}
+.a-tl li.done::before,.a-tl li.cur::before{background:var(--mint)}
+.a-tl li.cur{color:var(--gold2);font-weight:700}
+.a-tl li.cur i{border-color:var(--gold2);background:var(--gold);box-shadow:0 0 0 4px rgba(232,185,49,.2)}
+.a-tl li.na{opacity:.4}
+.a-tlcap{margin:2px 0 8px}
+.a-filters{display:flex;gap:8px;margin:0 0 10px}
+#acct .a-filters select{margin:0;padding:9px;font-size:13.8px;flex:1;min-width:0}
+.a-dl{display:flex;gap:8px;margin:0 0 12px}
+.a-dl .a-btn{flex:1;padding:9px 10px;font-size:13px}
+.a-sumline{display:flex;justify-content:center;gap:6px 16px;flex-wrap:wrap;font-size:13px;margin:0 0 10px}
+.a-tx{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid rgba(232,185,49,.15);text-align:left}
+.a-tx:first-child{border-top:0}
+.a-tx .l{min-width:0}
+.a-tx .l b{display:block;font-size:14.2px}
+.a-tx small{display:block;color:var(--muted);font-size:12px;word-break:break-word}
+.a-tx .r{text-align:right;flex:none}
+.a-tx .r b{display:block;font-variant-numeric:tabular-nums;font-size:14.8px;text-align:right}
+.a-tx .r b.in{color:var(--mint)}
+.a-tx .a-chip{display:inline-block;margin:4px 0 0}
+#acct .a-link.a-rep{display:inline;margin:0;padding:2px 0;font-size:12px}
+.a-rep-row{margin-top:6px}
+.a-det{margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.28);font-size:12.5px;text-align:left}
+.a-det .a-m{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+.a-det .a-mh{margin:8px 0 2px;color:var(--gold2);font-weight:700}
+.a-mf{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 0 12px}
+.a-mf button{padding:6px 12px;border-radius:99px;border:1px solid rgba(232,185,49,.45);background:none;color:var(--gold2);font-family:inherit;font-size:12.5px;cursor:pointer}
+.a-mf button[aria-pressed=true]{background:var(--gold);color:#2a1d00;border-color:var(--gold)}
+.a-ty{display:inline-block;padding:0 7px;margin-right:4px;border-radius:99px;border:1px solid rgba(232,185,49,.4);color:var(--gold2);font-size:10.8px}
+#acct a.a-wa{display:block;text-align:center;text-decoration:none;color:#2a1d00;margin-top:8px}
+.a-chip.st-Recorded{color:var(--mint);border-color:var(--mint)}
+.a-chip.st-Paid{background:var(--mint);color:#032015;border-color:var(--mint);font-weight:700}
+.a-danger{border-color:var(--red);color:var(--red)}
+@media (max-width:359px){.a-tl li{font-size:9.2px}.a-tabs button{padding:8px 11px;font-size:12.5px}.a-tile b{font-size:15px}}
+
+@media (max-width:359px){
+  .features{grid-template-columns:repeat(2,1fr);row-gap:16px}
+  .feat:nth-child(3){border-left:0}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:18px}
+  .steps li:nth-child(2)::after{display:none}
+  .stats{grid-template-columns:1fr;row-gap:12px}.stat{border-left:0;padding:0}
+}
+
+@media (max-width:420px){
+  .topbar-in{padding:8px 10px;gap:6px}
+  .logo-mark{width:42px;height:42px}
+  .brand{gap:7px}
+  .wordmark b{font-size:17.2px}.wordmark span{font-size:13.3px}
+  .top-acct{padding:6px 10px;font-size:11.2px}
+  .menu-btn{font-size:24.1px;padding:4px}
+  .hero-cta .btn{padding:10px 12px;font-size:12.9px}
+}
+
+/* ---------- wide screens: top menu, no tab bar ---------- */
+@media (min-width:860px){
+  body{padding-bottom:0}
+  .tabbar,.menu-btn,.menu-panel{display:none!important}
+  .topnav{display:flex}
+  .top-acct{display:none}
+  .only-wide{display:inline}
+  .only-narrow{display:none}
+  .topbar-in{padding:10px 28px;min-height:76px}
+  .logo-mark{width:62px;height:62px}
+  .wordmark b{font-size:29.2px}.wordmark span{font-size:23.2px}
+  .brand{margin-right:0}
+  .topnav{margin:0 auto}
+  .hero{min-height:440px;padding:56px 56px 44px}
+  .hero-copy{max-width:820px;margin:0 auto}
+  .eyebrow{font-size:12px;letter-spacing:.1em}
+  h1{font-size:clamp(37.8px,4vw,55px)}
+  .hero p.lead{font-size:15.5px;max-width:52ch;margin:18px auto 24px}
+  .hero-art{width:44%;max-width:560px;opacity:.2}
+  .hero-cta .btn{padding:13px 24px;font-size:14.6px}
+  .tag{right:3%;top:auto;bottom:38px;font-size:18.9px;transform:rotate(-6deg)}
+  .tag i{display:none}
+  .features{padding:24px 28px}
+  .feat{padding:2px 28px}
+  .feat h3{font-size:15.5px}.feat p{font-size:13.3px}
+  .feat .i{font-size:32.7px}
+  .how{padding:30px 28px 24px}
+  .steps{gap:18px}
+  .steps li{padding:0 8px}
+  .steps h3{font-size:15.9px}.steps p{font-size:13.3px}
+  .steps li:not(:last-child)::after{right:-12px;top:12px}
+  .steps .win{display:none}
+  .latest{margin:6px 28px 22px;padding:18px 22px}
+  .stat b{font-size:15px}
+  .banner{display:none}
+  .cta-wide{display:block;margin:6px 28px 24px}
+  .page-head,.controls,.jp-meta,.sumrow{padding-left:28px;padding-right:28px}
+  .matches,.contribute,.empty{margin-left:28px;margin-right:28px}
+  .prose{padding:6px 28px}
+  .matches{display:grid;grid-template-columns:1fr 1fr}
+  .match{border-right:1px solid rgba(232,185,49,.15)}
+  .match:nth-child(-n+2){border-top:0}
+  .contribute{max-width:640px}
+}
+
+/* ---------- progress, countdown, help, footer ---------- */
+.prog{margin-top:14px;padding-top:12px;border-top:1px solid rgba(232,185,49,.18)}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:13.3px}
+.prog-top b{color:var(--gold2)}
+.prog-top .cd{font-size:12.5px;color:var(--muted)}
+.prog-top .cd b{color:var(--mint);font-variant-numeric:tabular-nums}
+.bar{height:12px;margin-top:8px;border-radius:999px;background:rgba(0,0,0,.4);border:1px solid var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--gold2));transition:width .8s ease}
+.prog small{display:block;margin-top:6px;font-size:11.6px;color:var(--muted)}
+.cd.urgent b{color:var(--red)}
+.cdbox{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 12px;padding:10px 12px;border-radius:10px;background:rgba(31,211,154,.09);border:1px solid rgba(31,211,154,.35);font-size:13.3px}
+.cdbox b{font-size:15.9px;color:var(--mint);font-variant-numeric:tabular-nums}
+.cdbox.urgent b{color:var(--red)}
+.cdbox.closed{background:rgba(255,107,94,.1);border-color:rgba(255,107,94,.4)}
+.cdbox.closed b{color:var(--red)}
+
+
+/* payment sheet */
+.sheet-bg{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.66);display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:520px;max-height:92vh;overflow:auto;box-sizing:border-box;background:#06190f;border:1.5px solid rgba(232,185,49,.5);border-bottom:0;border-radius:18px 18px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom,0px));animation:sheetUp .22s ease-out}
+@keyframes sheetUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media(min-width:700px){.sheet-bg{align-items:center}.sheet{border-bottom:1.5px solid rgba(232,185,49,.5);border-radius:18px}}
+.sh-top{display:flex;justify-content:space-between;align-items:center;color:var(--gold2);font-size:16.3px;margin-bottom:10px}
+.sh-x{background:none;border:0;color:var(--muted);font-size:26px;line-height:1;cursor:pointer;padding:0 4px}
+.sh-steps{display:flex;gap:6px;margin-bottom:12px}.sh-steps span{flex:1;text-align:center;font-size:12px;padding:6px 0;color:var(--muted);border-bottom:3px solid rgba(232,185,49,.2)}
+.sh-steps span.on{color:var(--gold2);border-color:var(--gold)}.sh-steps span.done{color:var(--mint);border-color:var(--mint)}
+.sh-l{margin:10px 0 6px;font-size:12.9px;color:var(--muted)}
+.sh-pool{display:block;width:100%;text-align:left;border:1.5px solid rgba(232,185,49,.3);border-radius:12px;background:#071e14;color:inherit;padding:10px 12px;margin-bottom:8px;font:inherit;font-size:14.2px;cursor:pointer}
+.sh-pool small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.sh-pool.on{border-color:var(--gold);background:rgba(232,185,49,.13)}
+.sh-chips{display:flex;gap:8px;margin-bottom:8px}.sh-chip{border:1.5px solid var(--gold);background:none;color:var(--gold2);border-radius:999px;padding:7px 14px;font:inherit;font-size:13.8px;font-weight:700;cursor:pointer}.sh-chip small{font-weight:400;color:var(--muted)}
+.sheet input,.sheet textarea{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:10px;border:1.5px solid rgba(232,185,49,.4);background:#04120b;color:#fff;font:inherit;font-size:15px}
+.sh-amt{display:block;margin:12px 0 6px;font-size:15.5px;font-weight:700;color:var(--gold2)}
+.sheet input.sh-amtin{font-size:25px;font-weight:700;padding:14px;border:2px solid var(--gold);background:#021008;color:#fff;text-align:center;letter-spacing:.5px}
+.sheet input.sh-amtin::placeholder{color:rgba(255,255,255,.35)}
+.tsheet{max-height:88vh}.tsheet .tbody{font-size:14px;line-height:1.55}.tsheet .tbody h1{font-size:18px}
+.sh-sum{font-size:15px;margin-bottom:10px}.sh-sum b{color:var(--gold2)}
+.sh-pay{white-space:pre-line;font-weight:700;background:#04120b;border:1.5px dashed rgba(232,185,49,.5);border-radius:12px;padding:12px;font-size:14.2px}
+.sh-how{margin:8px 0 12px;padding-left:20px;color:var(--muted);font-size:13.3px;line-height:1.5}
+.sh-row{display:flex;gap:10px}.sh-row .a-btn{flex:1;width:auto}
+.sh-recap{display:flex;gap:10px;margin:10px 0}.sh-recap div{flex:1;background:#071e14;border:1px solid rgba(232,185,49,.25);border-radius:10px;padding:8px 10px}.sh-recap span{display:block;font-size:11.6px;color:var(--muted)}.sh-recap b{font-size:13.8px}
+.sh-ok{text-align:center;padding:10px 0}.sh-tick{width:54px;height:54px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;font-size:28px;background:var(--mint);color:#032015}
+.sheet .a-btn:disabled{opacity:.5;cursor:not-allowed}
+/* live dot beside jackpot name */
+.phase-chip{display:inline-block;margin-right:8px;padding:1px 9px;border-radius:999px;font-size:11.6px;font-weight:700;vertical-align:middle;border:1px solid var(--gold);color:var(--gold2)}
+.phase-chip.ph-running{color:var(--mint);border-color:var(--mint)}.phase-chip.ph-finished{color:var(--muted);border-color:var(--muted)}
+.contribute[hidden]{display:none}
+.jp-head{font-size:19.8px;color:var(--gold2);margin:14px 14px 4px}
+.live-dot{display:inline-block;width:10px;height:10px;margin-right:8px;border-radius:50%;background:var(--mint);vertical-align:middle;animation:livePulse 1.4s ease-in-out infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(31,211,154,.75);opacity:1}50%{opacity:.45}70%{box-shadow:0 0 0 9px rgba(31,211,154,0)}100%{box-shadow:0 0 0 0 rgba(31,211,154,0);opacity:1}}
+/* closes-in countdown card */
+.sumcard b.cdv{font-size:13.8px;font-variant-numeric:tabular-nums}
+.sumcard b.cdv.urgent{color:var(--red)}
+.sumcard .sw{display:block;margin-top:2px;font-size:11px;color:var(--muted)}
+/* press + loading feedback on account buttons */
+.a-btn,.a-seg button,.top-acct{transition:transform .12s ease,filter .12s ease,box-shadow .12s ease}
+.a-btn:active,.a-seg button:active,.top-acct:active{transform:scale(.95);filter:brightness(.88)}
+.a-btn.is-loading{cursor:progress;opacity:1;filter:brightness(.92)}
+.a-btn:disabled:not(.is-loading){opacity:.6}
+.dots{display:inline-flex;gap:4px;margin-left:6px;vertical-align:middle}
+.dots i{width:6px;height:6px;border-radius:50%;background:currentColor;animation:dotBounce 1s ease-in-out infinite both}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dotBounce{0%,80%,100%{transform:scale(.4);opacity:.4}40%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.live-dot,.dots i{animation:none}}
+.wa-fab{position:fixed;right:14px;bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom));z-index:55;display:flex;align-items:center;gap:8px;
+  padding:11px 16px;border-radius:999px;background:#25d366;color:#04200f;font-weight:700;font-size:13.3px;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.wa-fab svg{width:22px;height:22px;fill:currentColor}
+.warn-fab{position:fixed;left:14px;bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom));z-index:55;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:12.9px;line-height:1;background:var(--gold);border:1.5px solid #2a1d00;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.warn-modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.7)}
+.warn-modal[hidden]{display:none}
+.warn-card{position:relative;width:100%;max-width:380px;max-height:86vh;overflow:auto;padding:16px 16px 14px;border:2px solid var(--red);border-radius:14px;background:#06200f;text-align:center}
+.warn-card h2{font-size:15.5px;color:var(--gold2);margin-bottom:8px}
+.warn-card h3{font-size:10.8px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);margin:10px 0 3px}
+.warn-card p{font-size:11.6px;line-height:1.45;color:#d6dfd3;margin-bottom:5px}
+.warn-card .warn-caps{font-weight:700;color:#fff;font-size:11.8px;margin:9px 0 2px}
+.warn-card .btn{margin-top:10px}
+.warn-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.warn-badges .hl{padding:2px 8px;border-radius:999px;background:var(--gold);color:#2a1d00;font-weight:800;font-size:10.2px}
+.warn-badges .age-hl{background:var(--red);color:#fff}
+.warn-x{position:absolute;right:10px;top:6px;font-size:25.8px;line-height:1;color:var(--gold2);padding:4px 10px}
+.help-hint{margin:10px 0 0;padding:10px 12px;border-radius:10px;font-size:12.9px;background:rgba(232,185,49,.09);border:1px solid rgba(232,185,49,.3);color:#d6dfd3}
+.help-hint a{color:var(--gold2);text-decoration:underline}
+.sitefoot{border-top:1px solid var(--line);background:var(--bg2);padding:22px 16px 18px;font-size:12.5px;color:var(--muted)}
+.sitefoot-in{max-width:1200px;margin:0 auto;display:grid;gap:16px;text-align:center}
+.sitefoot h4{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
+.sitefoot p{margin-bottom:6px;line-height:1.5}
+.sitefoot a{color:var(--gold2);text-decoration:underline}
+.age{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px solid var(--red);color:var(--red);font-weight:800;font-size:12.5px;margin-right:8px;vertical-align:middle}
+.sitefoot .legal{padding-top:12px;border-top:1px solid rgba(232,185,49,.15);text-align:center;font-size:11.6px}
+@media (min-width:860px){
+  .wa-fab{bottom:24px;right:24px}
+  .warn-fab{bottom:24px;left:24px}
+  .sitefoot{padding:28px}
+  .sitefoot-in{grid-template-columns:1.2fr 1fr 1fr;gap:34px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar>i{transition:none}}
+
+/* ---------- centred presentation: phone and desktop ---------- */
+@media (min-width:860px){.contribute{margin-left:auto;margin-right:auto}}   /* the card was pinned to the left on wide screens */
+.mteams{text-align:center}
+.prog-top{justify-content:center;text-align:center}.prog small{text-align:center}
+.cdbox{justify-content:center;text-align:center;flex-wrap:wrap;gap:6px 12px}
+/* Pool contribution card */
+.contribute .crow{justify-content:center;text-align:center;flex-wrap:wrap;gap:4px 14px}
+.contribute .field{flex-direction:column;justify-content:center;text-align:center;gap:6px}
+.contribute .field label{flex:none;text-align:center}
+.contribute .field input{width:min(240px,100%);text-align:center}
+.contribute .hint{text-align:center;margin:0 0 8px}
+.contribute .note{justify-content:center;align-items:center;text-align:center}
+.contribute .order-note{text-align:center}
+.contribute .more-open h3{text-align:center}
+.contribute .tbl th,.contribute .tbl td{text-align:center}
+/* Payment window (Choose / Pay / Confirm) */
+.sheet{text-align:center}
+.sheet .sh-top{position:relative;justify-content:center}
+.sheet .sh-top .sh-x{position:absolute;right:0;top:50%;transform:translateY(-50%)}
+.sh-pool{text-align:center}
+.sh-chips{justify-content:center}
+.sh-how{list-style-position:inside;padding-left:0}
+.sh-pay{text-align:center}
+.sh-recap div{text-align:center}
+/* Pasted-message box and its inputs */
+.sheet textarea,.sheet input{text-align:center}
+.sheet textarea::placeholder,.sheet input::placeholder{text-align:center}
+.sh-sum,.sheet .a-mute,.sheet .a-ok,.sheet .a-bad,.sheet .sh-l,.sheet .sh-amt{text-align:center}
+.sh-ok{text-align:center}
+.sheet .a-link{display:block;margin-left:auto;margin-right:auto}
+/* Pool Terms pop-up and the Pool Terms page */
+.tsheet,.tsheet .tbody{text-align:center}
+.tsheet .tbody ul,.prose ul,#terms-body ul{list-style-position:inside;padding-left:0}
+.tsheet .tbody li,.prose li{text-align:center}
+.tsheet .tbody details.term summary,#terms-body details.term summary{text-align:center}
+.tsheet .tbody .eq,#terms-body .eq{justify-content:center}
+.tsheet .tbody details.term .tb,#terms-body details.term .tb{text-align:center}
+/* Other pages: About, Play safe, Terms */
+.prose,.page-head{text-align:center}
+.about-logo{margin-left:auto;margin-right:auto}
+.links{justify-content:center}
+/* Sign up / Log in and My Account */
+#acct{text-align:center}
+#acct label{text-align:center}
+#acct input,#acct select{text-align:center}
+#acct input::placeholder{text-align:center}
+#acct .a-phone{justify-content:center}
+#acct .a-phone input{text-align:center}
+#acct .a-check{justify-content:center;text-align:center}
+#acct .a-link{display:block;margin-left:auto;margin-right:auto}
+.a-card,.a-card h3,.a-note,.stake h3{text-align:center}
+.stake h3{justify-content:center}
+.a-row{flex-wrap:wrap;justify-content:center;text-align:center;gap:4px 14px}
+.a-row b{text-align:center}
+.stake .slices div{justify-content:center;flex-wrap:wrap;gap:2px 12px;text-align:center}
+.stake .why{text-align:center}
+.a-top{flex-wrap:wrap}
+details.more summary{text-align:center}
+#acct .tbl th,#acct .tbl td{text-align:center}
+.help-hint,#a-msg,#a-msg2,#sh-err{text-align:center}
+.warn-fab,.wa-fab{text-align:center}
+</style>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".5" stop-color="#e8b931"/><stop offset="1" stop-color="#a97c14"/></linearGradient>
+  </defs>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="7" r="3.2"/><circle cx="5.5" cy="9.5" r="2.4"/><circle cx="18.5" cy="9.5" r="2.4"/><path d="M6.5 19c0-3.3 2.4-5.5 5.5-5.5s5.5 2.2 5.5 5.5z"/><path d="M1.5 17.5c0-2.4 1.6-4 4-4 .8 0 1.5.2 2.1.5-1.3 1-2 2.1-2.2 3.5z"/><path d="M22.5 17.5c0-2.4-1.6-4-4-4-.8 0-1.5.2-2.1.5 1.3 1 2 2.1 2.2 3.5z"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v4.2c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V5.5"/><path d="M4.5 9.7v4.2c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V9.7"/><path d="M4.5 13.9v4.2c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-4.2"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3.5h10v5.5a5 5 0 0 1-10 0z"/><path d="M7 5H3.5c0 3 1.3 4.6 3.7 5"/><path d="M17 5h3.5c0 3-1.3 4.6-3.7 5"/><path d="M12 14v4"/><path d="M8 20.5h8"/><path d="M9.5 18h5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8.5L19 7.5V21H6z"/><path d="M14 3v5h5"/><path d="M9 12h7M9 15.5h7M9 19h4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 13.5h1.5M11.3 13.5h1.5M14.5 13.5h1.5M8 17h1.5M11.3 17h1.5M14.5 17h1.5"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8.2l3.4 2.5-1.3 4h-4.2l-1.3-4z"/><path d="M12 8.2V3.2M15.4 10.7l4.7-1.5M14.1 14.7l2.9 4M9.9 14.7l-2.9 4M8.6 10.7L3.9 9.2"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11L12 3.5 20.5 11"/><path d="M5.5 9.5V20.5h13V9.5"/><path d="M10 20.5v-6h4v6"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1"/><circle cx="12" cy="12" r="6.6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.7" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5L20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></symbol>
+
+  <!-- Emblem drawn in code. Set LOGO_SRC in the config block to use the real artwork instead. -->
+  <symbol id="logo-emblem" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="96" fill="#0a3d22" stroke="url(#gold)" stroke-width="6"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#1fd39a" stroke-width="1" opacity=".7"/>
+    <path d="M52 40a74 74 0 0 1 42-14" fill="none" stroke="#1fd39a" stroke-width="5" stroke-linecap="round"/>
+    <path d="M108 26a74 74 0 0 1 48 34" fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M54 160a74 74 0 0 0 40 14M110 174a74 74 0 0 0 40-16" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M30 98C58 54 142 54 170 98 142 142 58 142 30 98Z" fill="none" stroke="url(#gold)" stroke-width="5"/>
+    <path d="M42 98C64 68 136 68 158 98" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".6"/>
+    <circle cx="100" cy="98" r="29" fill="#0a2a1a" stroke="url(#gold)" stroke-width="4"/>
+    <circle cx="100" cy="98" r="23" fill="#f6f3e7"/>
+    <path d="M100 86l11 8-4 13H93l-4-13z" fill="#0a3d22"/>
+    <path d="M100 86V77M111 94l9-3M107 107l6 8M93 107l-6 8M89 94l-9-3" stroke="#0a3d22" stroke-width="2" fill="none"/>
+    <g stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <path d="M44 74h18l8 8"/><path d="M36 90h26"/><path d="M40 106h20l10-8" stroke="#1fd39a"/><path d="M48 122h22l8 6"/>
+      <circle cx="41" cy="74" r="3.4"/><circle cx="33" cy="90" r="3.4"/><circle cx="37" cy="106" r="3.4" stroke="#1fd39a"/><circle cx="45" cy="122" r="3.4"/>
+    </g>
+    <g fill="url(#gold)"><path d="M100 10l5 11h-10z"/><path d="M100 190l5-11h-10z"/><path d="M10 100l11-5v10z"/><path d="M190 100l-11-5v10z"/></g>
+  </symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#home" aria-label="3EYE Jackpot home">
+      <span class="logo-mark" id="logo-slot"><svg viewBox="0 0 200 200" role="img" aria-label="3EYE Jackpot logo"><use href="#logo-emblem"/></svg></span>
+      <span class="wordmark"><b>3EYE</b><span>JACKPOT</span></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#jackpot" data-nav="jackpot">Latest Jackpot</a>
+      <a href="#how" data-nav="how">How It Works</a>
+      <a href="#terms" data-nav="terms">Pool Terms</a>
+      <a href="#safe" data-nav="safe">Play safe</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#account" data-nav="account" class="js-acct">Sign up / Log in</a>
+    </nav>
+    <a class="btn btn-gold btn-sm top-acct js-acct" href="#account">Sign up / Log in</a>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel"><svg class="i"><use href="#i-menu"/></svg></button>
+  </div>
+  <div class="menu-panel" id="menu-panel">
+    <a href="#home" data-nav="home">Home</a>
+    <a href="#jackpot" data-nav="jackpot">Latest Jackpot</a>
+    <a href="#how" data-nav="how">How It Works</a>
+    <a href="#terms" data-nav="terms">Pool Terms</a>
+    <a href="#safe" data-nav="safe">Play safe</a>
+    <a href="#about" data-nav="about">About</a>
+    <a href="#account" data-nav="account" class="js-acct">Sign up / Log in</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HOME ================= -->
+  <div class="view" id="view-home">
+    <h1 style="position:absolute;left:-9999px">3EYE Jackpot: community football jackpot pool</h1>
+    <div id="view-jackpot" class="jp-inline">
+      <h2 class="jp-head">Latest Jackpot</h2>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Bookmaker" id="seg-platform"></div>
+      <div class="seg" role="group" aria-label="Jackpot" id="seg-jackpot"></div>
+    </div>
+    <div class="jp-meta" id="jp-meta"></div>
+    <div class="wrap"><div class="prog" id="jp-prog" hidden style="border-top:0;margin-top:6px">
+      <div class="prog-top"><span id="jp-prog-txt"></span><span class="cd" id="jp-cd"></span></div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="jp-bar"><i></i></div>
+      <small id="jp-prog-sub"></small>
+    </div></div>
+    <div class="sumrow" id="jp-sum"></div>
+    <ol class="matches" id="jp-matches"></ol>
+
+    <section class="contribute" id="contribute" aria-labelledby="c-h">
+      <h2 id="c-h">Pool contribution</h2>
+      <p class="sub">Enter what you would put in to see your share.</p>
+      <div class="note" id="c-closed" hidden><svg class="i"><use href="#i-warn"/></svg><span id="c-closed-t">Contributions for this pool are closed.</span></div>
+      <div class="cdbox" id="c-cd" hidden><span id="c-cd-label">Pool closes in</span><b id="c-cd-val">&mdash;</b></div>
+      <div class="crow"><span>Full stake for the pool</span><b id="c-total">&mdash;</b></div>
+      <div class="field"><label for="c-amount">Your contribution (KES)</label><input id="c-amount" type="number" inputmode="numeric" min="0" step="10"></div>
+      <span class="hint" id="c-min"></span>
+      <div class="crow"><span>Your share</span><b id="c-share">&mdash;</b></div>
+      <div class="crow"><span>Highest prize</span><b id="c-prize">&mdash;</b></div>
+      <div class="crow big"><span id="c-pay-label">Your share would pay</span><b id="c-pay">&mdash;</b></div>
+      <div class="more-open" id="c-more-wrap" hidden><div id="c-more"></div></div>
+      <div class="note"><svg class="i"><use href="#i-warn"/></svg><span>The amount shown is the highest prize. If a lower bonus is won, your same share still applies to whatever the pool is paid. Bookmaker prizes are shared among all winners in a category, so actual payouts can vary.</span></div>
+      <div class="note"><svg class="i"><use href="#i-warn"/></svg><span>Your share is fixed: <b>your contribution &divide; the full stake</b>. It does not change when other members join. If a pool overfills, the excess moves to a second pool on the same jackpot, which works the same way.</span></div>
+      <p class="order-note"><b>Pool order:</b> the earliest contributors are placed in the earliest pools. Which pool you land in depends on how fast your stake is confirmed compared with how fast other stakes come in.</p>
+      <a class="btn btn-gold" id="c-cta" href="#account">Join the pool <svg class="i"><use href="#i-arrow"/></svg></a>
+    </section>
+    </div>
+
+
+    <section class="band how" id="how" aria-labelledby="how-h">
+      <div class="sec-title"><h2 id="how-h">How It Works</h2></div>
+      <p class="sub">From sign-up to payout in four clear steps.</p>
+      <ol class="steps">
+        <li><span class="num">1</span><div><h3>Create your account</h3><p>Sign up with your phone number and a 4-character PIN. It takes under a minute.</p></div></li>
+        <li><span class="num">2</span><div><h3>Choose a jackpot and contribute</h3><p>Pick an open jackpot, send your stake by M-Pesa and submit your confirmation code.</p></div></li>
+        <li><span class="num">3</span><div><h3>We verify your payment</h3><p>Every payment is checked against our M-Pesa records before it counts, and your share is recorded.</p></div></li>
+        <li><span class="num">4</span><div><h3>Win together, paid by share</h3><p>Pooled stakes enter one jackpot. Winnings are paid in proportion to each member&rsquo;s share, and every payout is recorded in your account.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="cta-wide">
+      <h2>Ready to Take Part?</h2>
+      <p>Create your account, then join the open pool.</p>
+      <a class="btn btn-gold btn-sm js-cta" href="#account">Join the Pool <svg class="i"><use href="#i-arrow"/></svg></a>
+    </section>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <div class="view" id="view-about">
+    <div class="page-head"><h1><span class="gold-text">About 3EYE Jackpot</span></h1></div>
+    <div class="prose">
+      <img class="about-logo" src="assets/logo-full-480.png" alt="3EYE Jackpot logo">
+      <p>3EYE Jackpot is a football pool community. Members add an agreed share, the contributions are combined into one stake, and that stake enters a single football jackpot.</p>
+      <h2>Clear records</h2>
+      <p>Contributions and pool details are communicated clearly, and results are shared whether they go our way or not.</p>
+      <h2>Good to know</h2>
+      <ul>
+        <li>Nothing here is a guarantee of a win.</li>
+        <li>Bookmaker prizes are shared among all winners in a category, so payouts can vary.</li>
+        <li>Read our <a href="#safe" style="color:var(--gold2);text-decoration:underline">Play safe</a> page.</li>
+        <li>Read the full <a href="#terms" style="color:var(--gold2);text-decoration:underline">Pool Terms</a> before you contribute.</li>
+      </ul>
+      <div class="links" id="about-links"></div>
+    </div>
+  </div>
+  <div class="view" id="view-safe">
+    <div class="page-head"><h1><span class="gold-text">Play safe</span></h1><p>3EYE Jackpot is for adults aged 18 and over. Betting should be entertainment, never a source of income or a way to recover losses.</p></div>
+    <div class="prose">
+      <h2>Our commitment</h2>
+      <p>We run community pools for adults only. We encourage every member to take part within their means, and we will pause any account at the member&rsquo;s request, without question.</p>
+      <h2>Set your limits</h2>
+      <ul>
+        <li>Decide how much you can afford to lose before you contribute, and keep to it.</li>
+        <li>Never use money meant for rent, school fees, food, bills or savings.</li>
+        <li>Do not borrow in order to bet.</li>
+        <li>Do not chase losses. A previous loss does not make the next jackpot more likely to win.</li>
+        <li>Remember that jackpots are very difficult to win and that no result is guaranteed.</li>
+      </ul>
+      <h2>Know the warning signs</h2>
+      <ul>
+        <li>Spending more money or time on betting than you intended.</li>
+        <li>Hiding your betting or your losses from family and friends.</li>
+        <li>Feeling anxious, restless or irritable when you are not betting.</li>
+        <li>Betting to win back what you have lost.</li>
+        <li>Disagreements at home or at work because of money or betting.</li>
+      </ul>
+      <h2>If you need a break</h2>
+      <p>Message us on WhatsApp and ask for your account to be suspended. We will stop accepting contributions from you until you ask us to reopen it.</p>
+      <div class="links" id="safe-links" style="text-align:center;margin:10px 0"></div>
+      <h2>Where to get support</h2>
+      <p>If betting is affecting your health, finances or relationships, speak to a trusted friend or family member, or to a qualified counsellor or doctor. You do not have to deal with it alone.</p>
+    </div>
+  </div>
+  <div class="view" id="view-terms">
+    <div class="page-head"><h1><span class="gold-text">Pool Terms</span></h1><p>The rules that govern how pools are run, how shares are calculated and how winnings are paid. Please read them before you contribute.</p></div>
+    <div class="prose" id="terms-body"></div>
+  </div>
+  <div class="view" id="view-account">
+    <div class="page-head"><h1><span class="gold-text" id="acct-title">Sign up / Log in</span></h1></div>
+    <div id="acct"></div>
+  </div>
+</main>
+
+<footer class="sitefoot" id="site-foot">
+  <p class="legal" style="max-width:1200px;margin:0 auto;border-top:0;padding-top:0">&copy; <span id="yr"></span> 3EYE Jackpot &bull; Football Pool Community &bull; 18+ only</p>
+</footer>
+
+<button class="warn-fab" id="warn-fab" type="button" aria-haspopup="dialog" aria-controls="warn-modal" aria-label="Important information: 18+, risk and responsible play">&#9888;&#65039;</button>
+<div class="warn-modal" id="warn-modal" role="dialog" aria-modal="true" aria-labelledby="warn-h" hidden>
+  <div class="warn-card">
+    <button class="warn-x" id="warn-x" type="button" aria-label="Close">&times;</button>
+    <h2 id="warn-h">Important information</h2>
+    <div class="warn-badges"><span class="hl age-hl">18+ ONLY</span><span class="hl">NOT AFFILIATED WITH ANY BOOKMAKER</span></div>
+    <p class="warn-caps">Stake only what you can afford to lose. Gambling can be addictive.</p>
+    <h3>Play responsibly</h3>
+    <p>Jackpots are very difficult to win and you may lose your entire contribution. Nothing on this site guarantees a win. If betting stops being enjoyable, stop and speak to someone you trust.</p>
+    <h3>Payments</h3>
+    <p>Pay only to the M-Pesa details shown in My Account after you log in. We will never ask for your PIN.</p>
+    <h3>Prizes</h3>
+    <p>Bookmaker prizes are shared equally among all winners, so payouts can be far below the headline prize.</p>
+    <p><a href="#safe" style="color:var(--gold2);text-decoration:underline">Read our Play safe guide</a></p>
+    <button class="btn btn-gold btn-sm" id="warn-ok" type="button">I understand</button>
+  </div>
+</div>
+<a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener" hidden aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.18-3.1.82.83-3.03-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.7c-.2 0-.5.07-.75.35-.26.28-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.4 2.4.95 2.9.76 3.4.7.53-.05 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.57-.35s-1.7-.84-1.97-.93c-.26-.1-.46-.15-.65.14-.2.3-.75.93-.92 1.12-.17.2-.34.22-.63.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.65-1.6-.9-2.18-.23-.56-.47-.48-.65-.49h-.55z"/></svg>
+  <span>Chat with us</span>
+</a>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#home" data-nav="home"><svg class="i"><use href="#i-home"/></svg>Home</a>
+  <a href="#jackpot" data-nav="jackpot"><svg class="i"><use href="#i-trophy"/></svg>Latest Jackpot</a>
+  <a href="#how" data-nav="how"><svg class="i"><use href="#i-gear"/></svg>How It Works</a>
+  <a href="#about" data-nav="about"><svg class="i"><use href="#i-info"/></svg>About</a>
+</nav>
+
+<!-- =====================================================================
+     CONFIG + JACKPOT DATA  (edit this block each week)
+     Fill it by hand from the weekly screenshot. When the feeds are found,
+     replace getJackpotData() below to fetch them in the same shape and
+     nothing else on the page needs to change.
+     Jackpots are posted from the admin page (Pools > Post a jackpot). Each match carries only a type: DC (double chance) or S (single). No odds or picks are stored.
+     A jackpot disappears from this page when its first match kicks off.
+     Pools now come from your Sheet (Pools tab) through the API, with data/jackpots.json as a backup.
+     ===================================================================== -->
+<script id="jackpot-data">
+const SITE = {
+  currency: "KES",
+  telegram: "https://t.me/Official_3eyejackpot",
+  // >>> CONTACT (payment details are NOT stored on this page: members see them only inside My Account, from the backend) <<<
+  whatsapp: "https://wa.me/254787383923",   // admin WhatsApp: 0787 383 923 (Help button, footer, About page, PIN reset, unlock requests)
+  // >>> ------------------------- <<<
+  pricePerLine: 99,        // KES per combination (SportPesa Mega Jackpot Pro); a pool in data/jackpots.json can override it
+  feePercent: 0,           // % you keep for running the pool, taken from winnings
+  minContribution: 100,        // keep equal to MIN_CONTRIB in Code.gs
+  defaultContribution: 1000,
+  cutoffMinutes: 30,           // keep equal to CLOSE_MIN in Code.gs (pool closes this long before the first kickoff)
+  payoutDays: 2,               // days after the bookmaker pays us that members are paid
+  disputeDays: 7,              // days members have to flag a wrong record
+  logoSrc: "assets/emblem-128.png",     // emblem image next to this file; set to "" to fall back to the drawn emblem
+  poolsRefreshSeconds: 60      // how often the page re-reads pool totals from the Sheet while it is open
+};
+
+/* Shown only if neither the Sheet nor data/jackpots.json can be reached. It is empty on purpose, so members never see made-up fixtures. */
+const JACKPOT_DATA = { isSample: false, defaultPlatform: "sportpesa", platforms: { sportpesa: { name: "SportPesa", items: [] }, betika: { name: "Betika", items: [] } } };
+
+/* Returns the jackpot data. Order: 1) your Sheet via the API (action "pools"), 2) data/jackpots.json, 3) an empty page. */
+function fetchPools() {
+  const fromApi = () => {
+    if (!window.API_URL) return Promise.reject(new Error('no API'));
+    const ac = new AbortController(), to = setTimeout(() => ac.abort(), 9000);
+    return fetch(window.API_URL, { method: 'POST', body: JSON.stringify({ action: 'pools' }), signal: ac.signal })
+      .then(r => r.json()).then(j => { if (!j || !j.ok || !Array.isArray(j.pools)) throw new Error((j && j.msg) || 'bad reply'); try { localStorage.setItem('tj_pools_v1', JSON.stringify({ t: Date.now(), j })); } catch (x) {} return j; })
+      .finally(() => clearTimeout(to));
+  };
+  const fromFile = () => fetch('data/jackpots.json', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  return fromApi().catch(err => { console.warn('Sheet feed unavailable, trying data/jackpots.json:', err.message); return fromFile(); });
+}
+function buildData(j) {
+  {
+    const platforms = { sportpesa: { name: 'SportPesa', items: [] }, betika: { name: 'Betika', items: [] } }, now = Date.now();
+    (j.pools || []).forEach(p => {
+      const k = String(p.bookmaker || 'other').toLowerCase();
+      const pl = platforms[k] || (platforms[k] = { name: p.bookmaker || 'Other', items: [] });
+      pl.items.push({ key: p.jackpot || p.poolId, short: p.jackpotName || p.name, poolId: p.poolId, title: p.name, prize: p.prize, closes: p.closes, kickoff: p.kickoff, status: p.status, phase: p.phase || 'active', min: p.min, pricePerLine: p.pricePerLine,
+        totalStake: p.totalStake != null ? p.totalStake : p.target, collected: p.collected != null ? p.collected : p.total,
+        members: p.members, prizes: p.prizes, matches: p.matches || [] });
+    });
+    let def = null, best = Infinity;
+    Object.keys(platforms).forEach(k => { const it = platforms[k].items; const rk = j => j.phase === 'active' ? 0 : j.phase === 'running' ? 1 : 2; it.sort((x, y) => rk(x) - rk(y) || (rk(x) === 0 ? new Date(x.closes) - new Date(y.closes) : new Date(y.kickoff) - new Date(x.kickoff))); if (it.length && it[0].phase === 'active' && new Date(it[0].closes) < best) { best = new Date(it[0].closes); def = k; } });
+    if (!def) Object.keys(platforms).forEach(k => { if (!def && platforms[k].items.length) def = k; });
+    return { isSample: false, updated: j.updated, defaultPlatform: def || 'sportpesa', platforms };
+  }
+}
+function getCachedData() { try { const c = JSON.parse(localStorage.getItem('tj_pools_v1') || 'null'); if (c && c.j && Date.now() - c.t < 864e5) return buildData(c.j); } catch (e) {} return null; }
+function getJackpotData() { return fetchPools().then(buildData).catch(err => { console.warn('No jackpot data available:', err); return JACKPOT_DATA; }); }
+</script>
+
+<script id="app">
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const state = { data: null, platform: null, jpKey: null, mode: 'upcoming', amount: null };
+
+  /* ---------- formatting & maths ---------- */
+  const num = n => (n == null || isNaN(n)) ? null : Number(n);
+  const money = n => num(n) == null ? '\u2014' : SITE.currency + ' ' + Math.round(n).toLocaleString('en-US');
+  const trim1 = x => String(Math.round(x * 10) / 10);
+  function moneyShort(n) {
+    n = num(n); if (n == null) return null;
+    if (n >= 1e9) return SITE.currency + ' ' + trim1(n / 1e9) + 'B';
+    if (n >= 1e6) return SITE.currency + ' ' + trim1(n / 1e6) + 'M';
+    return money(n);
+  }
+  function calcShare(amount, totalStake, prize) {
+    amount = num(amount); totalStake = num(totalStake); prize = num(prize);
+    if (amount == null || amount < 0 || !totalStake || totalStake <= 0) return { share: null, payout: null };
+    const share = Math.min(amount / totalStake, 1);
+    return { share, payout: prize == null ? null : prize * share };
+  }
+  function pct(share) {
+    if (share == null) return '\u2014';
+    const p = share * 100;
+    return (p >= 10 ? p.toFixed(1) : p >= 1 ? p.toFixed(2) : p.toFixed(3)).replace(/\.?0+$/, '') + '%';
+  }
+  const when = iso => {
+    if (typeof iso === 'string' && !/^\d{4}-\d{2}-\d{2}/.test(iso)) return iso;
+    const d = new Date(iso); if (isNaN(d)) return String(iso == null ? '' : iso);
+    return d.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Nairobi' });
+  };
+  const itemsOf = p => { const pl = state.data && state.data.platforms[p]; return (pl && pl.items) || []; };
+  const TYPES = { sportpesa: [['sp_midweek', 'Midweek'], ['sp_mega', 'Mega']], betika: [['bt_mbw', 'Must Be Won'], ['bt_midweek', 'Midweek']] };
+  const typesOf = p => { const base = (TYPES[p] || []).map(t => ({ key: t[0], short: t[1] })); itemsOf(p).forEach(j => { if (!base.some(t => t.key === j.key)) base.push({ key: j.key, short: j.short }); }); return base; };
+  const getJackpot = p => { const it = itemsOf(p); if (state.jpKey && typesOf(p).some(t => t.key === state.jpKey)) return it.find(j => j.key === state.jpKey) || null; return it[0] || null; };
+  const defKey = p => { const it = itemsOf(p)[0]; return it ? it.key : ((typesOf(p)[0] || {}).key || null); };
+  const soonest = p => itemsOf(p)[0] || null;
+  /* A jackpot leaves the page as soon as its first match kicks off, even if the page was left open. */
+  window.tjCurrent = () => { const jp = getJackpot(state.platform), a = $('#c-amount'); return { poolId: jp && jp.poolId, amount: a ? a.value : '' }; };
+  function pruneExpired() { return false; }   // pools now stay on the page with a status label
+  const isActive = jp => !jp || !jp.phase || jp.phase === 'active';
+  const PHASE = { active: 'Active', running: 'Running', finished: 'Finished' };
+  const matchCount = jp => jp ? ((jp.matches && jp.matches.length) || jp.matchCount || 0) : 0;
+  const dcOf = jp => (jp.matches || []).filter(m => m.type === 'DC').length;
+  const linesOf = jp => Math.pow(2, dcOf(jp));
+  const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  const stakeOf = jp => num(jp.totalStake) != null ? num(jp.totalStake) : linesOf(jp) * (num(jp.pricePerLine) || SITE.pricePerLine);
+
+  /* ---------- drawn artwork ---------- */
+  function ballSVG() {
+    const pent = (cx, cy, r, rot) => Array.from({ length: 5 }, (_, k) => {
+      const a = (rot + 72 * k) * Math.PI / 180; return (cx + r * Math.cos(a)).toFixed(1) + ',' + (cy + r * Math.sin(a)).toFixed(1);
+    }).join(' ');
+    let patches = '', seams = '';
+    for (let k = 0; k < 5; k++) {
+      const a = (-90 + 72 * k) * Math.PI / 180, cx = 100 + 84 * Math.cos(a), cy = 100 + 84 * Math.sin(a);
+      patches += '<polygon points="' + pent(cx, cy, 26, -90 + 72 * k + 180) + '" fill="#0b2a1a"/>';
+      seams += '<line x1="' + (100 + 29 * Math.cos(a)).toFixed(1) + '" y1="' + (100 + 29 * Math.sin(a)).toFixed(1) + '" x2="' + (100 + 62 * Math.cos(a)).toFixed(1) + '" y2="' + (100 + 62 * Math.sin(a)).toFixed(1) + '"/>';
+    }
+    return '<svg viewBox="0 0 300 260"><defs>' +
+      '<radialGradient id="bl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#d8d5c6"/><stop offset="1" stop-color="#7d7b6e"/></radialGradient>' +
+      '<clipPath id="bc"><circle cx="100" cy="100" r="96"/></clipPath>' +
+      '<linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".5" stop-color="#e8b931"/><stop offset="1" stop-color="#a97c14"/></linearGradient></defs>' +
+      '<g fill="none" stroke="url(#g2)" stroke-width="4" stroke-linecap="round">' +
+      '<path d="M8 130C60 40 240 40 292 130 240 220 60 220 8 130Z"/><path d="M30 130C80 66 220 66 270 130" stroke-width="2" opacity=".6"/>' +
+      '<path d="M150 14v26M150 246v-26" stroke-width="3"/></g>' +
+      '<g transform="translate(70 50) scale(.8)"><g clip-path="url(#bc)"><circle cx="100" cy="100" r="96" fill="url(#bl)"/>' + patches +
+      '<polygon points="' + pent(100, 100, 29, -90) + '" fill="#0b2a1a"/>' +
+      '<g stroke="#8c8a7c" stroke-width="2" opacity=".8">' + seams + '</g>' +
+      '<circle cx="100" cy="100" r="96" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="8"/></g></g></svg>';
+  }
+  function crowdSVG() {
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const W = 600, H = 120; let s = '';
+    for (let x = 6; x < W; x += 13) {
+      const y = 62 + rnd() * 34, r = 6 + rnd() * 3;
+      s += '<circle cx="' + x.toFixed(0) + '" cy="' + y.toFixed(0) + '" r="' + r.toFixed(1) + '"/>';
+      s += '<rect x="' + (x - 8).toFixed(0) + '" y="' + (y + r).toFixed(0) + '" width="16" height="' + H + '" rx="7"/>';
+      if (rnd() > .62) s += '<path d="M' + (x - 5) + ' ' + (y + r + 4) + ' L' + (x - 12) + ' ' + (y - 14) + ' M' + (x + 5) + ' ' + (y + r + 4) + ' L' + (x + 12) + ' ' + (y - 16) + '" stroke="#020a05" stroke-width="4" stroke-linecap="round" fill="none"/>';
+    }
+    return { vb: '0 0 ' + W + ' ' + H, html: '<g fill="#020a05">' + s + '</g>' };
+  }
+
+  /* ---------- progress bar + countdown ---------- */
+  const poolOf = jp => (jp && state.mode === 'upcoming') ? jp : null;
+  function paintProgress(jp, ids) {
+    const box = $(ids.box); if (!box) return;
+    const target = jp && (num(jp.totalStake) || ((jp.matches || []).length ? stakeOf(jp) : null)), got = jp && num(jp.collected);
+    if (!jp || state.mode !== 'upcoming' || !isActive(jp) || !target || target <= 0 || got == null) { box.hidden = true; return; }
+    const pc = Math.max(0, Math.min(100, got / target * 100)), left = Math.max(0, target - got);
+    box.hidden = false;
+    $(ids.txt).innerHTML = '<b>' + money(got) + '</b> of ' + money(target) + ' collected';
+    $(ids.bar).setAttribute('aria-valuenow', String(Math.round(pc))); $(ids.bar).firstElementChild.style.width = pc.toFixed(1) + '%';
+    $(ids.sub).textContent = pc >= 100 ? 'This pool is full. New contributions go into the next pool on the same jackpot.' : money(left) + ' still needed' + (jp.members ? ' \u00b7 ' + jp.members + ' members in' : '') + '. Earlier contributors fill earlier pools.';
+  }
+  function untilClose(jp) {
+    if (!jp || !jp.closes) return null;
+    const t = new Date(jp.closes).getTime(); return isNaN(t) ? null : t - Date.now();
+  }
+  function fmtLeft(ms) {
+    const s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, z = n => String(n).padStart(2, '0');
+    return d > 0 ? d + 'd ' + z(h) + 'h ' + z(m) + 'm' : z(h) + ':' + z(m) + ':' + z(x);
+  }
+  let tickTimer = null;
+  function tick() {
+    if (pruneExpired()) { renderHomeCard(); renderJackpot(); return; }
+    const dp = state.data && (state.data.defaultPlatform || Object.keys(state.data.platforms)[0]);
+    const home = state.data && soonest(dp), cur = state.data && getJackpot(state.platform);
+    const paint = (el, jp, label) => {
+      if (!el) return; const ms = (state.mode === 'upcoming' || el.id === 'hc-cd') && jp && isActive(jp) ? untilClose(jp) : null;
+      if (ms == null) { el.hidden = true; el.textContent = ''; return; }
+      el.hidden = false; el.classList.toggle('urgent', ms > 0 && ms < 3600000);
+      el.innerHTML = ms <= 0 ? 'Pool closed' : label + ' <b>' + fmtLeft(ms) + '</b>';
+    };
+    const sc = $('#sum-cd');
+    if (sc) { const sm = untilClose(cur); if (sm != null) { sc.textContent = sm <= 0 ? 'Closed' : fmtLeft(sm); sc.classList.toggle('urgent', sm > 0 && sm < 3600000); } }
+    paint($('#hc-cd'), home, 'Closes in');
+    paint($('#jp-cd'), state.mode === 'upcoming' ? cur : null, 'Closes in');
+    const box = $('#c-cd');
+    if (box) {
+      const ms = state.mode === 'upcoming' && cur && isActive(cur) ? untilClose(cur) : null;
+      if (ms == null) box.hidden = true;
+      else { box.hidden = false; box.classList.toggle('urgent', ms > 0 && ms < 3600000); box.classList.toggle('closed', ms <= 0);
+        $('#c-cd-label').textContent = ms <= 0 ? 'This pool has closed. Contributions are no longer accepted.' : 'Pool closes in'; $('#c-cd-val').textContent = ms <= 0 ? '' : fmtLeft(ms); }
+    }
+  }
+  function startTick() { tick(); if (!tickTimer) tickTimer = setInterval(tick, 1000); }
+
+  /* ---------- views ---------- */
+  function renderHomeCard() {
+    if (!$('#hc-matches')) { tick(); return; }   // the home teaser card was removed; the full jackpot below is the first thing visitors see
+    const dp = state.data.defaultPlatform || Object.keys(state.data.platforms)[0];
+    const jp = soonest(dp);
+    const n = matchCount(jp), prize = jp && moneyShort(jp.prize);
+    $('#hc-matches').textContent = (n || '\u2014') + ' Matches';
+    $('#hc-prize').textContent = prize || 'Prize to be set';
+    $('#hc-prize-sub').textContent = prize ? 'Jackpot prize' : 'Shared among all winners';
+    const prevMode = state.mode; state.mode = 'upcoming';
+    paintProgress(jp, { box: '#hc-prog', txt: '#hc-prog-txt', bar: '#hc-bar', sub: '#hc-prog-sub' });
+    state.mode = prevMode; tick();
+  }
+
+  function renderControls() {
+    const seg = $('#seg-platform');
+    seg.innerHTML = Object.keys(state.data.platforms).map(k =>
+      '<button type="button" data-platform="' + esc(k) + '" aria-pressed="' + (k === state.platform) + '">' + esc(state.data.platforms[k].name) + (itemsOf(k).length ? '' : ' <small>\u00b7 Coming soon</small>') + '</button>').join('');
+    const js = $('#seg-jackpot'); js.style.display = '';
+    js.innerHTML = typesOf(state.platform).map(t => { const j = itemsOf(state.platform).find(x => x.key === t.key);
+      return '<button type="button" data-jp="' + esc(t.key) + '" aria-pressed="' + (t.key === state.jpKey) + '">' + esc(t.short) + ' <small>' + (j ? '(' + matchCount(j) + ')' + (isActive(j) ? '' : ' \u00b7 ' + esc(PHASE[j.phase] || j.phase)) : '\u00b7 Coming soon') + '</small></button>'; }).join('');
+  }
+
+  function renderJackpot() {
+    renderControls();
+    const jp = getJackpot(state.platform);
+    const meta = $('#jp-meta'), sum = $('#jp-sum'), list = $('#jp-matches');
+    const pName = state.data.platforms[state.platform].name;
+    if (!jp || !matchCount(jp)) {
+      meta.innerHTML = ''; sum.innerHTML = ''; list.innerHTML = ''; list.hidden = true; $('#jp-prog').hidden = true;
+      let e = $('#jp-empty'); if (!e) { e = document.createElement('div'); e.id = 'jp-empty'; e.className = 'empty'; list.after(e); }
+      const tp = typesOf(state.platform).find(t => t.key === state.jpKey); e.hidden = false; e.textContent = (tp ? pName + ' ' + tp.short + ' has no slate yet.' : 'No ' + pName + ' jackpot is open right now.') + ' Check back soon.';
+      updateContribution(null); return;
+    }
+    const e = $('#jp-empty'); if (e) e.hidden = true;
+    list.hidden = false;
+    paintProgress(jp, { box: '#jp-prog', txt: '#jp-prog-txt', bar: '#jp-bar', sub: '#jp-prog-sub' });
+    const ms = jp.matches || [], dc = dcOf(jp);
+    meta.innerHTML = '<strong>' + (isActive(jp) ? (state.mode === 'upcoming' ? '<i class="live-dot" role="img" aria-label="Live"></i>' : '') : '<span class="phase-chip ph-' + esc(jp.phase) + '">' + esc(PHASE[jp.phase] || jp.phase) + '</span>') + esc(jp.title || pName) + '</strong><span class="mm">' + dc + ' doubles (DC) \u00b7 ' + (ms.length - dc) + ' singles \u00b7 ' + linesOf(jp).toLocaleString('en-US') + ' lines</span>';
+    const first = jp.closes || ms.map(m => m.kickoff).filter(Boolean).sort()[0];
+    const live = jp.closes && state.mode === 'upcoming' && isActive(jp);
+    const third = live ? '<div class="sumcard"><small>Closes in</small><b class="cdv" id="sum-cd">\u2014</b><span class="sw">' + esc(when(jp.closes)) + '</span></div>'
+      : !isActive(jp) ? '<div class="sumcard"><small>Status</small><b style="font-size:15px">' + esc(PHASE[jp.phase] || jp.phase) + '</b></div>'
+      : '<div class="sumcard"><small>' + (jp.closes ? 'Closes' : 'First kickoff') + '</small><b style="font-size:12.9px">' + esc(first ? when(first) : '\u2014') + '</b></div>';
+    sum.innerHTML = '<div class="sumcard"><small>Matches</small><b>' + matchCount(jp) + '</b></div>' +
+      '<div class="sumcard"><small>Big prize</small><b>' + esc(moneyShort(jp.prize) || '\u2014') + '</b></div>' + third;
+    list.innerHTML = ms.map((m, i) => {
+      const isDC = m.type === 'DC', sub = [m.league, m.kickoff ? when(m.kickoff) : ''].filter(Boolean).map(esc).join(' \u00b7 ');
+      return '<li class="match"><span class="mno">' + (i + 1) + '</span><div class="mteams">' + esc(m.home) + ' vs ' + esc(m.away) + '<small>' + sub + '</small></div>' +
+        '<div class="picks"><span class="tp' + (isDC ? ' dc' : '') + '">' + (isDC ? 'DC' : 'Single') + '</span><span class="lockbar" role="img" aria-label="Selection locked">' + LOCK + '</span></div></li>';
+    }).join('');
+    updateContribution(jp); tick();
+  }
+
+  function updateContribution(jp) {
+    const secC = $('#contribute'); if (secC) secC.hidden = !jp;
+    const input = $('#c-amount'), more = $('#c-more'), wrap = $('#c-more-wrap');
+    const closed = !!jp && !isActive(jp); $('#c-closed').hidden = !closed; $('#c-cta').hidden = closed;
+    if (closed) $('#c-closed-t').textContent = jp.phase === 'finished' ? 'This pool is finished. Contributions are closed.' : 'This pool is running. Contributions are closed.';
+    const minAmt = jp ? (num(jp.min) || SITE.minContribution || 0) : (SITE.minContribution || 0);
+    $('#c-min').textContent = minAmt ? 'Minimum contribution for this pool ' + money(minAmt) : '';
+    if (!jp) { ['#c-total', '#c-share', '#c-prize', '#c-pay'].forEach(s => $(s).textContent = '\u2014'); wrap.hidden = true; return; }
+    if (state.amount == null && document.activeElement !== input) input.value = jp.defaultContribution != null ? jp.defaultContribution : Math.max(SITE.defaultContribution, minAmt);
+    const amt = input.value === '' ? null : Number(input.value);
+    input.min = minAmt || 0; $('#c-min').style.color = (amt != null && minAmt && amt < minAmt) ? 'var(--red)' : '';
+    const total = stakeOf(jp), keep = 1 - (SITE.feePercent || 0) / 100;
+    const r = calcShare(amt, total, jp.prize);
+    $('#c-total').textContent = money(total);
+    $('#c-prize').textContent = money(jp.prize);
+    $('#c-share').textContent = pct(r.share);
+    $('#c-pay').textContent = money(r.payout == null ? null : r.payout * keep);
+    $('#c-pay-label').textContent = 'Your share would pay';
+    const ms = jp.matches || [], dcN = dcOf(jp), ppl = num(jp.pricePerLine) || SITE.pricePerLine;
+    let h = '<h3>How this jackpot is built</h3>' +
+      [['Matches', ms.length], ['Doubles (DC)', dcN], ['Singles', ms.length - dcN], ['Lines played', linesOf(jp).toLocaleString('en-US')],
+       ppl ? ['Price per line', money(ppl)] : null, ['Full stake for the pool', money(total)], minAmt ? ['Minimum contribution', money(minAmt)] : null,
+       jp.members ? ['Members in this pool', jp.members] : null, jp.closes ? ['Pool closes', when(jp.closes)] : null]
+      .filter(Boolean).map(x => '<div class="crow"><span>' + x[0] + '</span><b>' + esc(String(x[1])) + '</b></div>').join('');
+    if (jp.prizes && jp.prizes.length) {
+      h += '<h3>If the slip pays</h3><table class="tbl"><tr><th>Result</th><th>Prize</th><th>Your payout</th></tr>' +
+        jp.prizes.map(z => '<tr><td>' + esc(z.label) + '</td><td>' + money(z.amount) + '</td><td>' + money(r.share == null ? null : z.amount * r.share * keep) + '</td></tr>').join('') + '</table>';
+    }
+    more.innerHTML = h; wrap.hidden = false;
+  }
+
+  /* ---------- routing ---------- */
+  function route() {
+    let h = (location.hash || '#home').slice(1), view = h, target = null, navKey = h;
+    if (h === 'how') { view = 'home'; target = 'how'; }
+    else if (h === 'jackpot') { view = 'home'; target = 'view-jackpot'; navKey = 'jackpot'; }
+    else if (h === 'contribute') { view = 'home'; target = 'contribute'; navKey = 'jackpot'; }
+    if (!['home', 'jackpot', 'about', 'terms', 'account', 'safe'].includes(view)) { view = 'home'; navKey = 'home'; }
+    try { sessionStorage.setItem('tj_view', h); } catch (x) {}
+    $$('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + view));
+    $$('[data-nav]').forEach(a => a.dataset.nav === navKey ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    closeMenu();
+    const el = target && document.getElementById(target);
+    if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' })); else window.scrollTo(0, 0);
+  }
+  function closeMenu() { $('#menu-panel').classList.remove('open'); $('#menu-btn').setAttribute('aria-expanded', 'false'); }
+
+  function renderTerms() {
+    const ex = { mine: 500, total: 5000, won: 100000 }, pc = ex.mine / ex.total, K = n => SITE.currency + ' ' + Math.round(n).toLocaleString('en-US');
+    const fee = SITE.feePercent ? 'A pool fee of ' + SITE.feePercent + '% is taken from the amount won before it is shared, and the fee is shown on this page.' : 'There is currently no pool fee. If we ever add one, it will be shown on this page before you contribute.';
+    const T = [
+      ['1. The pool', ['3EYE Jackpot operates community pools for bookmaker football jackpots. Members contribute to a shared pool, and the pool places a single combined stake on one jackpot slip.', 'Participation is voluntary and open only to persons aged 18 or over who may lawfully take part where they live.', '3EYE Jackpot is an independent community. It is not affiliated with, endorsed by or sponsored by any bookmaker.']],
+      ['2. Joining and contributing', ['ul', 'Each pool has its own minimum contribution, shown on the pool page and in My Account.', 'Payment details are displayed only inside My Account after you log in. Pay only to those details, and never to a number sent to you by anyone else.', 'A contribution counts once it has been confirmed and recorded against your name and number. After paying, submit your M-Pesa confirmation message in My Account so that it can be verified. Each M-Pesa code can be used once.', 'A pool closes ' + SITE.cutoffMinutes + ' minutes before its first kickoff. A payment that arrives after closing is refunded in full.', 'You may request to withdraw your contribution at any time before the pool closes.']],
+      ['3. The stake we place', ['ul', 'We always play the full combination at the highest stake: the number of lines multiplied by the price per line. The full stake of each jackpot is fixed and is shown on its page.', 'Your share equals your contribution divided by the full stake of the jackpot. It is fixed and does not change when other members join or pay.', 'If we are unable to place the slip before the jackpot closes, for example because the bookmaker\u2019s platform is unavailable, every contribution is refunded in full.', 'The page shows which matches are double chance (DC) and which are singles. The selections themselves are kept private. After placing the slip, we record the total pool and the slip reference.']],
+      ['4. Pool order and overflow', ['ul', 'A pool accepts contributions only up to the full stake. Any excess moves to a further pool on the same jackpot, with the same matches and the same slip, and so on if required.', 'Placement follows the order of confirmation: the earliest confirmed contributions are placed in the earlier pools.', 'If a payment exceeds the room left in a pool, it is split: the part that fits goes into that pool and the remainder into the next. The split is shown in My Account.', 'Winnings are calculated separately for each pool, using your share of that pool.']],
+      ['5. Winnings and payouts', ['ul', 'Your payout = (your contribution \u00f7 full stake) \u00d7 amount won, which is the same share of the winnings as your share of the stake.', 'Amount won is the amount the bookmaker actually pays on our slip, after any tax or charges deducted by the bookmaker or required by law.', 'The prize shown on the site is the headline prize. Bookmakers share each prize equally among all winners in that category, so the amount received may be far lower, and no amount is guaranteed.', fee, 'Payouts are rounded down to the nearest shilling and sent by M-Pesa to your registered number within ' + SITE.payoutDays + ' days of the bookmaker paying us. Each payout is recorded in My Account.']],
+      ['6. If we do not win, or a jackpot is cancelled', ['ul', 'If the slip does not win, contributions are not refunded, because the stake has already been placed.', 'If the bookmaker cancels the jackpot or returns the stake, the money is returned to members using the same share formula.', 'Postponed or abandoned matches are treated according to the bookmaker\u2019s own rules, and we follow the bookmaker\u2019s results.']],
+      ['7. Your account and records', ['ul', 'You log in with your phone number and a 4-character PIN. Keep your PIN private; we will never ask for it.', 'After 5 wrong PIN attempts your account is locked for 1 hour. You may request an unlock from the log-in page, and we will confirm it with you on WhatsApp.', 'For every pool we record the total pool, the slip reference and the result, whether we win or lose. Pools remain visible on the website with their status (Active, Running or Finished), and your own contributions and payouts appear in My Account.', 'If you believe a record is incorrect, tell us within ' + SITE.disputeDays + ' days of the result and we will check it against the M-Pesa and bookmaker records.']],
+      ['8. Risk and responsible play', ['Nothing on this site guarantees a win. Jackpots are very difficult to win, and you may lose your entire contribution. Contribute only what you can afford to lose. If betting stops being enjoyable, stop and speak to someone you trust. Our Play safe page explains how to set limits and how to ask us to pause your account.']],
+      ['9. Changes, complaints and governing law', ['We may update these terms. The terms displayed when you contribute apply to that pool. For any question or complaint, contact us on WhatsApp or Telegram and we will aim to resolve it with you directly. These terms are governed by the laws of Kenya.']]
+    ];
+    const eg = '<b>Example.</b> You put in ' + K(ex.mine) + ' and the full stake of the jackpot is ' + K(ex.total) + '. Your share is ' + ex.mine.toLocaleString('en-US') + ' \u00f7 ' + ex.total.toLocaleString('en-US') + ' = ' + (pc * 100) + '%. If the slip wins ' + K(ex.won) + ', you receive ' + (pc * 100) + '% \u00d7 ' + K(ex.won) + ' = <b>' + K(ex.won * pc) + '</b>.';
+    $('#terms-body').innerHTML = '<div class="formula"><h2>How winnings are shared</h2><div class="eq"><span>Your payout</span><i>=</i><span>(Your contribution \u00f7 Full stake)</span><i>\u00d7</i><span>Amount won</span></div><p class="eg">' + eg + '</p></div>' +
+      T.map((t, i) => { const b = t[1], body = b[0] === 'ul' ? '<ul>' + b.slice(1).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : b.map(x => '<p>' + esc(x) + '</p>').join('');
+        return '<details class="term"' + (i === 0 ? ' open' : '') + '><summary>' + esc(t[0]) + '</summary><div class="tb">' + body + '</div></details>'; }).join('') +
+      '<p style="font-size:12.5px;color:var(--muted);text-align:center;margin:12px 0">Keep a screenshot of your M-Pesa confirmation.</p>';
+  }
+
+  /* ---------- start ---------- */
+  function init() {
+    if (SITE.logoSrc) $('#logo-slot').innerHTML = '<img src="' + esc(SITE.logoSrc) + '" alt="3EYE Jackpot logo">';
+    const ha = $('#hero-art'); if (ha) ha.innerHTML = ballSVG();
+    const cv = $('#crowd'); if (cv) { const c = crowdSVG(); cv.setAttribute('viewBox', c.vb); cv.innerHTML = c.html; }
+    const links = [];
+    { const sl = $('#safe-links'); if (sl && SITE.whatsapp) sl.innerHTML = '<a class="btn btn-gold btn-sm" href="' + esc(SITE.whatsapp) + '" target="_blank" rel="noopener">Ask us to pause my account</a>'; }
+    if (SITE.whatsapp) links.push('<a class="btn btn-gold btn-sm" href="' + esc(SITE.whatsapp) + '" target="_blank" rel="noopener">WhatsApp</a>');
+    if (SITE.telegram) links.push('<a class="btn btn-line btn-sm" href="' + esc(SITE.telegram) + '" target="_blank" rel="noopener">Telegram</a>');
+    $('#about-links').innerHTML = links.join('');
+    renderTerms();
+    (function () {
+      const m = $('#warn-modal'), open = () => { m.hidden = false; $('#warn-ok').focus(); }, close = () => { m.hidden = true; $('#warn-fab').focus(); };
+      $('#warn-fab').onclick = open; $('#warn-x').onclick = close; $('#warn-ok').onclick = close;
+      m.addEventListener('click', e => { if (e.target === m || e.target.closest('a[href="#safe"]')) m.hidden = true; });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !m.hidden) close(); });
+    })();
+    $('#yr').textContent = new Date().getFullYear();
+    const wa = $('#wa-fab');
+    if (SITE.whatsapp) { wa.href = SITE.whatsapp + (SITE.whatsapp.indexOf('?') < 0 ? '?text=' + encodeURIComponent('Hi 3EYE Jackpot, I need help with ') : ''); wa.hidden = false; }
+    else if (SITE.telegram) { wa.href = SITE.telegram; wa.querySelector('span').textContent = 'Help'; wa.hidden = false; wa.style.background = '#2aabee'; }
+
+    $('#menu-btn').addEventListener('click', () => {
+      const open = $('#menu-panel').classList.toggle('open'); $('#menu-btn').setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    $('#seg-platform').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { state.platform = b.dataset.platform; state.jpKey = defKey(state.platform); state.amount = null; renderJackpot(); } });
+    $('#seg-jackpot').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { state.jpKey = b.dataset.jp; state.amount = null; renderJackpot(); } });
+    $('#c-amount').addEventListener('input', e => { state.amount = e.target.value === '' ? '' : e.target.value; updateContribution(getJackpot(state.platform)); });
+    window.addEventListener('hashchange', route);
+
+    route();
+    const cached = getCachedData();   // show the last known pools instantly, then refresh from the Sheet
+    if (cached) { state.data = cached; state.platform = cached.defaultPlatform || Object.keys(cached.platforms)[0]; state.jpKey = defKey(state.platform); renderHomeCard(); renderJackpot(); route(); startTick(); }
+    getJackpotData().then(d => {
+      state.data = d; if (!cached || !d.platforms[state.platform]) state.platform = d.defaultPlatform || Object.keys(d.platforms)[0]; if (!state.jpKey || !cached) state.jpKey = defKey(state.platform);
+      renderHomeCard(); renderJackpot(); if (!cached) route(); startTick();
+    }).catch(err => { console.error('Jackpot data failed to load', err); });
+    /* keep the totals and countdown fresh while the page stays open */
+    if (SITE.poolsRefreshSeconds > 0) setInterval(() => {
+      if (document.hidden) return;
+      getJackpotData().then(d => { if (!state.data) return; state.data = d; if (!d.platforms[state.platform]) state.platform = d.defaultPlatform; renderHomeCard(); renderJackpot(); }).catch(() => {});
+    }, SITE.poolsRefreshSeconds * 1000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+<script id="config">
+/* Paste your deployed Apps Script web app URL here (it ends in /exec). It is safe for this to be public. */
+window.API_URL = "https://script.google.com/macros/s/AKfycbzefvjwwFY___KN6aZS4J-eKcFdSvZhLq3a2JaOv9gBP6vRFR9UWsFfBxOTS8NjqPx2/exec";
+</script>
+<script id="account">
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const kes = n => 'KES ' + Math.round(+n || 0).toLocaleString('en-US');
+  const pct = sh => { const p = (sh || 0) * 100; return (p >= 10 ? p.toFixed(1) : p >= 1 ? p.toFixed(2) : p.toFixed(3)).replace(/\.?0+$/, '') + '%'; };
+  const when = v => { const d = new Date(v); return isNaN(d) ? '' : d.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Nairobi' }); };
+  let T = sessionStorage.getItem('tj_t'), mode = 'login', last = null, reveal = false;
+  /* Tapping "Join the pool" on a jackpot counts as choosing a jackpot: it opens the payment forms for a new member. */
+  document.addEventListener('click', e => { if (!e.target.closest('#c-cta')) return; e.preventDefault(); const sel = window.tjCurrent ? window.tjCurrent() : {}; openSheet({ poolId: sel.poolId, amount: sel.amount }); });
+
+  async function api(action, d) {
+    if (!window.API_URL) throw new Error('Accounts are not switched on yet.');
+    let r;
+    for (let k = 0; k < 2 && !r; k++) {          // one quiet retry: Apps Script sometimes drops the first call after a cold start
+      try { r = await fetch(window.API_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action: action, token: T }, d || {})) }); }
+      catch (e) { if (k) throw new Error('Could not reach the server. Check your connection and try again.'); await new Promise(z => setTimeout(z, 1200)); }
+    }
+    let j; try { j = await r.json(); } catch (e) { throw new Error('The server sent an unexpected reply. Try again.'); }
+    if (!j.ok) { if (/log in again/i.test(j.msg)) { T = null; sessionStorage.removeItem('tj_t'); navLabel(); } throw new Error(j.msg); }
+    return j;
+  }
+  const say = (m, bad) => { const e = $('#a-msg'); if (e) { e.textContent = m; e.className = bad ? 'a-bad' : 'a-ok'; } };
+  const draw = h => { $('#acct').innerHTML = h; };
+  /* Nav label: "Sign up / Log in" while signed out, "My Account" once logged in */
+  function navLabel() {
+    const t = T ? 'My Account' : 'Sign up / Log in';
+    document.querySelectorAll('.js-acct').forEach(a => { a.textContent = t; });
+    document.querySelectorAll('.js-cta').forEach(a => { a.hidden = !!T; });
+    const h = $('#acct-title'); if (h) h.textContent = t;
+  }
+  navLabel();
+
+  const busy = (b, txt) => { if (!b) return; b.dataset.l = b.innerHTML; b.classList.add('is-loading'); b.innerHTML = txt + '<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>'; b.disabled = true; };
+  const idle = b => { if (!b) return; if (b.dataset.l != null) { b.innerHTML = b.dataset.l; delete b.dataset.l; } b.classList.remove('is-loading'); b.disabled = false; };
+
+
+  /* ---------- chat with us: pick a topic, read the answer, then message us ---------- */
+  const CHAT = () => [
+    ['Getting started', [
+      ['how', 'How the pool works', 'Members contribute to a shared pool, and the pool places one combined stake on a single jackpot slip. Your share is your contribution divided by the full stake, and any winnings are paid in proportion to that share.'],
+      ['join', 'Joining and creating an account', 'Tap Sign up, enter your name, phone number and a 4-character PIN, and accept the Pool Terms. Your account is ready straight away. You must be 18 or over.']]],
+    ['Payments', [
+      ['pay', 'How to pay', 'Tap Join the pool on a jackpot, choose your amount and follow the steps. The M-Pesa details are shown in the window. Send the exact amount, then paste your M-Pesa confirmation message to submit it for approval.'],
+      ['pending', 'I paid but it is not approved yet', 'Every payment is checked against our M-Pesa records before it counts, so a new payment shows as Pending until it is approved. Check that you submitted the correct M-Pesa code. If it stays pending, message us and quote your M-Pesa code.'],
+      ['wrong', 'Wrong amount or wrong code', 'Each M-Pesa code can be used only once, and the amount you declare should match what you sent. If you entered the wrong code or amount, message us with your correct M-Pesa message so that it can be corrected.']]],
+    ['Pools and shares', [
+      ['share', 'How my share is worked out', 'Your share = your contribution \u00f7 the full stake of the jackpot. It is fixed and does not change when other members join. Your payout = your share \u00d7 the amount won.'],
+      ['full', 'The pool is full or has closed', 'A pool closes ' + SITE.cutoffMinutes + ' minutes before its first kickoff. Each pool takes contributions only up to the full stake, and any excess moves to the next pool on the same jackpot. A payment that arrives after closing is refunded in full.'],
+      ['withdraw', 'Withdraw my contribution', 'You may ask to withdraw your contribution at any time before the pool closes. Message us with your name and the pool you contributed to.']]],
+    ['Winnings', [
+      ['paid', 'When and how I get paid', 'Winnings are shared by stake and sent by M-Pesa to your registered number within ' + SITE.payoutDays + ' days of the bookmaker paying us. Each payout is recorded in My Account.'],
+      ['nowin', 'The jackpot did not win or was cancelled', 'If the slip does not win, contributions are not refunded because the stake has already been placed. If the bookmaker cancels the jackpot or returns the stake, the money is returned using the same share formula.']]],
+    ['My account', [
+      ['pin', 'Forgot or locked PIN', 'After 5 wrong PIN attempts an account is locked for 1 hour. On the log-in page you can request an unlock or a PIN reset, and we will confirm it with you on WhatsApp.'],
+      ['phone', 'Change my phone number', 'Message us from your registered number and tell us the new number. We will confirm it with you before we change it.']]],
+    ['Safety', [
+      ['pause', 'Pause my account', 'Message us and ask for your account to be suspended. We will stop accepting contributions from you until you ask us to reopen it.'],
+      ['record', 'Report a wrong record', 'If a record looks wrong, tell us within ' + SITE.disputeDays + ' days of the result. We will check it against the M-Pesa and bookmaker records.']]],
+    ['Other', [['other', 'Something else', 'Tell us what you need and we will help.']]]
+  ];
+  function openChat(id) {
+    const groups = CHAT(), all = [].concat.apply([], groups.map(g => g[1])), t = all.find(x => x[0] === id);
+    let bg = $('#chat'); if (!bg) { bg = document.createElement('div'); bg.id = 'chat'; bg.className = 'sheet-bg'; bg.style.zIndex = 100; document.body.appendChild(bg);
+      bg.addEventListener('click', e => { if (e.target === bg || e.target.closest('[data-ch="close"]')) { bg.remove(); if (!SH) document.body.style.overflow = ''; return; } const b = e.target.closest('[data-ch="topic"]'); if (b) openChat(b.dataset.id); else if (e.target.closest('[data-ch="back"]')) openChat(); }); }
+    document.body.style.overflow = 'hidden';
+    let h = '<div class="sheet" role="dialog" aria-modal="true" aria-label="Chat with us"><div class="sh-top"><b>' + (t ? esc(t[1]) : 'How can we help?') + '</b><button type="button" class="sh-x" data-ch="close" aria-label="Close">&times;</button></div>';
+    if (!t) h += '<p class="a-mute" style="margin:0 0 4px">Choose a topic to see a quick answer. You can message us after.</p>' + groups.map(g => '<p class="sh-l">' + esc(g[0]) + '</p>' + g[1].map(x => '<button type="button" class="sh-pool" data-ch="topic" data-id="' + x[0] + '"><b>' + esc(x[1]) + '</b></button>').join('')).join('');
+    else {
+      const who = last && last.name ? ' My name is ' + last.name + (last.phone ? ' (' + last.phone + ')' : '') + '.' : '', msg = 'Hello 3EYE Jackpot, I need help with: ' + t[1] + '.' + who;
+      const wa = SITE.whatsapp ? SITE.whatsapp + (SITE.whatsapp.indexOf('?') < 0 ? '?text=' + encodeURIComponent(msg) : '') : '';
+      h += '<div class="sh-sum" style="line-height:1.55;font-size:14.2px">' + esc(t[2]) + '</div><p class="sh-l">Still need help?</p>' +
+        (wa ? '<a class="a-btn a-gold" href="' + esc(wa) + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;color:#2a1d00;margin-bottom:8px">Chat on WhatsApp</a>' : '') +
+        (SITE.telegram ? '<a class="a-btn a-line" href="' + esc(SITE.telegram) + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none">Message on Telegram</a>' : '') +
+        '<button type="button" class="a-link" data-ch="back">&larr; Back to topics</button>';
+    }
+    bg.innerHTML = h + '</div>';
+  }
+  document.addEventListener('click', e => {
+    if (e.target.closest('#wa-fab')) { e.preventDefault(); openChat(); return; }
+    const c = e.target.closest('[data-chat]'); if (c) openChat(c.dataset.chat === 'open' ? undefined : c.dataset.chat);
+  });
+  /* ---------- payment sheet: Choose > Pay > Confirm ---------- */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-terms]'); if (!a) return; e.preventDefault();
+    const src = $('#view-terms'); if (!src) { location.hash = '#terms'; return; }
+    let bg = $('#tsheet'); if (bg) bg.remove(); bg = document.createElement('div'); bg.id = 'tsheet'; bg.className = 'sheet-bg'; bg.style.zIndex = 95;
+    bg.innerHTML = '<div class="sheet tsheet" role="dialog" aria-modal="true" aria-label="Pool Terms"><div class="sh-top"><b>Pool Terms</b><button type="button" class="sh-x" aria-label="Close">&times;</button></div><div class="tbody">' + src.innerHTML + '</div><button type="button" class="a-btn a-gold" style="margin-top:12px">Back to sign up</button></div>';
+    bg.addEventListener('click', ev => { if (ev.target === bg || ev.target.closest('.sh-x') || ev.target.closest('.a-btn')) { bg.remove(); document.body.style.overflow = ''; } });
+    document.body.appendChild(bg); document.body.style.overflow = 'hidden';
+  });
+  let SH = null;
+  /* Finds the M-Pesa code in what the member pasted. A code is 8 to 12 letters and/or digits (any mix, so all-digit and all-letter codes work).
+     Order: 1) a typed-in correction, 2) the whole paste is just the code, 3) the word before "Confirmed", 4) the first word of the message,
+     5) last resort: a 10-character code that mixes letters and digits. Phone numbers are never taken as a code. */
+  const CODE_RE = /^[A-Z0-9]{8,12}$/;
+  const isPhone = s => /^(?:254|0)?[17]\d{8}$/.test(s);
+  const okCode = s => CODE_RE.test(s) && !isPhone(s);
+  const parseMsg = (t, manual) => {
+    const raw = String(t || ''), up = raw.toUpperCase().trim(); let code = '';
+    const man = String(manual || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (okCode(man)) code = man;
+    if (!code) { const q = up.replace(/^[^A-Z0-9]+|[^A-Z0-9]+$/g, ''); if (okCode(q)) code = q; }
+    if (!code) { const m = up.match(/\b([A-Z0-9]{8,12})\s*[,.:;-]?\s*CONFIRMED\b/); if (m && okCode(m[1])) code = m[1]; }
+    if (!code) { const f = (up.match(/^[^A-Z0-9]*([A-Z0-9]+)/) || [])[1] || ''; if (okCode(f)) code = f; }
+    if (!code) { const m = up.match(/\b(?=[A-Z0-9]*[A-Z])(?=[A-Z0-9]*\d)[A-Z0-9]{10}\b/); if (m && okCode(m[0])) code = m[0]; }
+    const a = raw.match(/(?:ksh|kes)\.?\s*([\d,]+(?:\.\d+)?)/i);
+    /* Date and time, as M-Pesa writes it: "on 19/10/26 at 6:51 PM". Read as Nairobi time. */
+    let paid = null; const d = raw.match(/\bon\s+(\d{1,2})\/(\d{1,2})\/(\d{2,4})\s+at\s+(\d{1,2}):(\d{2})\s*([AP])\.?M\b/i);
+    if (d) {
+      const y = +d[3] < 100 ? 2000 + +d[3] : +d[3], mo = +d[2], dd = +d[1], hr = +d[4], mi = +d[5], pm = /p/i.test(d[6]), z = n => String(n).padStart(2, '0');
+      if (hr >= 1 && hr <= 12 && mi <= 59) {
+        const h24 = (hr % 12) + (pm ? 12 : 0), t = new Date(Date.UTC(y, mo - 1, dd, h24, mi));
+        if (t.getUTCFullYear() === y && t.getUTCMonth() === mo - 1 && t.getUTCDate() === dd) paid = y + '-' + z(mo) + '-' + z(dd) + 'T' + z(h24) + ':' + z(mi) + ':00+03:00';
+      }
+    }
+    return { code, amount: a ? parseFloat(a[1].replace(/,/g, '')) : null, paid };
+  };
+  const poolMin = (p, d) => +p.min || +(d && d.min) || 1;
+  async function openSheet(o) {
+    o = o || {};
+    if (!T) { try { sessionStorage.setItem('tj_pending', JSON.stringify(o)); sessionStorage.setItem('tj_join', '1'); } catch (x) {} location.hash = '#account'; return; }
+    let d = last, fresh = null;
+    if (!d) { try { d = last = await api('dashboard'); } catch (e) { alert(e.message); return; } } else fresh = api('dashboard').then(nd => { last = nd; return nd; }).catch(() => null);
+    const pools = d.open || [];
+    if (!pools.length) { alert('No pool is open for contributions right now.'); return; }
+    const p = pools.find(x => String(x.poolId) === String(o.poolId)) || pools[0], mn = poolMin(p, d);
+    SH = { step: o.step || 1, pools, d, poolId: String(p.poolId), amount: +o.amount >= mn ? String(Math.round(+o.amount)) : '', raw: '', manual: '', details: null, err: '', done: '' };
+    let bg = $('#sheet'); if (!bg) { bg = document.createElement('div'); bg.id = 'sheet'; bg.className = 'sheet-bg'; document.body.appendChild(bg); bg.addEventListener('click', onSheet); bg.addEventListener('input', onSheetInput); }
+    document.body.style.overflow = 'hidden'; drawSheet(); loadDetails();
+    if (fresh) fresh.then(nd => { if (SH && nd && nd.open && nd.open.length) { SH.pools = nd.open; SH.d = nd; if (!SH.pools.some(x => String(x.poolId) === SH.poolId)) SH.poolId = String(SH.pools[0].poolId); if (SH.step === 1) { const el = $('#sh-amount'), keep = el ? el.value : SH.amount; SH.amount = keep; drawSheet(); } } });
+  }
+  function closeSheet() { const bg = $('#sheet'); if (bg) bg.remove(); document.body.style.overflow = ''; SH = null; }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && SH) closeSheet(); });
+  const curPool = () => SH.pools.find(x => String(x.poolId) === SH.poolId) || SH.pools[0];
+  function drawSheet() {
+    const bg = $('#sheet'); if (!bg || !SH) return; const p = curPool(), mn = poolMin(p, SH.d), st = SH.step, names = ['Choose', 'Pay', 'Confirm'];
+    let h = '<div class="sheet" role="dialog" aria-modal="true" aria-label="Contribute to a pool"><div class="sh-top"><b>Contribute</b><button type="button" class="sh-x" data-sh="close" aria-label="Close">&times;</button></div>';
+    if (st < 4) h += '<div class="sh-steps">' + names.map((n, i) => '<span class="' + (i + 1 === st ? 'on' : i + 1 < st ? 'done' : '') + '">' + (i + 1) + ' ' + n + '</span>').join('') + '</div>';
+    if (st === 1) {
+      h += '<p class="sh-l">Choose a pool</p>' + SH.pools.map(x => '<button type="button" class="sh-pool' + (String(x.poolId) === SH.poolId ? ' on' : '') + '" data-sh="pool" data-id="' + esc(x.poolId) + '"><b>' + esc(x.name) + '</b><small>' + (x.closes ? 'Closes ' + esc(when(x.closes)) : '') + (x.full ? ' &middot; full, your payment goes to the next pool' : '') + '</small></button>').join('') +
+        '<label class="sh-amt" for="sh-amount">Enter your amount (KES)</label>' +
+        '<input id="sh-amount" class="sh-amtin" type="number" inputmode="numeric" min="' + mn + '" placeholder="' + mn + '" value="' + esc(SH.amount) + '" autocomplete="off">' +
+        '<p class="sh-l" style="margin:6px 0 4px">Quick pick</p><div class="sh-chips"><button type="button" class="sh-chip" data-sh="amt" data-v="' + mn + '">' + kes(mn) + ' <small>minimum</small></button></div>' +
+        '<p class="a-bad" id="sh-err">' + esc(SH.err) + '</p><button type="button" class="a-btn a-gold" data-sh="to2">Continue</button>';
+    } else if (st === 2) {
+      h += '<div class="sh-sum">Send <b>' + kes(+SH.amount) + '</b> for <b>' + esc(p.name) + '</b></div>' +
+        '<div class="sh-pay" id="sh-pay">' + (SH.details ? esc(SH.details) : 'Loading payment details&hellip;') + '</div>' +
+        '<button type="button" class="a-btn a-line" data-sh="copy" style="width:100%;margin:8px 0 2px">Copy M-Pesa number</button><p class="a-ok" id="sh-copied" style="margin:0 0 6px;font-size:13px"></p>' +
+        '<ol class="sh-how"><li>Open M-Pesa and send exactly the amount above.</li><li>Wait for the M-Pesa confirmation message.</li><li>Come back here and tap <b>I have paid</b>.</li></ol>' +
+        '<div class="sh-row"><button type="button" class="a-btn a-line" data-sh="to1">Back</button><button type="button" class="a-btn a-gold" data-sh="to3">I have paid</button></div><button type="button" class="a-link" data-chat="pay">Need help paying?</button>';
+    } else if (st === 3) {
+      const r = parseMsg(SH.raw, SH.manual);
+      h += '<p class="sh-l">Paste your M-Pesa confirmation message</p><textarea id="sh-raw" rows="4" placeholder="Paste the whole message, or just the code">' + esc(SH.raw) + '</textarea><div id="sh-found">' + foundHtml(r) + '</div>' +
+        '<p class="sh-l" style="margin:8px 0 4px">Code wrong or not found? Type it here</p><input id="sh-code" type="text" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="M-Pesa code (8 to 12 letters or numbers)" value="' + esc(SH.manual) + '">' +
+        '<div class="sh-recap"><div><span>Pool</span><b>' + esc(p.name) + '</b></div><div><span>Amount</span><b>' + kes(+SH.amount) + '</b></div></div>' +
+        '<p class="a-bad" id="sh-err">' + esc(SH.err) + '</p><div class="sh-row"><button type="button" class="a-btn a-line" data-sh="to2">Back</button><button type="button" class="a-btn a-gold" data-sh="submit" id="sh-go"' + (r.code ? '' : ' disabled') + '>Submit for approval</button></div><button type="button" class="a-link" data-chat="wrong">Need help with the code or amount?</button>';
+    } else {
+      h += '<div class="sh-ok"><div class="sh-tick">&#10003;</div><h3>Received</h3><p>' + esc(SH.done) + '</p><button type="button" class="a-btn a-gold" data-sh="close">Done</button></div>';
+    }
+    bg.innerHTML = h + '</div>';
+    if (st === 2 && !SH.details) loadDetails();
+  }
+  const foundHtml = r => !String(SH.raw).trim() ? '<p class="a-mute">We will pick the M-Pesa code out of the message for you.</p>'
+    : !r.code ? '<p class="a-bad">No M-Pesa code found yet. A code is 8 to 12 letters and/or numbers, usually at the start of the message, for example SKL2A3B4C5. You can also type it in the box below.</p>'
+    : '<p class="a-ok">Code found: <b>' + esc(r.code) + '</b></p>' +
+      (r.paid ? (new Date(r.paid).getTime() > Date.now() + 5 * 60000 ? '<p class="a-bad">The message date (' + esc(when(r.paid)) + ') is in the future. Check that you pasted the right message.</p>' : '<p class="a-ok">Paid: <b>' + esc(when(r.paid)) + '</b></p>') : '') +
+      (r.amount != null && Math.abs(r.amount - +SH.amount) > 0.5 ? '<p class="a-bad">The message shows ' + kes(r.amount) + ' but you chose ' + kes(+SH.amount) + '. Check before you submit.</p>' : '');
+  const payNumber = t => { const x = String(t || ''), m = x.match(/(?:\+?254|0)[\s-]?[17](?:[\s-]?\d){8}/) || x.match(/\b\d{5,7}\b/); return m ? m[0].replace(/[\s-]/g, '') : x.trim(); };
+  async function copyNumber(btn) {
+    const num = payNumber(SH && SH.details); if (!num || (SH && !SH.details)) return false;
+    try { await navigator.clipboard.writeText(num); } catch (x) {
+      try { const t = document.createElement('textarea'); t.value = num; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); const ok = document.execCommand('copy'); t.remove(); if (!ok) return false; } catch (y) { return false; }
+    }
+    const n = $('#sh-copied'); if (n) n.textContent = 'M-Pesa number ' + num + ' copied'; if (btn) { btn.textContent = 'Copied: ' + num; setTimeout(() => { if (btn.isConnected) btn.textContent = 'Copy M-Pesa number'; }, 2000); }
+    return true;
+  }
+  async function loadDetails() {
+    if (!SH || SH.details || SH.loading) return; SH.loading = true;
+    try { const c = JSON.parse(sessionStorage.getItem('tj_pd') || 'null'); if (c && c.t === T && c.d) SH.details = c.d; } catch (x) {}
+    if (!SH.details) { try { const j = await api('payDetails'); SH.details = j.details || j.msg || 'Payment details are not available right now.'; if (j.details) { try { sessionStorage.setItem('tj_pd', JSON.stringify({ t: T, d: j.details })); } catch (x) {} } } catch (e) { if (SH) SH.details = e.message; } }
+    if (!SH) return; SH.loading = false; const b = $('#sh-pay'); if (b && SH.step === 2) { b.textContent = SH.details; copyNumber(); }
+  }
+  function onSheetInput(e) {
+    if (!SH) return;
+    if (e.target.id === 'sh-amount') SH.amount = e.target.value;
+    if (e.target.id === 'sh-raw' || e.target.id === 'sh-code') {
+      if (e.target.id === 'sh-raw') SH.raw = e.target.value; else SH.manual = e.target.value;
+      const r = parseMsg(SH.raw, SH.manual);
+      $('#sh-found').innerHTML = (!String(SH.raw).trim() && r.code) ? '<p class="a-ok">Code: <b>' + esc(r.code) + '</b></p>' : foundHtml(r);
+      $('#sh-go').disabled = !r.code;
+    }
+  }
+  async function onSheet(e) {
+    if (!SH) return;
+    if (e.target.classList.contains('sheet-bg')) { closeSheet(); return; }
+    const b = e.target.closest('[data-sh]'); if (!b) return; const a = b.dataset.sh;
+    if (a === 'close') closeSheet();
+    else if (a === 'pool') { SH.poolId = b.dataset.id; SH.err = ''; drawSheet(); }
+    else if (a === 'amt') { SH.amount = b.dataset.v; drawSheet(); }
+    else if (a === 'to1') { SH.step = 1; SH.err = ''; drawSheet(); }
+    else if (a === 'to2') {
+      const p = curPool(), mn = poolMin(p, SH.d), n = +SH.amount;
+      if (SH.step === 1 && (!(n >= mn) || n !== Math.floor(n))) { SH.err = 'Enter a whole amount of at least ' + kes(mn) + '.'; drawSheet(); return; }
+      SH.step = 2; SH.err = ''; drawSheet(); if (SH.details) copyNumber();   // the Continue tap lets the browser copy the number straight away
+    }
+    else if (a === 'to3') { SH.step = 3; SH.err = ''; drawSheet(); }
+    else if (a === 'copy') { if (!(await copyNumber(b))) b.textContent = 'Press and hold the number to copy'; }
+    else if (a === 'submit') {
+      const r = parseMsg(SH.raw, SH.manual); if (!r.code) return; busy(b, 'Submitting');
+      try { const j = await api('declare', { poolId: SH.poolId, amount: SH.amount, ref: r.code }); SH.done = j.msg || 'Your payment is pending approval. You will be notified when it is approved.'; SH.step = 4; drawSheet(); render(); }
+      catch (x) { SH.err = x.message; drawSheet(); }
+    }
+  }
+  /* ---------- receipt (PNG) ---------- */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.a-rcpt'); if (!b) return;
+    let r; try { r = JSON.parse(decodeURIComponent(b.dataset.rc)); } catch (x) { return; }
+    const c = document.createElement('canvas'), W = 640, rowsL = [['Jackpot', r.j], ['Stake', kes(r.a)], ['Winning share', r.sh], ['M-Pesa code', r.r], ['Status', r.s], ['Date', r.d ? when(r.d) : '']].filter(x => x[1]);
+    c.width = W; c.height = 190 + rowsL.length * 52 + 70; const g = c.getContext('2d');
+    g.fillStyle = '#04120b'; g.fillRect(0, 0, W, c.height); g.strokeStyle = '#e8b931'; g.lineWidth = 3; g.strokeRect(12, 12, W - 24, c.height - 24);
+    g.fillStyle = '#f3cf5b'; g.font = 'bold 34px sans-serif'; g.fillText('3EYE Jackpot', 40, 76); g.fillStyle = '#a5bbae'; g.font = '20px sans-serif'; g.fillText('Contribution receipt', 40, 112);
+    g.fillStyle = '#e8b931'; g.fillRect(40, 130, W - 80, 2);
+    rowsL.forEach((x, i) => { const y = 180 + i * 52; g.fillStyle = '#a5bbae'; g.font = '20px sans-serif'; g.fillText(x[0], 40, y); g.fillStyle = '#fff'; g.font = 'bold 22px sans-serif'; g.textAlign = 'right'; g.fillText(String(x[1]).slice(0, 34), W - 40, y); g.textAlign = 'left'; });
+    g.fillStyle = '#a5bbae'; g.font = '16px sans-serif'; g.fillText('Not a bookmaker receipt. 18+ only. Play responsibly.', 40, c.height - 36);
+    const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = '3eye-receipt.png'; document.body.appendChild(a); a.click(); a.remove();
+  });
+  /* ---------- signed out ---------- */
+  function authHtml(note) {
+    const su = mode === 'signup', rs = mode === 'reset';
+    const tabs = rs ? '' : '<div class="a-seg"><button type="button" data-m="login" aria-pressed="' + !su + '">Log in</button><button type="button" data-m="signup" aria-pressed="' + su + '">Sign up</button></div>';
+    return tabs + '<form id="a-form" class="a-card" autocomplete="on">' +
+      (rs ? '<h3>Forgot your PIN?</h3><p class="a-mute">Choose a new PIN. The admin confirms it with you on WhatsApp, then it starts working.</p>' : '') +
+      (su ? '<label>Full name<input name="name" autocomplete="name" required></label>' : '') +
+      '<label>Phone number (M-Pesa)<div class="a-phone"><span class="a-cc">+254</span><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="712345678" pattern="[17][0-9]{8}" title="9 digits, starting with 7 or 1" required></div></label>' +
+      '<label>' + (su ? 'Choose a 4-character PIN (letters or numbers)' : rs ? 'New 4-character PIN (letters or numbers)' : 'PIN (4 letters or numbers)') + '<input name="pin" type="password" inputmode="text" maxlength="4" pattern="[A-Za-z0-9]{4}" title="Exactly 4 letters or numbers" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="' + (mode === 'login' ? 'current-password' : 'new-password') + '" required></label>' +
+      (su ? '<label class="a-check"><input type="checkbox" name="agree" required><span>I am 18 or over, and I accept the <a href="#terms" data-terms="1">Pool Terms</a> and the risks of betting.</span></label>' : '') +
+      '<button class="a-btn a-gold" type="submit">' + (su ? 'Create account' : rs ? 'Send reset request' : 'Log in') + '</button>' +
+      '<p id="a-msg" class="' + (note ? 'a-bad' : '') + '">' + esc(note || '') + '</p>' +
+      (mode === 'login' ? '<button type="button" class="a-link" data-m="reset">Forgot your PIN?</button><p class="help-hint">Reset requests are confirmed by the admin on WhatsApp. After 5 wrong PINs the account locks for 1 hour, and you can then request an unlock.</p>' : rs ? '<button type="button" class="a-link" data-m="login">Back to log in</button>' : '') + '</form>';
+  }
+  function bindAuth() {
+    const ph = $('#a-form') && $('#a-form').elements.phone;
+    if (ph) ph.addEventListener('input', () => {   // digits only, drop +254 / leading 0, must start with 1 or 7, max 9 digits
+      let d = ph.value.replace(/\D/g, ''); if (d.indexOf('254') === 0 && d.length > 9) d = d.slice(3);
+      d = d.replace(/^0+/, ''); while (d && !/^[17]/.test(d)) d = d.slice(1);
+      ph.value = d.slice(0, 9);
+    });
+    document.querySelectorAll('#acct [data-m]').forEach(b => b.onclick = () => { mode = b.dataset.m; draw(authHtml()); bindAuth(); });
+    $('#a-form').onsubmit = async ev => {
+      ev.preventDefault(); const f = ev.target, btn = f.querySelector('button[type=submit]'), v = n => f.elements[n] ? f.elements[n].value : '';
+      busy(btn, mode === 'signup' ? 'Creating account' : mode === 'reset' ? 'Sending request' : 'Logging in');
+      try {
+        if (mode === 'signup') { const j = await api('signup', { name: v('name'), phone: '254' + v('phone'), pin: v('pin'), agree: f.elements.agree.checked }); if (j.token) { T = j.token; sessionStorage.setItem('tj_t', T); render(); } else { f.reset(); say(j.msg, false); } }
+        else if (mode === 'reset') { const j = await api('requestReset', { phone: '254' + v('phone'), pin: v('pin') }); f.reset(); say(j.msg, false); }
+        else { const j = await api('login', { phone: '254' + v('phone'), pin: v('pin') }); T = j.token; sessionStorage.setItem('tj_t', T); render(); }
+      } catch (e) {
+        say(e.message, true);
+        if (mode === 'login' && /locked/i.test(e.message) && !$('#a-unlock')) {
+          const u = document.createElement('button'); u.type = 'button'; u.id = 'a-unlock'; u.className = 'a-btn a-line'; u.style.marginTop = '8px'; u.textContent = 'Request unlock';
+          u.onclick = async () => { u.disabled = true; try { const j = await api('requestUnlock', { phone: '254' + v('phone') }); say(j.msg, false); } catch (x) { say(x.message, true); u.disabled = false; } };
+          $('#a-msg').after(u);
+        }
+      } finally { idle(btn); }
+    };
+  }
+
+  /* ---------- signed in ---------- */
+  const STAGE = { Pending: 'Pending', Approved: 'Approved', Running: 'Currently running', Rejected: 'Rejected', Won: 'Won', Lost: 'Lost', Removed: 'Removed' };
+  let shown = 20;
+  const row = (k, v, cls) => '<div class="a-row' + (cls ? ' ' + cls : '') + '"><span>' + k + '</span><b>' + v + '</b></div>';
+  const wa = () => (typeof SITE !== 'undefined' && SITE.whatsapp) ? SITE.whatsapp : '';
+  /* One card per payment: jackpot, amount, status, winning share and amount to win. */
+  function stakeCard(s) {
+    const st = s.stage, est = st === 'Pending', multi = s.slices.length > 1, pool = (!multi && s.slices[0] && s.slices[0].name !== s.jackpot) ? s.slices[0].name : '';
+    let h = '<div class="a-card stake s-' + esc(st) + '"><h3>' + esc(s.jackpot) + '<span class="a-chip st-' + esc(st) + '">' + esc(STAGE[st] || st) + '</span></h3>' +
+      '<div class="sub">' + (pool ? esc(pool) + ' · ' : '') + (s.kind === 'recorded' ? 'Recorded by admin' : 'Submitted ' + esc(when(s.date))) + (s.closes && (st === 'Pending' || st === 'Approved') ? ' · closes ' + esc(when(s.closes)) : '') + '</div>';
+    h += row(st === 'Rejected' ? 'Amount sent' : 'Your stake', kes(s.amount));
+    if (s.ref) h += row('M-Pesa code', esc(s.ref));
+    if (st === 'Rejected') {
+      const w = wa();
+      return h + '<div class="why">We could not confirm this payment, so it is not in the pool. Please contact the admin' + (w ? ' on <a target="_blank" rel="noopener" href="' + esc(w) + '">WhatsApp</a>' : '') + '.</div></div>';
+    }
+    if (st === 'Removed') return h + '<div class="why">This stake was removed by the admin. Please contact them if you have questions.</div></div>';
+    h += timeline(s);
+    if (multi) {
+      h += '<div class="slices"><div class="a-mute"><span>Split across ' + s.slices.length + ' pools</span><span>Winning share</span></div>' + s.slices.map(x => '<div><span>' + esc(x.name) + ' · ' + kes(x.amt) + '</span><b>' + pct(x.share) + '</b></div>').join('') + '</div>';
+    } else h += row(est ? 'Winning share <span class="est">(once approved)</span>' : 'Winning share', pct(s.share));
+    if (st === 'Lost') h += row('Result', 'Did not win');
+    else if (st === 'Won') h += row('Your share of the winnings', kes(s.wouldPay), 'hl');
+    else h += row(s.prize ? 'Amount to win <span class="est">(highest prize)</span>' : 'Amount to win', s.prize ? kes(s.wouldPay) : 'Prize not set yet', 'hl');
+    if (st === 'Pending') h += '<button type="button" class="a-link" data-chat="pending">Need help with this payment?</button>';
+    if (s.fee > 0 && st !== 'Lost') h += '<p class="a-mute">Includes a ' + esc(s.fee) + '% pool fee.</p>';
+    if (st === 'Pending' || st === 'Approved' || st === 'Running' || st === 'Won' || st === 'Lost') h += '<button type="button" class="a-btn a-line a-rcpt" style="margin-top:10px;width:100%" data-rc="' + esc(encodeURIComponent(JSON.stringify({ j: s.jackpot, a: s.amount, sh: s.share != null ? pct(s.share) : '', r: s.ref || '', d: s.date || '', s: STAGE[st] || st }))) + '">Download receipt</button>';
+    h += '<div class="a-rep-row">' + waA('Report a problem', 'I want to report a problem with my stake in ' + s.jackpot + ' of ' + kes(s.amount) + (s.ref ? ' (M-Pesa code ' + s.ref + ')' : '') + '.', 'a-link a-rep') + '</div>';
+    return h + '</div>';
+  }
+  function totalsCard(g) {
+    let h = '<div class="a-card tot"><h3>' + esc(g.name) + (g.stage ? '<span class="a-chip st-' + esc(g.stage) + '">' + esc(STAGE[g.stage] || g.stage) + '</span>' : '') + '</h3>' +
+      '<div class="sub a-mute">' + (g.closes ? 'Closes ' + esc(when(g.closes)) + ' · ' : '') + g.count + (g.count === 1 ? ' stake' : ' stakes') + '</div>';
+    h += row('Total staked (approved)', kes(g.staked));
+    if (g.pending > 0) h += row('Waiting for approval', kes(g.pending));
+    h += row('Combined winning share', g.share != null ? pct(g.share) : 'Across ' + g.poolCount + ' pools');
+    h += row(g.stage === 'Won' ? 'Your share of the winnings' : g.stage === 'Lost' ? 'Result' : 'Combined amount to win', g.stage === 'Lost' ? 'Did not win' : g.wouldPay > 0 ? kes(g.wouldPay) : 'Prize not set yet', 'hl');
+    if (g.paidOut > 0) h += row('Paid out to you', kes(g.paidOut));
+    return h + '</div>';
+  }
+  /* Shown until the first payment is submitted: the same layout as a real stake, with every field empty. */
+  function emptyStakes() {
+    const e = '<span class="a-mute">—</span>';
+    return '<h2 class="a-h2">My stakes</h2>' +
+      '<div class="a-card stake ghost" aria-label="Sample layout"><h3>No stake yet<span class="a-chip">Sample layout</span></h3>' +
+      '<div class="sub">Your first stake will appear here once you pay and the admin approves it.</div>' +
+      row('Jackpot', e) + row('Your stake', e) + row('M-Pesa code', e) + row('Submitted', e) + row('Status', 'Not started') +
+      row('Winning share', e) + row('Amount to win', e, 'hl') + '</div>' +
+      '<h2 class="a-h2">Totals by jackpot</h2>' +
+      '<div class="a-card tot ghost"><h3>No jackpot yet</h3>' + row('Total staked (approved)', e) + row('Waiting for approval', e) + row('Combined winning share', e) + row('Combined amount to win', e, 'hl') + row('Paid out to you', e) + '</div>';
+  }
+  function stakesHtml(j) {
+    if (!j.stakes.length) return emptyStakes();
+    const list = j.stakes.slice(0, shown);
+    return '<h2 class="a-h2">My stakes</h2><p class="a-mute" style="text-align:center;margin:-4px 0 12px">Amounts to win use the highest prize. If a lower bonus is won, your same share applies to whatever the pool is paid.</p>' + list.map(stakeCard).join('') +
+      (j.stakes.length > shown ? '<button class="a-btn a-line a-more" id="a-more" type="button">Show more (' + (j.stakes.length - shown) + ')</button>' : '') +
+      (j.summary.length ? '<h2 class="a-h2">Totals by jackpot</h2>' + j.summary.map(totalsCard).join('') : '');
+  }
+  /* ---------- member dashboard: Overview, My stakes, History, Messages, Settings ---------- */
+  const TABS = [['overview', 'Overview'], ['stakes', 'My stakes'], ['history', 'History'], ['messages', 'Messages'], ['settings', 'Settings']];
+  const NOTE_TYPES = { payment: 'Payment', result: 'Result', payout: 'Payout', pool: 'Pool', account: 'Account', admin: 'From admin' };
+  let tab = 'overview', hv = 'tx', fMonth = '', fType = '', fRes = '', mf = 'all', openRes = '', flash = null, dashBound = false;
+  try { const t0 = sessionStorage.getItem('tj_tab'); if (TABS.some(x => x[0] === t0)) tab = t0; } catch (x) {}
+  const cache = () => { try { sessionStorage.setItem('tj_dash', JSON.stringify({ t: T, d: last })); } catch (x) {} };
+  const waLink = msg => { const w = wa(); return w ? w + (w.indexOf('?') < 0 ? '?text=' + encodeURIComponent(msg) : '') : ''; };
+  const meTag = () => last && last.name ? ' My name is ' + last.name + (last.phone ? ' (' + last.phone + ')' : '') + '.' : '';
+  const waA = (label, msg, cls) => { const u = waLink(msg + meTag()); return u ? '<a class="' + (cls || 'a-link') + '" href="' + esc(u) + '" target="_blank" rel="noopener">' + label + '</a>' : ''; };
+  const dayOf = v => { const d = new Date(v); return isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Africa/Nairobi' }); };
+  const stamp = v => { const d = new Date(v); return isNaN(d) ? '' : d.toLocaleString('en-GB', { timeZone: 'Africa/Nairobi', hour12: false }); };
+  const mKey = v => { const d = new Date(v); if (isNaN(d)) return ''; const p = {}; new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: '2-digit', timeZone: 'Africa/Nairobi' }).formatToParts(d).forEach(x => { p[x.type] = x.value; }); return p.year + '-' + p.month; };
+  const mLabel = k => { const d = new Date(k + '-15T12:00:00+03:00'); return isNaN(d) ? k : d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'Africa/Nairobi' }); };
+  const disputeDays = () => (typeof SITE !== 'undefined' && SITE.disputeDays) || 7;
+  const recent = v => { const t = new Date(v).getTime(); return !isNaN(t) && Date.now() - t <= disputeDays() * 86400000; };
+  const clearUnread = () => { if (!last || !last.unread) return; last.unread = 0; (last.notes || []).forEach(n => { n.unread = false; }); cache(); };
+  const txList = () => (last.history || []).filter(t => (!fMonth || mKey(t.date) === fMonth) && (!fType || t.type === fType));
+  const resList = () => (last.results || []).filter(r => (!fMonth || mKey(r.date) === fMonth) && (!fRes || r.result === fRes));
+
+  /* Where a stake is, as a six-step line: Submitted > Verified > On slip > Running > Result > Paid. */
+  const STEPS = ['Submitted', 'Verified', 'On slip', 'Running', 'Result', 'Paid'];
+  function timeline(s) {
+    const st = s.stage, g = ((last && last.summary) || []).find(x => x.jackpotId === s.jackpotId), paid = !!(g && g.paidOut > 0), days = (typeof SITE !== 'undefined' && SITE.payoutDays) || 3;
+    let n, cap;
+    if (st === 'Pending') { n = 1; cap = 'Waiting for the admin to verify your M-Pesa payment.'; }
+    else if (st === 'Approved') { n = 2; cap = 'Verified. You are in the pool. The slip is placed once the pool closes.'; }
+    else if (st === 'Running') { n = 3; cap = 'The pool has closed and the jackpot is in play. The result will be posted here.'; }
+    else if (st === 'Won') { n = paid ? 6 : 5; cap = paid ? 'You won and your payout has been sent to your M-Pesa.' : 'You won. Payouts are sent by M-Pesa within ' + days + ' days of the bookmaker paying.'; }
+    else { n = 5; cap = 'The result is in. This stake did not win.'; }
+    return '<ol class="a-tl" aria-label="Stake progress">' + STEPS.map((x, i) => '<li class="' + (i < n ? 'done' : (i === n && st !== 'Lost') ? 'cur' : st === 'Lost' && i === 5 ? 'na' : '') + '"><i></i>' + x + '</li>').join('') + '</ol><p class="a-mute a-tlcap">' + esc(cap) + '</p>';
+  }
+
+  const tile = (k, v, sub) => '<div class="a-tile"><span>' + k + '</span><b>' + v + '</b><small>' + (sub || '') + '</small></div>';
+  function poolBar(p) {
+    const pc = p.target ? Math.min(100, Math.round(p.total / p.target * 100)) : 0;
+    return '<div class="a-pool"><b>' + esc(p.name) + '</b>' + (p.target ? '<div class="a-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pc + '"><i style="width:' + pc + '%"></i></div>' : '') +
+      '<div class="a-mute">' + (p.target ? kes(p.total) + ' of ' + kes(p.target) + ' (' + pc + '% full)' : kes(p.total) + ' in so far') + (p.full ? ' · full, new payments go to the next pool' : '') + (p.closes ? ' · closes ' + esc(when(p.closes)) : '') + '</div></div>';
+  }
+  const noteHtml = n => '<div class="a-note' + (n.unread ? ' new' : '') + '"><b>' + esc(n.title) + '</b>' + esc(n.body) + '<br><small class="a-mute"><span class="a-ty">' + esc(NOTE_TYPES[n.type] || 'From admin') + '</span>' + esc(when(n.date)) + '</small></div>';
+
+  function overviewHtml(j) {
+    const s = j.stats, L = j.limit; let h = '';
+    if (j.paused) h += '<div class="a-alert bad"><b>Your account is paused.</b><br>New contributions are switched off. Stakes already in a pool are not affected. ' + waA('Ask the admin to resume', 'Please resume my account.') + '</div>';
+    if (s.pendingCount) h += '<div class="a-alert"><b>' + s.pendingCount + (s.pendingCount === 1 ? ' payment is' : ' payments are') + ' waiting for approval</b> (' + kes(s.pendingAmount) + ').<button type="button" class="a-link" data-tab="stakes">Track it</button></div>';
+    if (L.value && L.reserved >= L.value * 0.8) h += '<div class="a-alert' + (L.reserved >= L.value ? ' bad' : '') + '">' + (L.reserved >= L.value ? 'You have reached your monthly limit of ' : 'You have used most of your monthly limit of ') + kes(L.value) + '.</div>';
+    h += '<div class="a-tiles">' + tile('Active stakes', s.activeStakes || 0, s.activeAmount ? kes(s.activeAmount) + ' in play' : 'None right now') +
+      tile('Staked this month', kes(s.monthStaked), L.value ? 'Limit ' + kes(L.value) : 'No limit set') +
+      tile('Won to date', kes(s.totalWon), s.settled ? (s.wins || 0) + ' of ' + s.settled + ' pools won' : 'No results yet') +
+      tile('Paid to you', kes(s.totalPaid), s.refunded ? kes(s.refunded) + ' refunded' : '') + '</div>';
+    h += '<div class="a-card"><h3>Open for contributions</h3>' + (j.open.length ? j.open.map(poolBar).join('') +
+      (j.paused ? '<p class="a-mute">Contributions are switched off while your account is paused.</p>' : '<button class="a-btn a-gold" id="a-open-sheet" type="button">Contribute now</button><button class="a-link" id="a-open-confirm" type="button">Already paid? Confirm my payment</button>')
+      : '<p class="a-mute">No pool is open for contributions right now.</p>') + '</div>';
+    const nn = j.notes.slice(0, 2);
+    if (nn.length) h += '<div class="a-card"><h3>Latest messages' + (j.unread ? '<span class="a-dot">' + j.unread + '</span>' : '') + '</h3>' + nn.map(noteHtml).join('') + '<button type="button" class="a-link" data-tab="messages">Open inbox</button></div>';
+    return h;
+  }
+
+  function histHtml(j) {
+    const isTx = hv === 'tx', src = isTx ? j.history : j.results, months = [];
+    src.forEach(x => { const k = mKey(x.date); if (k && months.indexOf(k) < 0) months.push(k); });
+    if (fMonth && months.indexOf(fMonth) < 0) fMonth = '';
+    let h = '<div class="a-seg a-sub"><button type="button" data-hv="tx" aria-pressed="' + isTx + '">Transactions</button><button type="button" data-hv="res" aria-pressed="' + !isTx + '">Jackpot results</button></div>';
+    if (!src.length) return h + '<div class="a-card"><p class="a-mute">' + (isTx ? 'Your payments, refunds and payouts will be listed here.' : 'Results appear here once a jackpot you staked in has been settled.') + '</p></div>';
+    h += '<div class="a-filters"><select data-f="month" aria-label="Month"><option value="">All months</option>' + months.map(k => '<option value="' + k + '"' + (k === fMonth ? ' selected' : '') + '>' + esc(mLabel(k)) + '</option>').join('') + '</select>' +
+      (isTx ? '<select data-f="type" aria-label="Type"><option value="">All types</option>' + [['Contribution', 'Contributions'], ['Payout', 'Payouts'], ['Refund', 'Refunds']].map(x => '<option value="' + x[0] + '"' + (x[0] === fType ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select>'
+        : '<select data-f="res" aria-label="Result"><option value="">Won and lost</option><option value="Won"' + (fRes === 'Won' ? ' selected' : '') + '>Won</option><option value="Lost"' + (fRes === 'Lost' ? ' selected' : '') + '>Lost</option></select>') + '</div>' +
+      '<div class="a-dl"><button class="a-btn a-line" type="button" data-dl="csv">Download CSV</button><button class="a-btn a-line" type="button" data-dl="pdf">Download PDF</button></div>';
+    const list = isTx ? txList() : resList();
+    if (!list.length) return h + '<div class="a-card"><p class="a-mute">Nothing matches these filters.</p></div>';
+    if (isTx) {
+      const out = list.filter(t => t.dir === 'out' && (t.status === 'Approved' || t.status === 'Recorded')).reduce((a, t) => a + t.amount, 0), inn = list.filter(t => t.dir === 'in').reduce((a, t) => a + t.amount, 0);
+      h += '<div class="a-sumline"><span>Staked <b>' + kes(out) + '</b></span><span>Received <b>' + kes(inn) + '</b></span></div><div class="a-card">' + list.slice(0, 200).map(t => {
+        const rep = recent(t.date) ? waA('Report a problem', 'I want to report a problem with this record: ' + t.type + ' of ' + kes(t.amount) + (t.ref ? ', M-Pesa code ' + t.ref : '') + ' on ' + dayOf(t.date) + '.', 'a-link a-rep') : '';
+        return '<div class="a-tx"><div class="l"><b>' + esc(t.type) + '</b><small>' + esc(when(t.date)) + (t.pool ? ' · ' + esc(t.pool) : '') + '</small>' + (t.ref ? '<small>M-Pesa code ' + esc(t.ref) + '</small>' : '') + (t.note ? '<small>' + esc(t.note) + '</small>' : '') + rep + '</div>' +
+          '<div class="r"><b class="' + esc(t.dir) + '">' + (t.dir === 'in' ? '+ ' : '\u2212 ') + kes(t.amount) + '</b><span class="a-chip st-' + esc(t.status) + '">' + esc(t.status) + '</span></div></div>';
+      }).join('') + '</div>';
+    } else h += list.map(resCard).join('');
+    return h;
+  }
+  function resCard(r) {
+    const won = r.result === 'Won', open = openRes === r.poolId, pay = !won ? '' : r.paid >= r.winnings - 1 ? 'Paid' : r.paid > 0 ? 'Part paid' : 'Awaiting payout';
+    let h = '<div class="a-card stake s-' + esc(r.result) + '"><h3>' + esc(r.name) + '<span class="a-chip st-' + esc(r.result) + '">' + esc(r.result) + '</span></h3><div class="sub">' + esc(dayOf(r.date)) + '</div>' + row('Your stake', kes(r.stake)) + row('Winning share', pct(r.share));
+    if (won) h += row('Your winnings', kes(r.winnings), 'hl') + row('Paid to you', kes(r.paid) + ' <span class="a-chip st-' + (pay === 'Paid' ? 'Paid' : 'Pending') + '">' + pay + '</span>');
+    else h += row('Result', 'Did not win');
+    h += '<button type="button" class="a-link" data-res="' + esc(r.poolId) + '">' + (open ? 'Hide details' : 'Show details') + '</button>';
+    if (open) h += '<div class="a-det"><div class="a-m"><span>Pool total</span><b>' + kes(r.poolTotal) + (r.target ? ' of ' + kes(r.target) : '') + '</b></div><div class="a-m"><span>Pool winnings</span><b>' + kes(r.poolWon) + '</b></div>' + (r.fee ? '<div class="a-m"><span>Pool fee</span><b>' + esc(r.fee) + '%</b></div>' : '') +
+      (r.matches.length ? '<div class="a-mh">Matches</div>' + r.matches.map(m => '<div class="a-m"><span>' + esc(m.no) + '. ' + esc(m.home) + ' v ' + esc(m.away) + '</span><b>' + esc([m.score, m.result].filter(Boolean).join(' · ') || '\u2014') + '</b></div>').join('') : '') + '</div>';
+    h += '<div class="a-rep-row">' + waA('Report a problem', 'I want to report a problem with my result for ' + r.name + ' (stake ' + kes(r.stake) + ').', 'a-link a-rep') + '</div><p class="a-mute" style="margin:2px 0 0">Tell us within ' + disputeDays() + ' days of the result.</p></div>';
+    return h;
+  }
+
+  /* Statements: CSV opens in Excel; PDF opens the print dialog (choose Save as PDF). */
+  const csvCell = v => { let s = String(v == null ? '' : v); if (typeof v === 'string' && /^[=+\-@\t\r]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
+  function statement(kind) {
+    if (hv === 'tx' && last.historyMore) { loadFull().then(() => statement(kind)); return; }
+    const isTx = hv === 'tx', list = isTx ? txList() : resList();
+    const head = isTx ? ['Date', 'Type', 'Pool', 'Amount (KES)', 'Direction', 'M-Pesa code', 'Status'] : ['Date', 'Jackpot', 'Stake (KES)', 'Winning share', 'Result', 'Winnings (KES)', 'Paid (KES)'];
+    const body = list.map(x => isTx ? [stamp(x.date), x.type, x.pool, x.amount, x.dir === 'in' ? 'Received' : 'Sent', x.ref, x.status] : [dayOf(x.date), x.name, x.stake, pct(x.share), x.result, x.winnings, x.paid]);
+    const fname = '3eye-' + (isTx ? 'transactions' : 'results') + (fMonth ? '-' + fMonth : '');
+    if (kind === 'csv') {
+      const csv = '\ufeff' + [head].concat(body).map(r => r.map(csvCell).join(',')).join('\r\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = fname + '.csv'; document.body.appendChild(a); a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800); return;
+    }
+    const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr); const w = fr.contentWindow;   // hidden frame, so pop-up blockers never get in the way
+    const filt = [fMonth ? mLabel(fMonth) : 'All months', isTx ? (fType || 'All types') : (fRes || 'Won and lost')].join(' · ');
+    w.document.open(); w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>' + esc(fname) + '</title><style>body{font:13px Arial,sans-serif;margin:28px;color:#111}h1{margin:0;font-size:22px}p{margin:4px 0;color:#444}table{width:100%;border-collapse:collapse;margin-top:14px}th,td{border-bottom:1px solid #ccc;padding:6px 5px;text-align:left}th{background:#f2f2f2}small{color:#666}@media print{body{margin:12px}}</style></head><body>' +
+      '<h1>3EYE Jackpot statement</h1><p><b>' + esc(last.name) + '</b> · ' + esc(last.phone) + '</p><p>' + esc(isTx ? 'Transactions' : 'Jackpot results') + ' · ' + esc(filt) + ' · generated ' + esc(stamp(new Date())) + '</p>' +
+      '<table><thead><tr>' + head.map(x => '<th>' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + body.map(r => '<tr>' + r.map(c => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table>' +
+      '<p><small>This is a record of your activity on 3EYE Jackpot, not a bookmaker statement. 18+ only. Play responsibly.</small></p></body></html>');
+    w.document.close(); setTimeout(() => { try { w.focus(); w.print(); } catch (x) { alert('Your browser blocked printing. Use the CSV download instead.'); } setTimeout(() => fr.remove(), 30000); }, 400);
+  }
+
+  function msgHtml(j) {
+    const cnt = {}; j.notes.forEach(n => { cnt[n.type] = (cnt[n.type] || 0) + 1; });
+    const fl = [['all', 'All'], ['unread', 'Unread']].concat(Object.keys(NOTE_TYPES).filter(k => cnt[k]).map(k => [k, NOTE_TYPES[k]]));
+    if (!fl.some(x => x[0] === mf)) mf = 'all';
+    const list = j.notes.filter(n => mf === 'all' || (mf === 'unread' ? n.unread : n.type === mf));
+    let h = '<div class="a-card"><h3>Messages' + (j.unread ? '<span class="a-dot">' + j.unread + '</span>' : '') + '</h3><p class="a-mute">Approvals, results and payouts are posted here. Need to reach the admin directly?</p>' + waA('Message the admin on WhatsApp', 'Hello 3EYE Jackpot, I have a question.', 'a-btn a-gold a-wa') + '</div>';
+    if (!j.notes.length) return h + '<div class="a-card"><p class="a-mute">No messages yet.</p></div>';
+    h += '<div class="a-mf">' + fl.map(x => '<button type="button" data-mf="' + x[0] + '" aria-pressed="' + (mf === x[0]) + '">' + x[1] + '</button>').join('') + '</div>';
+    h += '<div class="a-card">' + (list.length ? list.map(noteHtml).join('') : '<p class="a-mute">Nothing here.</p>') + '</div>';
+    if (j.notes.length >= 60) h += '<p class="a-mute" style="text-align:center">Showing your latest 60 messages.</p>';
+    return h;
+  }
+
+  function settingsHtml(j) {
+    const L = j.limit, fl = id => flash && flash.id === id ? '<p class="' + (flash.bad ? 'a-bad' : 'a-ok') + '">' + esc(flash.msg) + '</p>' : '';
+    let h = '<div class="a-card"><h3>My account</h3>' + row('Name', esc(j.name)) + row('Phone', esc(j.phone)) + (j.joined ? row('Member since', esc(dayOf(j.joined))) : '') + '</div>';
+    h += '<div class="a-card"><h3>Monthly limit</h3><p class="a-mute">The most you want to contribute in a calendar month. Lowering it applies at once. Raising or removing it takes 24 hours, on purpose.</p>';
+    if (L.value) {
+      const pc = Math.min(100, Math.round(L.reserved / L.value * 100));
+      h += '<div class="a-bar' + (pc >= 100 ? ' warn' : '') + '" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pc + '"><i style="width:' + pc + '%"></i></div><div class="a-mute">' + kes(L.reserved) + ' of ' + kes(L.value) + ' used this month · ' + kes(Math.max(L.value - L.reserved, 0)) + ' left</div>' + (L.reserved > L.spent ? '<div class="a-mute">Includes ' + kes(L.reserved - L.spent) + ' waiting for approval.</div>' : '');
+    } else h += row('This month', kes(L.spent) + ' contributed') + row('Limit', 'None set');
+    if (L.pending) h += '<p class="a-mute">Scheduled: ' + (L.pending.value ? 'your limit changes to ' + kes(L.pending.value) : 'your limit is removed') + ' from ' + esc(when(L.pending.from)) + '.</p>';
+    h += '<form id="a-limit" style="margin-top:8px"><label>' + (L.value ? 'New monthly limit (KES)' : 'Set a monthly limit (KES)') + '<input name="amount" type="number" inputmode="numeric" min="' + esc(L.min) + '" step="1" placeholder="At least ' + esc(L.min) + '" required></label><button class="a-btn a-gold" type="submit">Save limit</button></form>' +
+      (L.value ? '<button type="button" class="a-link" id="a-limit-rm">Remove my limit</button>' : '') + fl('limit') + '</div>';
+    h += '<div class="a-card"><h3>Pause my account</h3>' + (j.paused
+      ? '<p class="a-mute">Paused since ' + esc(dayOf(j.paused)) + '. New contributions are off; stakes already in a pool are not affected.</p>' + waA('Ask the admin to resume', 'Please resume my account.', 'a-btn a-gold a-wa')
+      : '<p class="a-mute">Need a break? Pausing switches off new contributions. Stakes already in a pool are not affected. Only the admin can switch it back on, after a chat on WhatsApp.</p><button type="button" class="a-btn a-line a-danger" data-act="pause">Pause my account</button>') + fl('pause') + '</div>';
+    h += '<div class="a-card"><details class="more"' + (flash && flash.id === 'phone' ? ' open' : '') + ' style="margin:0;border:0;padding:0"><summary>Change my phone number</summary><form id="a-phone" style="margin-top:10px"><p class="a-mute">The admin confirms the change with you on WhatsApp. Nothing changes until then.</p>' +
+      '<label>New phone number<div class="a-phone"><span class="a-cc">+254</span><input name="np" type="tel" inputmode="numeric" placeholder="712345678" required></div></label>' +
+      '<label>Your PIN<input name="pin" type="password" inputmode="text" maxlength="4" autocapitalize="off" autocomplete="current-password" required></label><button class="a-btn a-line" type="submit">Send request</button>' + fl('phone') + '</form></details></div>';
+    h += '<div class="a-card"><details class="more" style="margin:0;border:0;padding:0"><summary>Change my PIN</summary><form id="a-pin" style="margin-top:10px">' +
+      '<label>Current PIN<input name="current" type="password" inputmode="text" maxlength="4" autocapitalize="off" autocomplete="current-password" required></label>' +
+      '<label>New PIN (4 letters or numbers)<input name="pin" type="password" inputmode="text" maxlength="4" pattern="[A-Za-z0-9]{4}" title="Exactly 4 letters or numbers" autocapitalize="off" autocomplete="new-password" required></label>' +
+      '<button class="a-btn a-line" type="submit">Change PIN</button><p id="a-msg2"></p></form></details></div>';
+    h += '<p class="a-mute" style="text-align:center"><button type="button" class="a-link" data-chat="open">Need help?</button></p>';
+    return h;
+  }
+
+  function dashHtml(j) {
+    ['stakes', 'summary', 'open', 'notes', 'history', 'results'].forEach(k => { j[k] = j[k] || []; });
+    j.stats = j.stats || {}; j.limit = j.limit || { value: 0, pending: null, spent: 0, reserved: 0, min: 500 };
+    const dot = j.unread ? '<span class="a-dot">' + j.unread + '</span>' : '';
+    return '<div class="a-top"><b>Hello, ' + esc(j.name) + '</b><button class="a-btn a-line" id="a-out" type="button">Log out</button></div>' +
+      '<div class="a-tabs" role="tablist">' + TABS.map(x => '<button type="button" role="tab" data-tab="' + x[0] + '" aria-selected="' + (tab === x[0]) + '">' + x[1] + (x[0] === 'messages' ? dot : '') + '</button>').join('') + '</div>' +
+      (tab === 'stakes' ? stakesHtml(j) : tab === 'history' ? histHtml(j) : tab === 'messages' ? msgHtml(j) : tab === 'settings' ? settingsHtml(j) : overviewHtml(j));
+  }
+  let lastWarm = 0;
+  const warm = () => { if (Date.now() - lastWarm < 18e4 || !window.API_URL) return; lastWarm = Date.now(); try { fetch(window.API_URL, { method: 'POST', body: JSON.stringify({ action: 'ping' }) }).catch(() => {}); } catch (x) {} };
+  async function render() {
+    if (!$('#acct')) return;
+    warm();
+    navLabel();
+    if (!T) { draw(authHtml()); bindAuth(); return; }
+    let cd = null; try { cd = JSON.parse(sessionStorage.getItem('tj_dash') || 'null'); } catch (x) {}
+    if (cd && cd.t === T && cd.d && cd.d.stats) { last = cd.d; shown = 20; reveal = false; draw(dashHtml(last)); bindDash(); } else draw('<p class="a-mute">Loading\u2026</p>');
+    try { shown = 20; reveal = false; last = await api('dashboard'); cache(); draw(dashHtml(last)); bindDash(); if (tab === 'messages' && last.unread) api('markSeen').catch(() => {}); if (tab === 'history') loadFull().then(() => { if (tab === 'history') redraw(); }); let pd = null; try { pd = sessionStorage.getItem('tj_pending'); sessionStorage.removeItem('tj_pending'); } catch (x) {} if (pd) { try { openSheet(JSON.parse(pd)); } catch (x) {} } }
+    catch (e) { if (!T) { draw(authHtml(e.message)); bindAuth(); } else draw('<p class="a-bad">' + esc(e.message) + '</p><button class="a-btn a-line" id="a-retry" type="button">Try again</button>'), $('#a-retry').onclick = render; }
+  }
+  /* The dashboard sends the latest 100 transactions; older ones are fetched the first time History is opened. */
+  let fullP = null;
+  function loadFull() { if (!last || !last.historyMore) return Promise.resolve(); if (!fullP) fullP = api('fullHistory').then(j => { last.history = j.history; last.historyMore = false; cache(); }).catch(() => {}).then(() => { fullP = null; }); return fullP; }
+  function redraw() { const y = window.scrollY; draw(dashHtml(last)); bindDash(); window.scrollTo(0, y); }
+  function setTab(t) {
+    if (tab === 'messages' && t !== 'messages') clearUnread();
+    tab = t; flash = null; try { sessionStorage.setItem('tj_tab', t); } catch (x) {}
+    if (t === 'messages' && last.unread) api('markSeen').catch(() => {});
+    if (t === 'history') loadFull().then(() => { if (tab === 'history') redraw(); });
+    draw(dashHtml(last)); bindDash(); window.scrollTo(0, 0);
+  }
+  async function reload() { last = await api('dashboard'); cache(); }
+  async function onDashClick(e) {
+    if (!T || !last || !last.stats) return;
+    const t = e.target.closest('[data-tab],[data-hv],[data-res],[data-dl],[data-mf],[data-act]'); if (!t) return;
+    const d = t.dataset;
+    if (d.tab) setTab(d.tab);
+    else if (d.hv) { hv = d.hv; fMonth = ''; redraw(); }
+    else if (d.res !== undefined) { openRes = openRes === d.res ? '' : d.res; redraw(); }
+    else if (d.dl) statement(d.dl);
+    else if (d.mf) { mf = d.mf; redraw(); }
+    else if (d.act === 'pause') {
+      if (!confirm('Pause your account? You will not be able to contribute until the admin switches it back on. Stakes already in a pool are not affected.')) return;
+      busy(t, 'Pausing');
+      try { const j = await api('pauseAccount'); await reload(); flash = { id: 'pause', msg: j.msg }; } catch (x) { flash = { id: 'pause', msg: x.message, bad: true }; }
+      redraw();
+    }
+  }
+  function onDashChange(e) {
+    const s = e.target.closest('[data-f]'); if (!s || !last || !last.stats) return;
+    if (s.dataset.f === 'month') fMonth = s.value; else if (s.dataset.f === 'type') fType = s.value; else if (s.dataset.f === 'res') fRes = s.value;
+    redraw();
+  }
+  async function doLimit(amount, btn) {
+    busy(btn, 'Saving');
+    try { const j = await api('setLimit', { amount: amount }); await reload(); flash = { id: 'limit', msg: j.msg }; } catch (x) { flash = { id: 'limit', msg: x.message, bad: true }; }
+    redraw();
+  }
+  function bindDash() {
+    const g = id => document.getElementById(id);
+    if (g('a-out')) g('a-out').onclick = async () => { try { await api('logout'); } catch (e) {} T = null; tab = 'overview'; flash = null; ['tj_t', 'tj_join', 'tj_pending', 'tj_dash', 'tj_pd', 'tj_tab'].forEach(k => sessionStorage.removeItem(k)); closeSheet(); render(); };
+    if (g('a-more')) g('a-more').onclick = () => { shown += 20; draw(dashHtml(last)); bindDash(); };
+    if (g('a-open-sheet')) g('a-open-sheet').onclick = () => openSheet({});
+    if (g('a-open-confirm')) g('a-open-confirm').onclick = () => openSheet({ step: 3 });
+    const lf = g('a-limit'); if (lf) lf.onsubmit = ev => { ev.preventDefault(); doLimit(lf.elements.amount.value, lf.querySelector('button[type=submit]')); };
+    if (g('a-limit-rm')) g('a-limit-rm').onclick = () => { if (confirm('Remove your monthly limit? This takes effect after 24 hours.')) doLimit('', g('a-limit-rm')); };
+    const pf = g('a-phone');
+    if (pf) pf.onsubmit = async ev => {
+      ev.preventDefault(); const btn = pf.querySelector('button[type=submit]');
+      let dgt = pf.elements.np.value.replace(/\D/g, '').replace(/^0+/, ''); if (dgt.indexOf('254') === 0 && dgt.length > 9) dgt = dgt.slice(3);
+      busy(btn, 'Sending');
+      try { const j = await api('requestPhoneChange', { newPhone: '254' + dgt, pin: pf.elements.pin.value }); flash = { id: 'phone', msg: j.msg }; } catch (x) { flash = { id: 'phone', msg: x.message, bad: true }; }
+      redraw();
+    };
+    const pg = g('a-pin');
+    if (pg) pg.onsubmit = async ev => {
+      ev.preventDefault(); const m = g('a-msg2'), btn = pg.querySelector('button'); btn.disabled = true;
+      try { const j = await api('changePin', { current: pg.elements.current.value, pin: pg.elements.pin.value }); pg.reset(); m.textContent = j.msg; m.className = 'a-ok'; }
+      catch (e) { m.textContent = e.message; m.className = 'a-bad'; } finally { btn.disabled = false; }
+    };
+    if (!dashBound) { dashBound = true; const root = $('#acct'); root.addEventListener('click', onDashClick); root.addEventListener('change', onDashChange); }
+  }
+  window.addEventListener('hashchange', () => { if (location.hash === '#account') render(); });
+  if (location.hash === '#account') render();
+})();
+</script>
+</body>
+</html>
