@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>3EYE Admin</title>
+<style>
+:root{--bg:#04120b;--side:#03100a;--panel:#071e14;--panel2:#0a2819;--line:rgba(232,185,49,.22);--line2:rgba(232,185,49,.12);--gold:#e8b931;--gold2:#f7dc7a;--txt:#f2f5ef;--mut:#9db3a5;--ok:#1fd39a;--bad:#ff6b5e;--r:12px}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1080px;margin:0 auto;padding:22px 24px 80px}
+.shell{display:flex;min-height:100vh}.main{flex:1;min-width:0}
+.side{width:236px;flex:none;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;gap:3px;padding:18px 12px;background:var(--side);border-right:1px solid var(--line)}
+.sb{color:var(--gold2);font-size:20px;font-weight:800;letter-spacing:.01em;padding:0 10px 12px;border-bottom:1px solid var(--line2);margin-bottom:4px}
+.sp{flex:1}
+.nvh{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#7f9a8a;margin:16px 10px 5px;font-weight:700}
+button.nv{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border-radius:9px;background:none;color:#d6dfd3;border:1px solid transparent;padding:9px 12px;font-size:14.5px;font-weight:600}
+button.nv:hover{background:rgba(232,185,49,.09)}button.nv.on{background:rgba(232,185,49,.16);color:var(--gold2);border-color:rgba(232,185,49,.45)}
+.mbar{display:none;align-items:center;gap:12px;padding:10px 14px;position:sticky;top:0;z-index:20;background:var(--side);border-bottom:1px solid var(--line)}.scrim{display:none}
+/* page header */
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
+h1{color:var(--gold2);font-size:24px;line-height:1.2;margin:0;font-weight:800}
+.ph p{margin:4px 0 0}
+h3{margin:16px 0 8px;color:var(--gold2);font-size:16px;font-weight:700}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+#note{min-height:0;margin:0 0 10px;font-size:14px}#note:empty{display:none}
+/* stat cards */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.stat b{display:block;font-size:22px;line-height:1.25;color:var(--gold2);font-variant-numeric:tabular-nums}.stat span{font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.sec{display:flex;align-items:baseline;gap:8px;margin:22px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}.sec h3{margin:0}
+.bar2{height:6px;border-radius:9px;background:#0b2a1a;overflow:hidden;margin:8px 0}.bar2 i{display:block;height:100%;background:var(--ok)}
+.c-Open{color:var(--ok);border-color:var(--ok)}.c-Closed{color:var(--gold)}.c-Settled{background:var(--ok);color:#032015;border-color:var(--ok)}
+/* buttons: clear press feedback */
+button{font-family:inherit;font-weight:700;font-size:14.5px;padding:8px 14px;border-radius:9px;border:1.5px solid var(--gold);background:var(--gold);color:#2a1d00;cursor:pointer;transition:transform .08s,filter .12s,background .12s;position:relative}
+button:hover{filter:brightness(1.07)}button:active{transform:scale(.96)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+button.g{background:none;color:var(--gold2)}button.g:hover{background:rgba(232,185,49,.1)}
+button.no{background:none;color:var(--bad);border-color:var(--bad)}button.no:hover{background:rgba(255,107,94,.1)}
+button.on{background:var(--gold2);color:#2a1d00}
+button.ok2{background:var(--ok);border-color:var(--ok);color:#032015}
+button.wait{opacity:.7;cursor:progress}
+/* cards and rows */
+.card,.row{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.row.s{padding:9px 12px;margin-bottom:6px}
+.card:hover{border-color:rgba(232,185,49,.4)}
+input,select,textarea{padding:9px 10px;margin:4px 4px 8px 0;border-radius:8px;border:1.5px solid rgba(232,185,49,.35);background:#04150d;color:#fff;font-size:15px;font-family:inherit;max-width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+textarea{width:100%}
+label{font-size:13.5px;display:inline-block;color:#cfdccf}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;border:1px solid var(--gold);color:var(--gold2);vertical-align:middle;margin-left:4px;white-space:nowrap}
+.c-Approved,.c-Active,.c-Running{color:var(--ok);border-color:var(--ok)}.c-Won{background:var(--ok);color:#032015;border-color:var(--ok)}.c-Rejected,.c-Suspended,.c-Lost,.c-Removed{color:var(--bad);border-color:var(--bad)}
+.dot{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:99px;background:var(--bad);color:#fff;font-size:12.5px;text-align:center}
+.seg2{display:flex;gap:6px;flex-wrap:wrap}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.pick{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:6px 10px;margin:6px 0}.pick.off{opacity:.4;pointer-events:none}
+.pick label{display:flex;gap:10px;align-items:center;padding:6px 0;font-size:15px;border-bottom:1px solid var(--line2)}.pick input{margin:0;width:19px;height:19px}
+.m{color:var(--mut);font-size:13.5px}.ok{color:var(--ok)}.bad{color:var(--bad)}a{color:var(--gold2)}
+.empty{padding:26px 14px;text-align:center;color:var(--mut);background:var(--panel);border:1px dashed var(--line);border-radius:var(--r)}
+/* payments table */
+.pt{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel);margin-bottom:12px}
+.pth,.ptr{display:grid;grid-template-columns:minmax(150px,1.3fr) minmax(140px,1.1fr) 112px 128px 92px minmax(240px,1.3fr);gap:12px;align-items:center;padding:11px 14px}
+.pth{background:var(--panel2);color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.ptr{border-top:1px solid var(--line2)}.ptr:hover{background:rgba(232,185,49,.04)}
+.ptr>div{min-width:0;display:flex;flex-direction:column}
+.ptr .c1{flex-direction:row;align-items:center;gap:10px}.ptr .c1>div{display:flex;flex-direction:column;min-width:0}.ptr .c1 b{overflow:hidden;text-overflow:ellipsis}
+.ptr .c1 input[type=checkbox]{width:18px;height:18px;margin:0;flex:none}
+.ptr .act{flex-direction:row;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap}.ptr .act input{width:96px;margin:0}
+.ptr b{font-variant-numeric:tabular-nums}
+.pgh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 14px;background:rgba(232,185,49,.1);border-top:1px solid var(--line);color:var(--gold2);font-weight:700}.pgh span{font-size:13.5px;color:var(--txt);font-variant-numeric:tabular-nums}
+.ptot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:11px 14px;border-top:1px solid var(--line);background:var(--panel2);font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums}
+.stat em{display:block;font-style:normal;font-size:12.5px;color:var(--mut);margin-top:1px}
+.seg2 button small{display:block;font-weight:600;font-size:12px;opacity:.85}
+.bell{padding:6px 11px;font-size:17px;line-height:1.2}.bell .dot{font-size:12px;vertical-align:top;margin-left:4px}
+.act-i{display:flex;gap:12px;align-items:flex-start}.act-ic{font-size:20px;line-height:1.3;flex:none}
+.code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;letter-spacing:.05em;color:var(--gold2);font-weight:700;word-break:break-all}
+/* working feedback: spinner, top bar, toast */
+.spin-i{display:inline-block;width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:rot .7s linear infinite;vertical-align:-2px;margin-right:7px}
+@keyframes rot{to{transform:rotate(360deg)}}
+#topbar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:200;background:linear-gradient(90deg,transparent,var(--gold2),transparent);background-size:40% 100%;background-repeat:no-repeat;opacity:0;pointer-events:none;transition:opacity .15s}
+body.busy #topbar{opacity:1;animation:slide 1s linear infinite}
+@keyframes slide{from{background-position:-40% 0}to{background-position:140% 0}}
+body.busy,body.busy *{cursor:progress}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,24px);z-index:300;max-width:min(92vw,520px);padding:11px 18px;border-radius:12px;font-weight:600;font-size:14.5px;background:#0b2a1a;color:var(--txt);border:1.5px solid var(--gold);box-shadow:0 10px 34px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast.ok{border-color:var(--ok)}#toast.bad{border-color:var(--bad);color:#ffd2cc}#toast.warn{border-color:var(--gold)}
+button.lk{background:none;border:0;color:var(--gold2);text-decoration:underline;padding:0;font-weight:600;font-size:inherit;text-align:left}button.lk:hover{background:none;filter:brightness(1.2)}
+.crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 12px;font-size:14px}
+.fxr{display:grid;grid-template-columns:26px 1fr auto;gap:8px;padding:5px 0;border-top:1px solid var(--line2);font-size:14px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}.kv>div{background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:8px 10px}.kv span{display:block;font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}.kv b{font-variant-numeric:tabular-nums;color:var(--gold2)}
+.mv{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.mv select{margin:0;max-width:190px}
+@media(max-width:1000px){
+  .pth{display:none}
+  .ptr{grid-template-columns:1fr 1fr;gap:10px 14px}
+  .ptr .c1,.ptr .act{grid-column:1/-1}.ptr .act{justify-content:flex-start}
+  .ptr>div[data-l]::before{content:attr(data-l);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-bottom:1px}
+}
+@media(max-width:860px){.side{position:fixed;left:0;top:0;z-index:50;transform:translateX(-102%);transition:transform .2s}.side.open{transform:none;box-shadow:0 0 40px rgba(0,0,0,.7)}.mbar{display:flex}.side.open~.scrim{display:block;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55)}.w{padding:16px 14px 80px}h1{font-size:21px}input,select,textarea{font-size:16px}}
+</style>
+</head>
+<body><div id="topbar"></div><div id="app"></div>
+<script id="config">
+/* Paste your deployed Apps Script web app URL here (it ends in /exec). It is safe for this to be public. */
+window.API_URL = "https://script.google.com/macros/s/AKfycbzefvjwwFY___KN6aZS4J-eKcFdSvZhLq3a2JaOv9gBP6vRFR9UWsFfBxOTS8NjqPx2/exec";
+window.PAY_INFO = "Send your contribution by M-Pesa as the admin instructs, then enter the M-Pesa confirmation code below.";
+</script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const kes=n=>'KES '+Math.round(+n||0).toLocaleString('en-US'),val=id=>($('#'+id)||{}).value;
+const day=v=>{const d=new Date(v);return isNaN(d)?'':d.toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Africa/Nairobi'})};
+const toLocal=v=>{const d=new Date(v);return isNaN(d)?'':new Date(d.getTime()+3*36e5).toISOString().slice(0,16)}; // Nairobi wall clock for datetime-local
+const fromLocal=v=>v?v+':00+03:00':'';
+let T=sessionStorage.getItem('tj_a'),tab='queue',pools=[],curMember=null;
+let actUnread=0,actFilter='All',actLimit=100,payFilter='Pending',payLimit=50,payCounts={All:0,Pending:0,Approved:0,Rejected:0},memQ='',memLimit=50,msgAll=true,msgSel=new Set(),msgMembers=[];
+const STAGE={Pending:'Pending',Approved:'Approved',Running:'Currently running',Rejected:'Rejected',Won:'Won',Lost:'Lost',Removed:'Removed'};
+const pct=sh=>{const p=(sh||0)*100;return(p>=10?p.toFixed(1):p>=1?p.toFixed(2):p.toFixed(3)).replace(/\.?0+$/,'')+'%';};
+async function rawApi(action,d){
+  const t0=performance.now();
+  if(!window.API_URL)throw new Error('Set API_URL in assets/config.js first.');
+  let r;try{r=await fetch(window.API_URL,{method:'POST',body:JSON.stringify(Object.assign({action,token:T},d||{}))});}catch(e){throw new Error('Could not reach the server.');}
+  let j;try{j=await r.json();}catch(e){throw new Error('Unexpected reply from the server.');}
+  if(!j.ok){if(/log in again/i.test(j.msg)){T=null;sessionStorage.removeItem('tj_a');}throw new Error(j.msg);}TM.push({a:action,ms:Math.round(performance.now()-t0),s:+j.ms||0});if(TM.length>80)TM.shift();return j;}
+/* ---------- speed layer ----------
+   Reads are shared for 10 s (and identical requests already in flight are joined), any write clears them, and tabs show their last view at once while a fresh copy loads. */
+const TM=[],memo=new Map(),SNAP={},EDITS={},MEMO_MS=10000;
+const READS=new Set(['pools','payments','members','memberDetail','posted','poolMembers','notes','audit','waiting','resets','matchesOf','settle','payDetails']);
+function api(action,d){
+  const read=READS.has(action),key=read?action+'|'+JSON.stringify(d||{}):'';
+  if(read){const h=memo.get(key);if(h&&Date.now()-h.t<MEMO_MS)return h.p;}
+  else{memo.clear();}
+  const p=rawApi(action,d).then(j=>{if(!read){memo.clear();Object.keys(SNAP).forEach(k=>delete SNAP[k]);}return j;},e=>{memo.delete(key);throw e;});
+  if(read)memo.set(key,{t:Date.now(),p});
+  return p;
+}
+function timingHtml(){const g={};TM.forEach(t=>{const o=g[t.a]||(g[t.a]={n:0,ms:0,s:0,max:0});o.n++;o.ms+=t.ms;o.s+=t.s;o.max=Math.max(o.max,t.ms);});const k=Object.keys(g);if(!k.length)return '';
+  return '<div class="card"><b>Speed this session</b><span class="m"> round trip, with server time in brackets (ms)</span>'+k.sort((x,y)=>g[y].ms/g[y].n-g[x].ms/g[x].n).map(x=>{const o=g[x];return `<div class="m">${esc(x)} · ${o.n}× · avg ${Math.round(o.ms/o.n)} (server ${Math.round(o.s/o.n)}) · worst ${o.max}</div>`;}).join('')+'</div>';}
+if(window.API_URL){try{fetch(window.API_URL,{method:'POST',body:'{"action":"ping"}'}).catch(()=>{});}catch(e){}}   // wake the server while the login page loads
+document.addEventListener('input',e=>{const t=e.target;if(t&&t.id&&t.closest&&t.closest('#pane'))EDITS[t.id]=t.type==='checkbox'?t.checked:t.value;});
+const snapKeyOf=k=>k==='queue'?'queue:'+payFilter:k;
+const SPIN='<div class="empty"><i class="spin-i"></i>Loading…</div>';
+async function loadPane(k,swr){
+  try{await panes[k]();}
+  catch(e){if(tab===k){if(!T)draw(e.message);else note(e.message,true);}return;}
+  const p=$('#pane');if(!p)return;
+  if(!(k==='running'&&PD.poolId))SNAP[snapKeyOf(k)]=p.innerHTML;
+  if(tab!==k){p.innerHTML=SNAP[snapKeyOf(tab)]||SPIN;return;}   // the user moved on while this loaded: put their tab back
+  if(swr)Object.keys(EDITS).forEach(id=>{const el=document.getElementById(id);if(!el)return;if(el.type==='checkbox')el.checked=EDITS[id];else el.value=EDITS[id];});
+}
+async function switchTab(b){
+  tab=b.dataset.t;if(tab==='running')pdReset();
+  Object.keys(EDITS).forEach(k=>delete EDITS[k]);
+  const sd=$('#side');if(sd)sd.classList.remove('open');
+  drawTabs();$('#pane').innerHTML=SNAP[snapKeyOf(tab)]||SPIN;window.scrollTo(0,0);
+  await loadPane(tab,true);
+}
+let tt;
+function toast(m,k){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';e.setAttribute('role','status');e.setAttribute('aria-live','polite');document.body.appendChild(e);}
+  clearTimeout(tt);e.className='show '+(k||'ok');e.innerHTML=(k==='work'?'<i class="spin-i"></i>':k==='bad'?'&#9888; ':k==='warn'?'':'&#10003; ')+esc(m);
+  if(k!=='work')tt=setTimeout(()=>e.classList.remove('show'),k==='bad'?7000:3800);}
+const note=(m,bad)=>{const n=$('#note');if(n){n.textContent=m;n.className=bad?'bad':'ok';}toast(m,bad?'bad':'ok');};
+/* ---------- click guard: one action at a time, visible feedback on every click ----------
+   The first click locks the whole dashboard until the server answers. Any click that arrives meanwhile is ignored with a
+   "please wait" notice, so an approval, payout, contribution or message can never be sent twice by a double click. */
+const QUICK=new Set(['tab','opennav','closenav','selall','msgselall','msgclear','clearfx','closedetail','cancelreplace']);
+const LBL={verify:b=>b.dataset.r?'Rejecting…':'Approving…',verifymany:'Approving selected…',payout:'Recording payout…',payall:'Recording payouts…',rollbonus:'Rolling over…',pdroll:'Rolling over…',contrib:'Recording…',sendmsg:'Sending…',publishfx:'Publishing…',loadfx:'Reading…',savepool:'Saving…',savemember:'Saving…',editcontrib:'Saving…',editpayrec:'Saving…',delpool:'Deleting…',delmember:'Deleting…',delcontrib:'Deleting…',delpayrec:'Deleting…',reset:'Requesting…',decidereset:'Working…',decideunlock:'Working…',unlockm:'Unlocking…',resumem:'Resuming…',togglesuspend:'Updating…',exportcsv:'Exporting…',search:'Searching…',refresh:'Refreshing…',settle:'Loading…',pdaddc:'Recording…',pdeditc:'Saving…',pdmovec:'Moving…',pddelc:'Deleting…',pdpay:'Recording payout…',pdrefund:'Recording refund…',pdpayall:'Recording payouts…',pdeditpay:'Saving…',pddelpay:'Deleting…',pdverify:b=>b.dataset.r?'Rejecting…':'Approving…'};
+const lblOf=b=>{const l=b&&LBL[b.dataset.act];return typeof l==='function'?l(b):(l||'Loading…');};
+let LOCK=false;
+async function guarded(b,fn,label){
+  if(LOCK){toast('Please wait, the last action is still running.','warn');return;}
+  LOCK=true;document.body.classList.add('busy');
+  const lab=label||lblOf(b),keep=b?b.innerHTML:'';
+  if(b){b.style.minWidth=b.offsetWidth+'px';b.disabled=true;if(b.classList.contains('nv'))b.classList.add('wait');else b.innerHTML='<i class="spin-i"></i>'+esc(lab);}
+  toast(lab,'work');
+  try{await fn();}
+  catch(e){if(!T)draw(e.message);else note(e.message,true);}
+  finally{
+    LOCK=false;document.body.classList.remove('busy');
+    const t=$('#toast');if(t&&t.classList.contains('work'))t.classList.remove('show');
+    if(b&&b.isConnected){b.disabled=false;b.classList.remove('wait');b.style.minWidth='';if(!b.classList.contains('nv'))b.innerHTML=keep;}
+  }
+}
+async function run(f){try{await f();}catch(e){if(!T)draw(e.message);else note(e.message,true);}}
+const opts=sel=>pools.map(p=>`<option value="${esc(p.poolId)}"${p.poolId===sel?' selected':''}>${esc(p.name)} (${esc(p.shown)})</option>`).join('');
+const loadPools=async()=>{pools=(await api('pools')).list;};
+
+function draw(err){
+  if(!T){$('#app').innerHTML=`<div class="w"><div class="top"><h1>3EYE Admin</h1></div><form id="lf" class="card"><label>Email<br><input name="email" type="email" autocomplete="username" required></label><br><label>Password<br><input name="password" type="password" autocomplete="current-password" required></label><br><button type="submit">Log in</button><p class="bad" id="note">${esc(err||'')}</p></form></div>`;
+    $('#lf').onsubmit=e=>{e.preventDefault();const f=e.target;guarded(f.querySelector('button'),async()=>{const j=await api('adminLogin',{email:f.email.value,password:f.password.value});T=j.token;sessionStorage.setItem('tj_a',T);await draw();},'Logging in…');};return;}
+  $('#app').innerHTML=`<div class="shell"><aside class="side" id="side"><div class="sb">3EYE Admin</div><nav id="nav"></nav><div class="sp"></div><button class="nv" data-act="out">Log out</button></aside><div class="scrim" data-act="closenav"></div><div class="main"><div class="mbar"><button class="g" data-act="opennav" aria-label="Open menu">&#9776;</button><b id="ptitle" style="color:#f7dc7a"></b><span style="flex:1"></span><button class="g bell" data-act="tab" data-t="activity" aria-label="Activity: sign-ups and logins">&#128276;<span class="dot bellc" style="display:none"></span></button></div><div class="w"><div class="ph"><div><h1 id="h1"></h1><p id="sub" class="m"></p></div><div style="display:flex;gap:8px;align-items:center"><button class="g bell" data-act="tab" data-t="activity" aria-label="Activity: sign-ups and logins" title="Activity">&#128276;<span class="dot bellc" style="display:none"></span></button><button class="g" data-act="refresh">&#8635; Refresh</button></div></div><p id="note" class="m"></p><div id="pane"><div class="empty"><i class="spin-i"></i>Loading…</div></div></div></div></div>`;
+  drawTabs();if(tab!=='queue')refreshBadge();pollActivity();return loadPane(tab);}
+const NAV=[['Operations',[['queue','Payments'],['activity','Activity'],['members','Members'],['resets','PIN & unlocks']]],['Pools',[['live','Update pools'],['running','Paid pools']]],['Communication',[['msgs','Messages']]],['System',[['log','Log']]]];
+const SUB={queue:'Check each M-Pesa code against your M-Pesa messages before you approve.',activity:'Sign-ups and member logins as they happen. Logins are shown here only, never e-mailed. Sign-ups are also e-mailed to you.',members:'Search, edit and suspend members, or record a contribution.',resets:'Confirm with the member on WhatsApp before you approve.',live:'Load a jackpot, and see what is posted on the site.',running:'Every pool with contributions. Open a pool, then a member, then their account.',msgs:'Messages show on each member\'s dashboard.',log:'The most recent admin actions.'};
+const TITLE={};NAV.forEach(g=>g[1].forEach(x=>TITLE[x[0]]=x[1]));
+const drawTabs=()=>{const n=$('#nav');if(!n)return;n.innerHTML=NAV.map(g=>`<div class="nvh">${g[0]}</div>`+g[1].map(([k,l])=>`<button class="nv${k===tab?' on':''}" data-act="tab" data-t="${k}">${l}${k==='queue'&&payCounts.Pending?`<span class="dot">${payCounts.Pending}</span>`:''}${k==='activity'&&actUnread?`<span class="dot">${actUnread}</span>`:''}</button>`).join('')).join('');document.querySelectorAll('.bellc').forEach(e=>{e.textContent=actUnread>99?'99+':actUnread||'';e.style.display=actUnread?'':'none';});$('#h1').textContent=TITLE[tab]||'';$('#ptitle').textContent=TITLE[tab]||'';const sb=$('#sub');if(sb)sb.textContent=SUB[tab]||'';};
+/* Bell: asks the server every 45 s (and on each refresh) how many sign-ups and logins are new since the Activity tab was last opened. */
+let actPrev=null;
+async function pollActivity(){if(!T||document.hidden)return;try{const j=await rawApi('activity',{limit:1});if(tab==='activity')return;if(actPrev!==null&&j.unread>actPrev)toast((j.unread-actPrev)+' new sign-up/login activity. Tap the bell.','warn');actPrev=j.unread;actUnread=j.unread;drawTabs();}catch(e){}}
+setInterval(pollActivity,45000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pollActivity();});
+async function refreshBadge(){try{const j=await api('payments',{status:'Pending',limit:1});payCounts=j.counts;drawTabs();}catch(e){}}
+
+/* ---------- jackpot posting: catalog, fixture parser, preview ---------- */
+/* Keep equal to JACKPOTS in Code.gs. Stake = 2^doubles lines x price per line (always the highest stake). */
+const CATALOG={sp_midweek:{name:'SportPesa Midweek Jackpot',matches:13,doubles:7,price:99},sp_mega:{name:'SportPesa Mega Jackpot',matches:17,doubles:10,price:99},bt_mbw:{name:'Betika Must Be Won Jackpot',matches:15,doubles:6,price:49},bt_midweek:{name:'Betika Midweek Jackpot',matches:13,doubles:7,price:15}};
+const stakeOf=c=>Math.pow(2,c.doubles)*c.price;
+let fx=[],fxJack='sp_midweek',replaceId=null,replaceName='',fxInfo='',pj={prize:'',min:'100'};
+const pad2=n=>String(n).padStart(2,'0');
+function mkIso(y,mo,d,h,mi){const dt=new Date(Date.UTC(y,mo-1,d,h,mi));if(h>23||mi>59||dt.getUTCFullYear()!==y||dt.getUTCMonth()!==mo-1||dt.getUTCDate()!==d)return '';return y+'-'+pad2(mo)+'-'+pad2(d)+'T'+pad2(h)+':'+pad2(mi)+':00+03:00';}
+/* Reads a SportPesa or Betika paste. Odds are read past and thrown away. All times are Nairobi time. */
+function parseFixtures(text){
+  const lines=String(text||'').split(/\r?\n|\t/).map(x=>x.trim()).filter(Boolean),list=[],warn=[];
+  const cy=new Date(Date.now()+3*36e5).getUTCFullYear(),year=v=>+v<100?2000+ +v:+v;
+  const hdr=/^soccer\s*[\u2022\u00b7|:\-\u2013]\s*(\S.*)$/i;
+  const betika=lines.some(l=>hdr.test(l));
+  if(betika){
+    let i=0;
+    while(i<lines.length){
+      const h=lines[i].match(hdr);if(!h){i++;continue;}
+      let j=i+1;const blk=[];while(j<lines.length&&!hdr.test(lines[j]))blk.push(lines[j++]);
+      const dm=(blk[0]||'').match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?,?\s*[-\u2013]?\s*(\d{1,2}):(\d{2})$/);
+      if(!dm||blk.length<3){warn.push('Could not read the match after "'+lines[i]+'"');i=j;continue;}
+      let iso=mkIso(dm[3]?year(dm[3]):cy,+dm[2],+dm[1],+dm[4],+dm[5]);
+      if(iso&&!dm[3]&&new Date(iso).getTime()<Date.now()-30*864e5)iso=mkIso(cy+1,+dm[2],+dm[1],+dm[4],+dm[5]);   // no year on Betika: roll Dec to Jan
+      if(!iso)warn.push('Bad date for '+blk[1]+' vs '+blk[2]);
+      list.push({home:blk[1],away:blk[2],league:h[1].trim(),kick:iso,dc:false});i=j;
+    }
+  }else{
+    const dre=/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})\s*[-\u2013]\s*(\d{1,2}):(\d{2})$/;
+    for(let i=0;i<lines.length;i++){
+      const dm=lines[i].match(dre);if(!dm)continue;
+      const home=lines[i+1],away=lines[i+2];
+      if(!home||!away||/^[\d.]+$/.test(home)||/^[\d.]+$/.test(away)||dre.test(home)||dre.test(away)){warn.push('Could not read the teams after "'+lines[i]+'"');continue;}
+      const iso=mkIso(year(dm[3]),+dm[2],+dm[1],+dm[4],+dm[5]);if(!iso)warn.push('Bad date for '+home+' vs '+away);
+      list.push({home,away,league:'',kick:iso,dc:false});i+=2;
+    }
+  }
+  return{list,warn,format:betika?'Betika':'SportPesa'};
+}
+const need=()=>CATALOG[fxJack];
+function previewHtml(){
+  if(!fx.length)return '';
+  const inp=(k,i,v,w)=>`<input data-fx="${k}" data-i="${i}" value="${esc(v)}" style="width:${w}px;margin:0">`;
+  return `<div id="pj-cnt" class="card" style="margin:10px 0"></div><div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:15px"><tr class="m"><td>#</td><td>Kickoff (Nairobi)</td><td>League</td><td>Home</td><td>Away</td><td>Double</td></tr>`+
+    fx.map((r,i)=>`<tr><td class="m">${i+1}</td><td><input data-fx="kick" data-i="${i}" type="datetime-local" value="${esc(toLocal(r.kick))}" style="width:185px;margin:0"></td><td>${inp('league',i,r.league,130)}</td><td>${inp('home',i,r.home,150)}</td><td>${inp('away',i,r.away,150)}</td><td style="text-align:center"><input data-fx="dc" data-i="${i}" type="checkbox"${r.dc?' checked':''} style="width:20px;height:20px;margin:0"></td></tr>`).join('')+'</table></div>';
+}
+function updateRule(){const c=need(),e=$('#pj-rule');if(e)e.textContent=c.matches+' matches · '+c.doubles+' doubles ('+Math.pow(2,c.doubles).toLocaleString('en-US')+' lines × '+kes(c.price)+') = full stake '+kes(stakeOf(c));}
+function updateCounters(){
+  const c=need(),box=$('#pj-cnt'),btn=$('#pj-go');if(!btn)return;
+  const n=fx.length,d=fx.filter(r=>r.dc).length,bad=fx.filter(r=>!r.home.trim()||!r.away.trim()||!r.kick).length,ok=n===c.matches&&d===c.doubles&&!bad;
+  btn.disabled=!ok;
+  if(!box)return;
+  const cl=(a,b)=>a===b?'ok':'bad',ks=fx.map(r=>new Date(r.kick).getTime()).filter(x=>!isNaN(x)).sort((a,b)=>a-b);
+  box.innerHTML=`Matches loaded: <b class="${cl(n,c.matches)}">${n} / ${c.matches}</b>${n<c.matches?` <span class="m">(${c.matches-n} missing)</span>`:n>c.matches?` <span class="bad">(${n-c.matches} too many)</span>`:' <span class="ok">✓</span>'}`+
+    ` &nbsp;·&nbsp; Doubles marked: <b class="${cl(d,c.doubles)}">${d} / ${c.doubles}</b>${d===c.doubles?' <span class="ok">✓</span>':''}`+
+    (bad?`<br><span class="bad">${bad} row(s) have a missing team or kickoff.</span>`:'')+
+    (ks.length?`<br><span class="m">First kickoff ${esc(day(ks[0]))} · pool closes ${esc(day(ks[0]-30*60000))} · the jackpot leaves the website when that match starts.</span>`:'');
+}
+const postCard=()=>{const c=need();return `<div class="card"><b>${replaceId?'Replace fixtures':'Post a jackpot'}</b>${replaceId?` <span class="m">for ${esc(replaceName)}</span> <button class="g" data-act="cancelreplace">Cancel</button>`:''}<br>
+  <label>Which jackpot <select id="pj-jack" ${replaceId?'disabled':''}>${Object.keys(CATALOG).map(k=>`<option value="${k}"${k===fxJack?' selected':''}>${esc(CATALOG[k].name)}</option>`).join('')}</select></label><div class="m" id="pj-rule"></div>
+  ${replaceId?'':`<label>Prize (KES) <input id="pj-prize" type="number" value="${esc(pj.prize)}" style="width:150px"></label> <label>Minimum stake per client (KES) <input id="pj-min" type="number" value="${esc(pj.min)}" style="width:110px"></label><br>`}
+  <textarea id="pj-paste" rows="6" placeholder="Paste the fixture list copied from SportPesa or Betika here. Odds are ignored."></textarea>
+  <button data-act="loadfx">Load fixtures</button> <button class="g" data-act="clearfx">Clear</button> <span class="m" id="pj-info">${esc(fxInfo)}</span>
+  <div id="pj-prev">${previewHtml()}</div>
+  <button id="pj-go" data-act="publishfx" disabled>${replaceId?'Save fixtures':'Publish to website'}</button> <span class="m">Tick the ${c.doubles} double-chance (DC) matches. The website shows DC or Single for each match and keeps the selection locked. No odds or picks are stored.</span></div>`;};
+const bar=(a,b)=>`<div class="bar2"><i style="width:${b>0?Math.min(100,a/b*100):0}%"></i></div>`;
+const PH={Open:'Active',Closed:'Running',Settled:'Finished'};
+let poolFilter='All';
+const byKick=(a,b)=>String(b.kickoff||'').localeCompare(String(a.kickoff||''));
+let showOld=false;
+const stakeAdm=s=>`<div class="card" style="margin:0 0 8px"><b>${esc(s.jackpot)}</b> <span class="chip c-${esc(s.stage)}">${esc(STAGE[s.stage]||s.stage)}</span><br><span class="m">${s.kind==='rolled'?'Rolled-over bonus (free ticket)':s.kind==='recorded'?'Recorded by admin':'M-Pesa '+esc(s.ref)} · ${esc(day(s.date))}${s.decidedAt?' · decided '+esc(day(s.decidedAt)):''}</span><br>
+  ${s.feePaid>0?`Paid <b>${kes(s.paid)}</b> · fee ${kes(s.feePaid)} · in pool `:s.kind==='rolled'?'Rolled bonus ':'Stake '}<b>${kes(s.amount)}</b>${s.stage==='Rejected'||s.stage==='Removed'?'':` · share <b>${s.split?'split':pct(s.share)}</b>${s.stage==='Pending'?' (est.)':''} · ${s.stage==='Won'?'winnings':'to win'} <b>${s.stage==='Lost'?'none':kes(s.wouldPay)}</b>`}
+  ${s.slices.filter(x=>x.cid).map(x=>`<div class="row s"><div>${x.poolId&&curMember?`<button class="lk" data-act="gopool" data-id="${esc(x.poolId)}" data-p="${esc(curMember)}">${esc(x.name)}</button>`:esc(x.name)} · <b>${kes(x.amt)}</b> <span class="m">${pct(x.share)}</span></div><div><button class="g" data-act="editcontrib" data-id="${esc(x.cid)}" data-a="${x.amt}">Edit</button> <button class="no" data-act="delcontrib" data-id="${esc(x.cid)}">Delete</button></div></div>`).join('')}</div>`;
+const memberView=d=>{const m=d.member,odd=m.status!=='Approved'&&m.status!=='Suspended',row=(r,k)=>`<div class="row s"><div>${esc(r.pool)} · <b>${kes(r.amount)}</b> <span class="m">${esc(day(r.date))}${r.note?' · '+esc(r.note):''}</span></div><div><button class="g" data-act="edit${k}" data-id="${esc(r.id)}" data-a="${r.amount}">Edit</button> <button class="no" data-act="del${k}" data-id="${esc(r.id)}">Delete</button></div></div>`;
+  return `<div class="card"><div class="top" style="margin:0"><b>${esc(m.name)} <span class="chip c-${esc(m.label)}">${esc(m.label)}</span></b>${PD.acct?`<button class="g" data-act="pdpool" data-id="${esc(PD.poolId)}">Back to pool</button>`:'<button class="g" data-act="closedetail">Close</button>'}</div><span class="m">${esc(m.phone)} · joined ${esc(day(m.created))} · terms ${esc(m.terms||'n/a')}</span><br>
+  <label>Name <input id="mn" type="text" maxlength="60" autocomplete="off" value="${esc(m.name)}"></label><label>Phone <input id="mp" type="text" inputmode="tel" value="${esc(m.phone)}"></label>
+  <label>Pay-to details (shown only in this member's account) <input id="mpay" value="${esc(m.payTo)}" style="width:100%;box-sizing:border-box" maxlength="200" placeholder="e.g. Send to 07XX XXX XXX (Name)"></label><br><span class="m">PIN: <b>${esc(m.pin)}</b>${m.locked?' · <span class="bad">locked</span>':''}</span><br><span class="m">Monthly limit: <b>${m.limit?kes(m.limit):'none'}</b>${m.paused?' · <span class="bad">PAUSED by member '+esc(day(m.paused))+'</span>':''}</span><br>
+  <label>Status <select id="ms"><option value="Approved"${m.status==='Approved'?' selected':''}>Active</option><option value="Suspended"${m.status==='Suspended'?' selected':''}>Suspended</option>${odd?`<option selected>${esc(m.status)}</option>`:''}</select></label>
+  <button data-act="savemember" data-p="${esc(m.phone)}">Save</button> <button class="g" data-act="reset" data-p="${esc(m.phone)}">Set new PIN</button> ${m.locked?`<button class="g" data-act="unlockm" data-p="${esc(m.phone)}">Unlock</button>`:''} ${m.paused?`<button class="g" data-act="resumem" data-p="${esc(m.phone)}">Resume contributions</button>`:''} <button class="no" data-act="delmember" data-p="${esc(m.phone)}">Delete</button>
+  <h3>Stakes (as the member sees them)</h3>${d.stakes.map(stakeAdm).join('')||'<p class="m">None.</p>'}
+  <h3>Payouts</h3>${d.payouts.map(r=>row(r,'payrec')).join('')||'<p class="m">None.</p>'}</div>`;};
+const payRow=x=>{const pend=x.status==='Pending',id=esc(x.queueId);
+  return `<div class="ptr"><div class="c1">${pend?`<input type="checkbox" class="pk" data-q="${id}" aria-label="Select payment">`:''}<div><b>${esc(x.name||x.phone)}</b><span class="m">${esc(x.phone)}</span></div></div>
+  <div data-l="Pool / M-Pesa code"><span>${x.pool&&x.poolId?`<button class="lk" data-act="gopool" data-id="${esc(x.poolId)}" data-p="${esc(x.phone)}">${esc(x.pool)}</button>`:esc(x.pool||'Pool removed')}</span><span class="code">${esc(x.ref)}</span></div>
+  <div data-l="Amount"><b>${kes(x.declared)}</b>${x.approved!=null&&x.approved!==x.declared?`<span class="m">approved ${kes(x.approved)}</span>`:''}</div>
+  <div data-l="Sent"><span>${esc(day(x.time))}</span>${x.decidedAt?`<span class="m">${x.status==='Rejected'?'rejected ':'approved '}${esc(day(x.decidedAt))}</span>`:''}</div>
+  <div data-l="Status"><span><span class="chip c-${esc(x.status)}" style="margin:0">${esc(x.status)}</span></span></div>
+  <div class="act">${pend?`<input id="amt-${id}" type="number" value="${x.declared}" aria-label="Amount to approve (KES)"><button class="ok2" data-act="verify" data-q="${id}">Approve</button><button class="no" data-act="verify" data-q="${id}" data-r="1">Reject</button>`:''}</div></div>`;};
+const memRow=m=>`<div class="row s"><div><b>${esc(m.name)}</b> <span class="chip c-${esc(m.label)}">${esc(m.label)}</span><br><span class="m">${esc(m.phone)} · staked ${kes(m.staked)} · joined ${esc(day(m.created))}</span></div><div>${m.status==='Approved'||m.status==='Suspended'?`<button class="${m.status==='Approved'?'no':'g'}" data-act="togglesuspend" data-p="${esc(m.phone)}" data-s="${esc(m.status)}">${m.status==='Approved'?'Suspend':'Activate'}</button> `:''}<button class="g" data-act="open" data-p="${esc(m.phone)}" title="Edit member" aria-label="Edit ${esc(m.name)}">&#9998; Edit</button></div></div>`;
+async function loadMemList(){if(!$('#mlist'))return;const j=await api('members',{q:memQ,limit:memLimit});$('#mlist').innerHTML=`<p class="m">${j.total} member${j.total===1?'':'s'}${memQ?' matching "'+esc(memQ)+'"':''}</p>`+(j.list.map(memRow).join('')||'<p class="m">No members.</p>')+(j.more?'<button class="g" data-act="moremem">Show more</button>':'');}
+const msgCount=()=>{const c=$('#mcount');if(c)c.textContent=msgAll?'Sending to all members.':msgSel.size?`Sending to ${msgSel.size} selected member${msgSel.size===1?'':'s'}.`:'Tick the members to send to.';};
+
+const panes={
+  async queue(){const j=await api('payments',{status:payFilter,limit:payLimit});payCounts=j.counts;drawTabs();
+    const C=j.counts,S=j.sums||{},sc=(l,k,hint)=>`<div class="stat"><b>${kes(S[k])}</b><span>${l}</span><em>${plural(C[k]||0,'payment')}${hint?' · '+hint:''}</em></div>`;
+    const shown={};j.list.forEach(x=>{const id=String(x.poolId);shown[id]=(shown[id]||0)+1;});
+    const groups=(j.byPool||[]).filter(g=>shown[g.poolId]).map(g=>`<div class="pgh"><div>${esc(g.pool||'Pool removed')}</div><span>${plural(g.count,'payment')} · <b>${kes(g.total)}</b>${shown[g.poolId]<g.count?' · showing '+shown[g.poolId]:''}</span></div>`+j.list.filter(x=>String(x.poolId)===g.poolId).map(payRow).join('')).join('');
+    $('#pane').innerHTML=`<div class="stats">${sc('Waiting for approval','Pending','to check')}${sc('Approved','Approved','in the pools')}${sc('Rejected','Rejected')}${sc('All declared','All')}</div>`+
+      `<div class="toolbar"><div class="seg2">${['Pending','Approved','Rejected','All'].map(f=>`<button class="${f===payFilter?'on':'g'}" data-act="payfilter" data-f="${f}">${f} (${C[f]||0})<small>${kes(S[f])}</small></button>`).join('')}</div><button class="g" data-act="exportcsv">&#8681; Export CSV</button></div>`+
+      (payFilter==='Pending'&&j.list.length?`<div class="card"><input id="pq" placeholder="Filter by name, phone, code or pool" style="width:min(100%,340px)"> <button class="g" data-act="selall">Select all</button> <button data-act="verifymany">Approve selected</button><p class="m" style="margin:2px 0 0">Approves each ticked payment at the amount the member declared. Check the codes first.</p></div>`:'')+
+      (j.list.length?`<div class="pt"><div class="pth"><div>Member</div><div>Pool / code</div><div>Amount</div><div>Sent</div><div>Status</div><div></div></div>${groups}<div class="ptot"><span>Total ${esc(payFilter==='All'?'declared':payFilter.toLowerCase())}</span><span>${plural(C[payFilter]||0,'payment')} · ${kes(S[payFilter])}</span></div></div>`:`<div class="empty">${payFilter==='Pending'?'No payments waiting. Check each code against your M-Pesa messages before you approve.':'No payments here.'}</div>`)+(j.more?'<button class="g" data-act="morepay">Show more</button>':'');},
+  /* Activity: sign-ups, member logins, lock-outs and admin logins. Opening the tab marks everything as seen. */
+  async activity(){const j=await rawApi('activity',{limit:actLimit,type:actFilter}),C=j.counts||{},seen=j.seen||'';
+    const TY={signup:['&#127881;','New sign-up','c-Approved'],login:['&#128273;','Logged in',''],locked:['&#128274;','Locked out','c-Rejected'],admin:['&#128737;','Admin login','c-Closed']};
+    const row=x=>{const t=TY[x.type]||['&#8226;',esc(x.type),''],fresh=x.type!=='admin'&&(!seen||x.time>seen);
+      return `<div class="row s"><div class="act-i"><span class="act-ic">${t[0]}</span><div><b>${esc(x.name||x.phone||'Unknown')}</b> <span class="chip ${t[2]}">${t[1]}</span>${fresh?' <span class="chip c-Won">NEW</span>':''}<br><span class="m">${x.type==='admin'?'':esc(x.phone)+' · '}${esc(day(x.time))}${x.detail?' · '+esc(x.detail):''}</span></div></div><div>${x.phone&&x.type!=='admin'?`<a target="_blank" rel="noopener" href="https://wa.me/${esc(x.phone)}">WhatsApp</a>`:''}</div></div>`;};
+    const F=[['All','All'],['signup','Sign-ups'],['login','Logins'],['locked','Lock-outs'],['admin','Admin']];
+    $('#pane').innerHTML=`<div class="stats"><div class="stat"><b>${C.signup||0}</b><span>Sign-ups</span></div><div class="stat"><b>${C.login||0}</b><span>Logins recorded</span></div><div class="stat"><b>${C.locked||0}</b><span>Lock-outs</span></div></div>`+
+      `<div class="toolbar"><div class="seg2">${F.map(([k,l])=>`<button class="${k===actFilter?'on':'g'}" data-act="actfilter" data-f="${k}">${l} (${C[k]||0})</button>`).join('')}</div></div>`+
+      (j.list.map(row).join('')||'<div class="empty">Nothing yet. New sign-ups and logins will show here.</div>')+(j.more?'<button class="g" data-act="actmore">Show more</button>':'');
+    if(j.unread>0){try{await rawApi('activitySeen');}catch(e){}}
+    actUnread=0;actPrev=0;drawTabs();},
+  async resets(){const j=await api('resets');
+    const un=j.unlocks.length?j.unlocks.map(x=>`<div class="row"><div><b>${esc(x.name)}</b> · ${esc(x.phone)}<br><span class="m">Locked out, asked ${esc(day(x.time))}. Confirm with them on WhatsApp first.</span> <a target="_blank" rel="noopener" href="https://wa.me/${esc(x.phone)}">WhatsApp</a></div><div><button data-act="decideunlock" data-id="${esc(x.id)}" data-y="1">Unlock</button> <button class="no" data-act="decideunlock" data-id="${esc(x.id)}">Reject</button></div></div>`).join(''):'<p class="m">No unlock requests.</p>';
+    const rs=j.list.length?j.list.map(x=>`<div class="row"><div><b>${esc(x.name)}</b> · ${esc(x.phone)}<br><span class="m">Asked ${esc(day(x.time))}. Confirm with them on WhatsApp first.</span> <a target="_blank" rel="noopener" href="https://wa.me/${esc(x.phone)}">WhatsApp</a></div><div><button data-act="decidereset" data-id="${esc(x.id)}" data-y="1">Approve</button> <button class="no" data-act="decidereset" data-id="${esc(x.id)}">Reject</button></div></div>`).join(''):'<p class="m">No PIN reset requests.</p>';
+    $('#pane').innerHTML='<h3>Unlock requests</h3>'+un+'<h3>PIN reset requests</h3>'+rs;},
+  async members(){api('members',{q:memQ,limit:memLimit}).catch(()=>{});await loadPools();$('#pane').innerHTML=`<div class="card"><input id="q" placeholder="Search name or phone" value="${esc(memQ)}"><button data-act="search">Search</button> <button class="g" data-act="clearsearch">Show all</button></div><div id="detail"></div><div id="mlist"></div><div class="card"><b>Record a contribution</b><br><input id="cp" type="text" inputmode="tel" placeholder="Member phone"><select id="cpool">${opts()}</select><input id="ca" type="number" placeholder="Amount (KES)"><button data-act="contrib">Record</button></div>`;await Promise.all([loadMemList(),curMember?showMember(curMember,true):null]);},
+  async pools(){return panes[tab==='running'?'running':'live']();},
+  async msgs(){const [j,ml]=await Promise.all([api('notes'),api('members',{limit:500})]);msgMembers=ml.list.filter(m=>m.status==='Approved');
+    $('#pane').innerHTML=`<div class="card"><b>Send a message</b><br><label style="display:flex;gap:10px;align-items:center;margin:8px 0"><input type="checkbox" data-msg="all" style="width:20px;height:20px;margin:0"${msgAll?' checked':''}> <b>Send to all members</b> <span class="m">(${msgMembers.length})</span></label>
+      <input data-msg="filter" placeholder="Find a member to tick" style="width:100%;box-sizing:border-box"><div class="seg2"><button class="g" data-act="msgselall">Select all shown</button><button class="g" data-act="msgclear">Clear</button></div>
+      <div class="pick${msgAll?' off':''}" id="pick">${msgMembers.map(m=>`<label data-n="${esc((m.name+' '+m.phone).toLowerCase())}"><input type="checkbox" data-msg="m" value="${esc(m.phone)}"${msgSel.has(m.phone)?' checked':''}><span>${esc(m.name)} <span class="m">${esc(m.phone)}</span></span></label>`).join('')||'<p class="m">No active members yet.</p>'}</div>
+      <p class="m" id="mcount"></p><input id="mti" maxlength="80" placeholder="Title" style="width:100%;box-sizing:border-box"><textarea id="mb" rows="3" maxlength="600" placeholder="Message (shows on the member's dashboard)"></textarea><button data-act="sendmsg">Send</button></div><h3>Recent</h3>`+(j.list.map(n=>`<div class="m" style="margin-bottom:8px"><b>${esc(n.title)}</b> to ${esc(n.to)} · ${esc(day(n.date))}<br>${esc(n.body)}</div>`).join('')||'<p class="m">Nothing yet.</p>');msgCount();},
+  async log(){const j=await api('audit');$('#pane').innerHTML=timingHtml()+j.list.map(r=>`<div class="m">${esc(String(r.time).slice(0,16).replace('T',' '))} · ${esc(r.action)} · ${esc(r.detail)}</div>`).join('')||'<p class="m">Nothing yet.</p>';}
+};
+/* ---------- Update pools: 1) load a jackpot  2) posted on the site (only what was loaded) ---------- */
+let PST={list:[],older:[]},showEarlier=false;
+const fxList=p=>p.matches&&p.matches.length?`<details style="margin:6px 0"><summary class="m" style="cursor:pointer">Fixtures (${p.matches.length})</summary>${p.matches.map(m=>`<div class="fxr"><span class="m">${m.no}</span><span>${esc(m.home)} v ${esc(m.away)}<br><span class="m">${esc(m.league)}${m.league?' · ':''}${esc(day(m.kickoff))}</span></span><b>${m.type==='DC'?'Double':'Single'}</b></div>`).join('')}</details>`:'';
+const postedCard=p=>{const c=CATALOG[p.jackpot],id=esc(p.poolId),bm=p.bookmaker==='betika'?'Betika':'SportPesa';
+  const f=(l,i,v,w,t)=>`<label>${l} <input id="${i}-${id}" ${t||'type="number" inputmode="decimal" min="0"'} value="${esc(v)}" style="width:${w}px"></label> `;
+  return `<div class="card"><b>${esc(p.name)}</b> <span class="chip">${bm}</span><br><span class="m">Price per line ${kes(p.pricePerLine)} · target stake ${kes(p.target)} · minimum stake ${kes(p.min)} · prize ${kes(p.prize)} · ${p.fee}% operating fee taken up front<br>Closes ${esc(day(p.closes))} · first kickoff ${esc(day(p.kickoff))} · ${c?`fixtures ${p.matchCount}/${c.matches}, doubles ${p.doubles}/${c.doubles}`:p.matchCount+' fixtures'}</span>
+  ${fxList(p)}
+  <details style="margin:4px 0 8px"><summary class="m" style="cursor:pointer">Edit name, kickoff, minimum stake and prize</summary>${f('Name','nm',p.name,220,'type="text" maxlength="60" autocomplete="off" autocapitalize="words"')}${f('Kickoff','ko',toLocal(p.kickoff),200,'type="datetime-local"')}${f('Min stake','mi',p.min,90)}${f('Prize','pz',p.prize,120)}<br><button data-act="savepool" data-id="${id}">Save changes</button></details>
+  ${c?`<button class="g" data-act="replacefx" data-id="${id}" data-j="${esc(p.jackpot)}" data-n="${esc(p.name)}">Replace fixtures</button> `:''}<button class="no" data-act="delpool" data-id="${id}" data-t="${p.total}" data-mb="${p.members}">Delete</button></div>`;};
+
+/* ---------- Paid pools: pool list > members in a pool > one member in a pool > full account ---------- */
+let PD={poolId:null,phone:null,acct:false};
+const pdReset=()=>{PD.poolId=null;PD.phone=null;PD.acct=false;curMember=null;};
+async function pdGo(poolId,phone,acct){PD.poolId=poolId||null;PD.phone=phone||null;PD.acct=!!acct;curMember=acct?phone:null;if(tab!=='running'){tab='running';drawTabs();}await panes.running();window.scrollTo(0,0);}
+const crumb=items=>`<div class="crumb">${items.map((x,i)=>i===items.length-1?`<b>${esc(x[0])}</b>`:`<button class="lk" data-act="${x[1]}"${x[2]||''}>${esc(x[0])}</button>`).join(' <span class="m">&rsaquo;</span> ')}</div>`;
+const kv=l=>`<div class="kv">${l.map(x=>`<div><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div>`;
+const plural=(n,w)=>n+' '+w+(n===1?'':'s');
+const settleBox=p=>{const id=esc(p.poolId),f=(l,i,v,w)=>`<label>${l} <input id="${i}-${id}" type="number" inputmode="decimal" min="0" value="${esc(v)}" style="width:${w}px"></label> `;
+  return `<label>Status <select id="st-${id}">${['Open','Closed','Settled'].map(x=>`<option value="${x}"${x===p.status?' selected':''}>${PH[x]}</option>`).join('')}</select></label> ${f('Prize','pz',p.prize,120)}${f('Amount won','wn',p.won,120)}<label>Win type <select id="bn-${id}"><option value=""${p.bonus?'':' selected'}>Jackpot</option><option value="Y"${p.bonus?' selected':''}>Bonus (consolation)</option></select></label> <button data-act="savepool" data-id="${id}">Save changes</button>`;};
+const paidCard=p=>{const id=esc(p.poolId),pc=p.target?Math.min(100,p.total/p.target*100):0;
+  return `<div class="card"><b>${esc(p.label)}</b> <span class="chip c-${esc(p.shown)}">${PH[p.shown]||esc(p.shown)}</span> <span class="m">${id}</span>${bar(p.total,p.target)}<span class="m">Collected <b>${kes(p.total)}</b> of ${kes(p.target)} (${pc.toFixed(0)}%) · prize ${kes(p.prize)}${p.won?' · won '+kes(p.won)+(p.bonus?' (bonus)':''):''} · ${p.fee}% fee taken up front${p.feeTotal?' ('+kes(p.feeTotal)+' so far)':''}<br>Closes ${esc(day(p.closes))} · first kickoff ${esc(day(p.kickoff))}</span><br>
+  <button data-act="pdpool" data-id="${id}">${plural(p.members,'Member')} &rsaquo;</button><details style="margin:8px 0 0"><summary class="m" style="cursor:pointer">Status and amount won</summary>${settleBox(p)}</details></div>`;};
+function pdPoolHtml(d){const p=d.pool,t=d.totals,id=esc(p.poolId),pc=p.target?Math.min(100,p.total/p.target*100):0,won=p.won>0;
+  const row=m=>`<div class="row"><div><button class="lk" data-act="pdmember" data-id="${id}" data-p="${esc(m.phone)}"><b>${esc(m.name||m.phone)}</b></button> <span class="chip c-${esc(m.status)}">${esc(m.status)}</span>${m.paused?' <span class="chip c-Rejected">Paused</span>':''}${m.pendingAmount?` <span class="chip">${kes(m.pendingAmount)} pending</span>`:''}<br><span class="m">${esc(m.phone)} · staked <b>${kes(m.amount)}</b> · share ${pct(m.share)}${won?` · suggested ${kes(m.suggested)} · paid ${kes(m.paid)}${m.remaining>0?' · <b class="bad">due '+kes(m.remaining)+'</b>':''}`:''}${m.roll&&won?` · <b>rolls over ${kes(Math.round(p.won*m.share))}</b> to the next pool`:''}${m.refunded?` · refunded ${kes(m.refunded)}`:''}</span></div>
+    <div><button class="g" data-act="pdmember" data-id="${id}" data-p="${esc(m.phone)}">Details</button> <button data-act="pdpay" data-id="${id}" data-p="${esc(m.phone)}" data-a="${m.remaining}">Record payout</button> <button class="g" data-act="pdacct" data-id="${id}" data-p="${esc(m.phone)}">Account</button></div></div>`;
+  return crumb([['All pools','pdhome'],[p.label]])+`<div class="card"><b>${esc(p.label)}</b> <span class="chip c-${esc(p.shown)}">${PH[p.shown]||esc(p.shown)}</span> <span class="m">${id}</span>${bar(p.total,p.target)}${kv([['Collected',kes(p.total)],['Full stake',kes(p.target)],['Filled',pc.toFixed(0)+'%'],['Members',p.members],['Prize',kes(p.prize)],['Amount won',kes(p.won)],['Win type',p.bonus?'Bonus (consolation)':'Jackpot'],['Operating fees ('+p.fee+'%)',kes(p.feeTotal)],['Suggested payouts',kes(t.suggested)],['Paid so far',kes(t.paid)]])}<span class="m">Closes ${esc(day(p.closes))} · first kickoff ${esc(day(p.kickoff))}${t.pending?' · '+kes(t.pending)+' waiting for approval':''}</span><br>${settleBox(p)}</div>
+  <div class="sec"><h3>${plural(d.members.length,'Member')}</h3><span class="m">tap a name for their contributions in this pool</span></div>`+
+  (d.members.map(row).join('')||'<p class="m">No contributions in this pool yet.</p>')+
+  `<div class="card" style="margin-top:10px"><b>Record a contribution in this pool</b><br><input id="pdcp" type="text" inputmode="tel" placeholder="Member phone"><input id="pdca" type="number" placeholder="Amount (KES)"><button data-act="pdaddc" data-id="${id}">Record</button>${d.members.length&&won?` <button class="g" data-act="pdpayall" data-id="${id}">Record all unpaid</button>`:''}${p.bonus&&won?` <button data-act="pdroll" data-id="${id}">Roll bonus into next pool</button>`:''} <button class="no" data-act="delpool" data-id="${id}" data-t="${p.total}" data-mb="${p.members}">Delete pool</button></div>`;}
+function pdMemberHtml(d,m){const p=d.pool,id=esc(p.poolId),ph=esc(m.phone),won=p.won>0,other=pools.filter(x=>x.poolId!==p.poolId);
+  const cr=c=>`<div class="row s"><div>${c.fee>0?`${kes(c.gross)} paid · fee ${kes(c.fee)} · in pool `:c.bonusRoll?'Rolled bonus (free ticket) ':''}<b>${kes(c.amount)}</b> <span class="m">${esc(day(c.date))} · ${esc(c.bonusRoll?'Bonus rolled over':c.source)}${c.ref?' · <span class="code">'+esc(c.ref)+'</span>':''}</span></div><div class="mv"><button class="g" data-act="pdeditc" data-id="${esc(c.id)}" data-a="${c.amount}">Edit amount</button><select id="mv-${esc(c.id)}" aria-label="Move to pool">${other.map(x=>`<option value="${esc(x.poolId)}">${esc(x.label)} (${esc(PH[x.shown]||x.shown)})</option>`).join('')}</select><button class="g" data-act="pdmovec" data-id="${esc(c.id)}"${other.length?'':' disabled'}>Move</button><button class="no" data-act="pddelc" data-id="${esc(c.id)}">Delete</button></div></div>`;
+  const py=r=>`<div class="row s"><div><b>${kes(r.amount)}</b> ${r.refund?'<span class="chip">Refund</span>':'<span class="chip c-Approved">Payout</span>'} <span class="m">${esc(day(r.date))}${r.note?' · '+esc(r.note):''}</span></div><div><button class="g" data-act="pdeditpay" data-id="${esc(r.id)}" data-a="${r.amount}">Edit</button> <button class="no" data-act="pddelpay" data-id="${esc(r.id)}">Delete</button></div></div>`;
+  const pe=r=>`<div class="row s"><div><b>${kes(r.declared)}</b> <span class="chip">Pending</span> <span class="m">${esc(day(r.time))} · <span class="code">${esc(r.ref)}</span></span></div><div><button class="ok2" data-act="pdverify" data-q="${esc(r.queueId)}" data-a="${r.declared}">Approve</button> <button class="no" data-act="pdverify" data-q="${esc(r.queueId)}" data-r="1">Reject</button></div></div>`;
+  return crumb([['All pools','pdhome'],[p.label,'pdpool',` data-id="${id}"`],[m.name||m.phone]])+`<div class="card"><div class="top" style="margin:0"><b>${esc(m.name||m.phone)} <span class="chip c-${esc(m.status)}">${esc(m.status)}</span></b><span><button class="g" data-act="pdpool" data-id="${id}">Back to pool</button> <button data-act="pdacct" data-id="${id}" data-p="${ph}">Open full account</button></span></div><span class="m">${esc(m.phone)} · in ${esc(p.label)}</span>
+  ${kv([['Staked in this pool',kes(m.amount)],['Winning share',pct(m.share)],['Suggested payout',won?kes(m.suggested):'Not won yet'],['Paid so far',kes(m.paid)],['Still due',won?kes(m.remaining):'-']])}</div>
+  <div class="sec"><h3>Contributions</h3><span class="m">${plural(m.contributions.length,'record')} · edit the amount, move it to another pool, or delete it</span></div>${m.contributions.map(cr).join('')||'<p class="m">None in this pool.</p>'}
+  <div class="card"><b>Add a contribution for ${esc(m.name||m.phone)}</b><br><input id="pdca" type="number" placeholder="Amount (KES)"><button data-act="pdaddc" data-id="${id}" data-p="${ph}">Record</button></div>
+  ${m.pending.length?`<div class="sec"><h3>Waiting for approval</h3></div>${m.pending.map(pe).join('')}`:''}
+  <div class="sec"><h3>Payouts and refunds</h3><span class="m">${plural(m.payouts.length,'record')}</span></div>${m.payouts.map(py).join('')||'<p class="m">None yet.</p>'}
+  <div class="card"><button data-act="pdpay" data-id="${id}" data-p="${ph}" data-a="${m.remaining}">Record payout</button> <button class="g" data-act="pdrefund" data-id="${id}" data-p="${ph}">Record refund</button></div>`;}
+const panes2={
+  async live(){const j=await api('posted');PST=j;
+    $('#pane').innerHTML=`<div class="sec"><h3>1. Load a jackpot</h3><span class="m">paste the fixtures, tick the doubles, publish to the website</span></div>`+postCard()+
+      `<div class="sec"><h3>2. Posted on the site</h3><span class="m">what was loaded, until the next jackpots are uploaded</span></div>`+(j.list.map(postedCard).join('')||'<p class="m">Nothing is posted yet. Load a jackpot above.</p>')+
+      (j.older.length?(showEarlier?`<div class="sec"><h3>Earlier loaded jackpots</h3><span class="m">replaced by newer ones; still editable</span></div>`+j.older.map(postedCard).join(''):`<button class="g" data-act="showearlier">Show ${plural(j.older.length,'earlier loaded jackpot')}</button>`):'');
+    updateRule();updateCounters();},
+  async running(){await loadPools();
+    if(PD.poolId&&PD.acct){const p=pools.find(x=>x.poolId===PD.poolId);$('#pane').innerHTML=crumb([['All pools','pdhome'],[p?p.label:'Pool','pdpool',` data-id="${esc(PD.poolId)}"`],['Member account']])+'<div id="detail"></div>';return showMember(PD.phone,true);}
+    if(PD.poolId){const d=await api('poolMembers',{poolId:PD.poolId});if(!d.pool){pdReset();return panes.running();}
+      if(PD.phone){const m=d.members.find(x=>x.phone===PD.phone);
+        if(m){$('#pane').innerHTML=pdMemberHtml(d,m);return;}
+        $('#pane').innerHTML=crumb([['All pools','pdhome'],[d.pool.label,'pdpool',` data-id="${esc(d.pool.poolId)}"`],[PD.phone]])+`<div class="empty">This member has no records in this pool.<br><br><button data-act="pdacct" data-id="${esc(d.pool.poolId)}" data-p="${esc(PD.phone)}">Open full account</button></div>`;return;}
+      $('#pane').innerHTML=pdPoolHtml(d);return;}
+    const P=pools.filter(p=>p.total>0).sort(byKick),A=P.filter(p=>p.shown==='Open'),R=P.filter(p=>p.shown==='Closed'),F=P.filter(p=>p.shown==='Settled'),cut=Date.now()-30*864e5,rec=F.filter(p=>!p.kickoff||new Date(p.kickoff)>=cut),old=F.filter(p=>p.kickoff&&new Date(p.kickoff)<cut),sum=l=>l.reduce((x,p)=>x+(p.total||0),0),sec=(t,n,l)=>`<div class="sec"><h3>${t}</h3><span class="m">${n} · ${plural(l.length,'pool')} · collected <b>${kes(sum(l))}</b></span></div>`+(l.map(paidCard).join('')||'<p class="m">None.</p>');
+    $('#pane').innerHTML=`<div class="stats"><div class="stat"><b>${P.length}</b><span>Pools with contributions</span></div><div class="stat"><b>${kes(sum(P))}</b><span>Total collected</span></div><div class="stat"><b>${A.length}</b><span>Still collecting</span></div><div class="stat"><b>${kes(P.reduce((x,p)=>x+(p.feeTotal||0),0))}</b><span>Operating fees</span></div><div class="stat"><b>${kes(sum(A))}</b><span>In active pools</span></div><div class="stat"><b>${kes(sum(R))}</b><span>In running pools</span></div><div class="stat"><b>${kes(sum(F))}</b><span>In finished pools</span></div></div><p class="m">Tap a pool's members to open them, then a member for their contributions, then their full account.</p>`+
+      sec('Active','still filling, partly or fully paid',A)+sec('Running','closed to new stakes, waiting for results and payouts',R)+sec('Finished','last 30 days',rec)+
+      (old.length?(showOld?old.map(paidCard).join(''):`<button class="g" data-act="showold">Show ${old.length} older pool${old.length===1?'':'s'} (${kes(sum(old))})</button>`):'');}
+};
+Object.assign(panes,panes2);
+
+async function showMember(ph,quiet){curMember=ph;const d=await api('memberDetail',{phone:ph});$('#detail').innerHTML=memberView(d);if(!quiet)$('#detail').scrollIntoView({behavior:'smooth',block:'start'});}
+async function showSettle(id){const j=await api('settle',{poolId:id}),rl=j.list.filter(m=>m.roll&&m.rollAmt-m.rolled>0).length;($('#settle-'+id)||$('#settle')).innerHTML=`<div class="card"><b>Payouts</b> <span class="m">${j.bonus?'BONUS win':'Jackpot win'} · won ${kes(j.won)} · in pool ${kes(j.total)} · full stake ${kes(j.full)}${j.bonus?' · bonus shares below '+kes(j.min)+' roll over':''}</span>`+(j.list.map(m=>`<div class="row"><div>${esc(m.name)} <span class="m">${(m.share*100).toFixed(2)}% · ${m.roll?`<b>ROLLS OVER ${kes(m.rollAmt)}</b> (rolled so far ${kes(m.rolled)})`:`suggested ${kes(m.suggested)} · paid ${kes(m.paid)}`}</span></div>${m.roll?'':`<button data-act="payout" data-id="${esc(id)}" data-p="${esc(m.phone)}" data-a="${Math.max(0,m.suggested-m.paid)}">Record payout</button>`}</div>`).join('')||'<p class="m">No contributions in this pool.</p>')+(j.list.length?`<button data-act="payall" data-id="${esc(id)}">Record all unpaid</button>`:'')+(j.bonus&&j.won?` <button data-act="rollbonus" data-id="${esc(id)}">Roll bonus into next pool${rl?' ('+rl+')':''}</button>`:'')+'</div>';}
+const ask=(t,d)=>prompt(t,d);
+const acts={
+  async tab(b){if(LOCK){toast('Please wait, the last action is still running.','warn');return;}await switchTab(b);},
+  async refresh(){memo.clear();try{await api('flushCache');}catch(e){}await Promise.all([loadPane(tab),refreshBadge()]);},
+  opennav(){$('#side').classList.add('open');},
+  closenav(){$('#side').classList.remove('open');},
+  async poolfilter(b){poolFilter=b.dataset.f;await panes.live();},
+  async showold(){showOld=true;await panes.running();},
+  async showearlier(){showEarlier=true;await panes.live();},
+  async pdhome(){pdReset();await panes.running();window.scrollTo(0,0);},
+  async pdpool(b){await pdGo(b.dataset.id);},
+  async pdmember(b){await pdGo(b.dataset.id,b.dataset.p);},
+  async pdacct(b){await pdGo(b.dataset.id||PD.poolId,b.dataset.p,true);},
+  async gopool(b){await pdGo(b.dataset.id,b.dataset.p||null);},
+  async pdaddc(b){const ph=b.dataset.p||val('pdcp'),a=val('pdca');if(!ph||!a)throw new Error('Enter the member phone and the amount.');note((await api('contribute',{phone:ph,poolId:b.dataset.id,amount:a})).msg);await panes.running();},
+  async pdeditc(b){const a=ask('Correct amount (KES):',b.dataset.a);if(!a)return;note((await api('editContribution',{id:b.dataset.id,fields:{amount:a}})).msg);await panes.running();},
+  async pdmovec(b){const to=val('mv-'+b.dataset.id),p=pools.find(x=>x.poolId===to);if(!to)return;if(!confirm('Move this contribution to '+(p?p.label:'the other pool')+'? The member is notified.'))return;note((await api('editContribution',{id:b.dataset.id,fields:{poolId:to}})).msg);await panes.running();},
+  async pddelc(b){if(!confirm('Delete this contribution? The member is notified.'))return;note((await api('deleteContribution',{id:b.dataset.id})).msg);await panes.running();},
+  async pdpay(b){const a=ask('Amount paid out (KES):',b.dataset.a);if(!a)return;note((await api('payout',{poolId:b.dataset.id,phone:b.dataset.p,amount:a,note:'M-Pesa'})).msg);await panes.running();},
+  async pdrefund(b){const a=ask('Refund amount (KES):','');if(!a)return;note((await api('payout',{poolId:b.dataset.id,phone:b.dataset.p,amount:a,note:'Refund'})).msg.replace('Payout','Refund'));await panes.running();},
+  async pdeditpay(b){const a=ask('Correct amount (KES):',b.dataset.a);if(!a)return;note((await api('editPayout',{id:b.dataset.id,fields:{amount:a}})).msg);await panes.running();},
+  async pddelpay(b){if(!confirm('Delete this payout record? The member is notified.'))return;note((await api('deletePayout',{id:b.dataset.id})).msg);await panes.running();},
+  async pdverify(b){if(b.dataset.r&&!confirm('Reject this payment?'))return;const j=await api('verify',{queueId:b.dataset.q,amount:b.dataset.a,reject:!!b.dataset.r});await panes.running();note(j.msg);},
+  async pdroll(b){if(!confirm('Roll every roll-over bonus share of this pool into the next pool of the same jackpot as a free community ticket (no fee)? Members are notified. Safe to repeat: it only adds what is still due.'))return;const j=await api('rollBonus',{poolId:b.dataset.id});await panes.running();note(j.msg);},
+  async pdpayall(b){if(!confirm('Record every unpaid suggested payout for this pool? Members are notified.'))return;const j=await api('payoutMany',{poolId:b.dataset.id});await panes.running();note(j.msg);},
+  async out(){try{await api('logout');}catch(e){}T=null;sessionStorage.removeItem('tj_a');await draw();},
+  async verify(b){if(b.dataset.r&&!confirm('Reject this payment?'))return;const j=await api('verify',{queueId:b.dataset.q,amount:val('amt-'+b.dataset.q),reject:!!b.dataset.r});await panes.queue();note(j.msg);},
+  async payfilter(b){payFilter=b.dataset.f;payLimit=50;await panes.queue();},
+  async morepay(){payLimit+=50;await panes.queue();},
+  async actfilter(b){actFilter=b.dataset.f;actLimit=100;await panes.activity();},
+  async actmore(){actLimit+=100;await panes.activity();},
+  async exportcsv(){const j=await api('payments',{status:payFilter,limit:5000}),q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"',L=[['Member','Phone','Jackpot / pool','Declared KES','Approved KES','M-Pesa code','Sent','Status','Decided']].concat(j.list.map(x=>[x.name,x.phone,x.pool,x.declared,x.approved==null?'':x.approved,x.ref,x.time,x.status,x.decidedAt]));const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.map(r=>r.map(q).join(',')).join('\n')],{type:'text/csv'}));a.download='payments-'+payFilter.toLowerCase()+'.csv';a.click();note('Exported '+j.list.length+' payments.');},
+  async decidereset(b){const j=await api('decideReset',{id:b.dataset.id,approve:!!b.dataset.y});await panes.resets();note(j.msg);},
+  async decideunlock(b){const j=await api('decideUnlock',{id:b.dataset.id,approve:!!b.dataset.y});await panes.resets();note(j.msg);},
+  async search(){memQ=val('q').trim();memLimit=50;await loadMemList();},
+  async clearsearch(){memQ='';memLimit=50;const q=$('#q');if(q)q.value='';await loadMemList();},
+  async moremem(){memLimit+=50;await loadMemList();},
+  async togglesuspend(b){const on=b.dataset.s==='Approved';if(!confirm((on?'Suspend':'Activate')+' this member?'+(on?' They will not be able to log in.':'')))return;const j=await api('editMember',{phone:b.dataset.p,fields:{status:on?'Suspended':'Approved'}});await Promise.all([loadMemList(),curMember===b.dataset.p?showMember(curMember,true):null]);note(j.msg);},
+  async closedetail(){curMember=null;$('#detail').innerHTML='';},
+  async open(b){await showMember(b.dataset.p);},
+  async savemember(b){const j=await api('editMember',{phone:b.dataset.p,fields:{name:val('mn'),phone:val('mp'),status:val('ms'),payTo:val('mpay')}});if(PD.acct)PD.phone=val('mp');await Promise.all([showMember(val('mp'),true),loadMemList()]);note(j.msg);},
+  async resumem(b){if(!confirm('Resume contributions for this member? Confirm with them on WhatsApp first.'))return;note((await api('resumeMember',{phone:b.dataset.p})).msg);await showMember(b.dataset.p);},
+  async unlockm(b){note((await api('unlockMember',{phone:b.dataset.p})).msg);await showMember(b.dataset.p);},
+  async delmember(b){if(!confirm('Delete this member? This cannot be undone.'))return;const j=await api('deleteMember',{phone:b.dataset.p});curMember=null;if(PD.acct){const id=PD.poolId;PD.phone=null;PD.acct=false;PD.poolId=id;await panes.running();}else await panes.members();note(j.msg);},
+  async reset(b){const pin=ask('New 4-character PIN (letters or numbers) for this member (tell them on WhatsApp):');if(!pin)return;const j=await api('requestReset',{phone:b.dataset.p,pin});note(j.msg+' Approve it under PIN resets.');},
+  async contrib(){note((await api('contribute',{phone:val('cp'),poolId:val('cpool'),amount:val('ca')})).msg);await Promise.all([loadMemList(),curMember?showMember(curMember,true):null]);},
+  async editcontrib(b){const a=ask('Correct amount (KES):',b.dataset.a);if(!a)return;note((await api('editContribution',{id:b.dataset.id,fields:{amount:a}})).msg);await showMember(curMember);},
+  async delcontrib(b){if(!confirm('Delete this contribution? The member is notified.'))return;note((await api('deleteContribution',{id:b.dataset.id})).msg);await showMember(curMember);},
+  async editpayrec(b){const a=ask('Correct payout amount (KES):',b.dataset.a);if(!a)return;note((await api('editPayout',{id:b.dataset.id,fields:{amount:a}})).msg);await showMember(curMember);},
+  async delpayrec(b){if(!confirm('Delete this payout record? The member is notified.'))return;note((await api('deletePayout',{id:b.dataset.id})).msg);await showMember(curMember);},
+  async loadfx(){const r=parseFixtures(val('pj-paste'));fx=r.list;fxInfo=r.list.length?'Read '+r.list.length+' matches ('+r.format+' format).'+(r.warn.length?' '+r.warn.join(' '):''):'No matches found in that text. '+r.warn.join(' ');$('#pj-prev').innerHTML=previewHtml();$('#pj-info').textContent=fxInfo;updateCounters();},
+  async clearfx(){fx=[];fxInfo='';const t=$('#pj-paste');if(t)t.value='';$('#pj-prev').innerHTML='';$('#pj-info').textContent='';updateCounters();},
+  async replacefx(b){tab='live';replaceId=b.dataset.id;replaceName=b.dataset.n;fxJack=b.dataset.j;fx=[];fxInfo='';drawTabs();await panes.live();window.scrollTo(0,0);note('Paste the full fixture list again, tick the doubles, then Save fixtures.');},
+  async cancelreplace(){replaceId=null;fx=[];fxInfo='';await panes.pools();},
+  async publishfx(){const c=need(),d=fx.filter(r=>r.dc).length;
+    if(!confirm((replaceId?'Replace the fixtures of ':'Post ')+c.name+' with '+fx.length+' matches ('+d+' doubles)'+(replaceId?'?':' to the website?')))return;
+    const matches=fx.map(r=>({home:r.home.trim(),away:r.away.trim(),league:r.league.trim(),kickoff:r.kick,type:r.dc?'DC':'S'}));
+    const j=replaceId?await api('saveMatches',{poolId:replaceId,matches}):await api('publishJackpot',{jackpot:fxJack,prize:pj.prize,minStake:pj.min,matches});
+    fx=[];fxInfo='';replaceId=null;pj.prize='';await panes.pools();note(j.msg);},
+  async savepool(b){const id=b.dataset.id,f={},k=val('ko-'+id);[['name','nm'],['status','st'],['prize','pz'],['won','wn'],['min','mi'],['bonus','bn']].forEach(([n,p])=>{const v=val(p+'-'+id);if(v!==undefined&&!(n==='name'&&!String(v).trim()))f[n]=v;});if(k)f.kickoff=fromLocal(k);const j=await api('updatePool',{poolId:id,fields:f});await panes.pools();note(j.msg);},
+  async delpool(b){const id=b.dataset.id,p={total:+b.dataset.t||0,members:+b.dataset.mb||0},money=p.total>0||p.members>0;
+    if(money){const t=prompt('This pool has '+kes(p.total)+' from '+p.members+' member(s). Deleting it permanently removes the pool, its fixtures, contributions, payments and payouts (and any later rounds of the same jackpot). A backup copy of the Sheet is made first and members are notified.\n\nType DELETE to confirm:');if(t!=='DELETE')return;}
+    else if(!confirm('Delete this pool?'))return;
+    const j=await api('deletePool',{poolId:id,force:true});if(PD.poolId===id)pdReset();await panes.pools();note(j.msg);},
+  async settle(b){await showSettle(b.dataset.id);},
+  selall(){const c=[...document.querySelectorAll('.pk')].filter(x=>x.closest('.ptr').style.display!=='none');const on=c.some(x=>!x.checked);c.forEach(x=>x.checked=on);},
+  async verifymany(){const ids=[...document.querySelectorAll('.pk:checked')].map(x=>x.dataset.q);if(!ids.length)return note('Tick at least one payment first.',true);if(!confirm('Approve '+ids.length+' payment(s) at the declared amounts?'))return;const j=await api('verifyMany',{ids});await panes.queue();note(j.msg);},
+  async payall(b){if(!confirm('Record every unpaid suggested payout for this pool? Members are notified.'))return;const j=await api('payoutMany',{poolId:b.dataset.id});await showSettle(b.dataset.id);note(j.msg);},
+  async rollbonus(b){if(!confirm('Roll every roll-over bonus share of this pool into the next pool of the same jackpot as a free community ticket (no fee)? Members are notified. Safe to repeat: it only adds what is still due.'))return;const j=await api('rollBonus',{poolId:b.dataset.id});await showSettle(b.dataset.id);note(j.msg);},
+  async payout(b){const a=ask('Amount paid out (KES):',b.dataset.a);if(!a)return;const j=await api('payout',{poolId:b.dataset.id,phone:b.dataset.p,amount:a,note:'M-Pesa'});await showSettle(b.dataset.id);note(j.msg);},
+  async msgselall(){document.querySelectorAll('#pick label').forEach(l=>{if(l.style.display==='none')return;const c=l.querySelector('input');c.checked=true;msgSel.add(c.value);});msgCount();},
+  async msgclear(){msgSel.clear();document.querySelectorAll('#pick input').forEach(c=>c.checked=false);msgCount();},
+  async sendmsg(){if(!msgAll&&!msgSel.size)throw new Error('Tick at least one member, or choose Send to all.');if(!confirm(msgAll?'Send this message to ALL members?':'Send this message to '+msgSel.size+' member(s)?'))return;const j=await api('message',{to:msgAll?'ALL':Array.from(msgSel),title:val('mti'),body:val('mb')});msgSel.clear();await panes.msgs();note(j.msg);}
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const a=b.dataset.act;if(QUICK.has(a)){run(()=>acts[a](b));return;}guarded(b,()=>acts[a](b));});
+document.addEventListener('input',e=>{if(e.target.id!=='pq')return;const t=e.target.value.toLowerCase();document.querySelectorAll('#pane .ptr').forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(t)?'':'none';});});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='q'){e.preventDefault();guarded(null,()=>acts.search(),'Searching…');}});
+document.addEventListener('input',e=>{const t=e.target,k=t.dataset&&t.dataset.fx,g=t.dataset&&t.dataset.msg;
+  if(g){if(g==='all'){msgAll=t.checked;$('#pick').classList.toggle('off',msgAll);}else if(g==='m'){t.checked?msgSel.add(t.value):msgSel.delete(t.value);}else if(g==='filter'){const f=t.value.toLowerCase().trim();document.querySelectorAll('#pick label').forEach(l=>l.style.display=!f||l.dataset.n.indexOf(f)>-1?'':'none');}msgCount();return;}
+  if(k){const r=fx[+t.dataset.i];if(!r)return;if(k==='dc')r.dc=t.checked;else if(k==='kick')r.kick=fromLocal(t.value);else r[k]=t.value;updateCounters();return;}
+  if(t.id==='pj-jack'){fxJack=t.value;updateRule();updateCounters();}
+  else if(t.id==='pj-prize')pj.prize=t.value;else if(t.id==='pj-min')pj.min=t.value;});
+draw();
+</script></body></html>
